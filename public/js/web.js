@@ -31448,7 +31448,7 @@ var render = function() {
               [
                 _c("img", {
                   staticClass: "w-100 img-thumbnail",
-                  attrs: { src: "/storage/" + _vm.post.image, alt: "" }
+                  attrs: { src: _vm.post.image, alt: "" }
                 })
               ]
             )
@@ -31467,6 +31467,7 @@ var render = function() {
               _vm.post.tags
                 ? _c(
                     "div",
+                    { staticClass: "d-inline" },
                     _vm._l(_vm.post.tags, function(tag) {
                       return _c(
                         "span",
@@ -31490,6 +31491,7 @@ var render = function() {
                 [
                   !_vm.compact
                     ? _c("votes-component", {
+                        staticClass: "d-inline",
                         attrs: {
                           votes: this.post.votes,
                           tag: this.post.id,

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use App\Traits\Voteable;
 
 class Post extends Model
@@ -10,7 +11,7 @@ class Post extends Model
     use Voteable;
 
     protected $fillable = [
-        'title', 'slug', 'content', 'category_id', 'status', 'image_post_id', 'user_id'
+        'title', 'slug', 'content', 'category_id', 'status', 'image_url', 'user_id'
     ];
 
     public function category() {
@@ -53,5 +54,9 @@ class Post extends Model
     public function setTags($tags) {
         if(array_key_exists('tags', $tags)) $this->tags()->sync($tags['tags']);
         else $this->tags()->detach();
+    }
+
+    public function getFullPathImageAttribute() {
+        return Storage::url($this->image_url);
     }
 }

@@ -23,7 +23,7 @@ class Post extends JsonResource
             'slug'      => $this->slug,
             'content'   => $this->content,
             'category'  => Category::make($this->whenLoaded('category')),
-            'image'     => $this->image_url,
+            'image'     => $this->full_path_image,
             'votes'     => [
                 'user_vote_type'    => $this->when($this->whenLoaded('votes'), Vote::make($this->votes->first())),
                 'likes'             => $this->likes,

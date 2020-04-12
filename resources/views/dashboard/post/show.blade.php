@@ -8,7 +8,7 @@
             'view'  => 'index'
         ])
         @if($post->image_url)
-        <img src="{{ url('storage/'.$post->image_url) }}" class="img-fluid py-2" alt="imagen no encontrada">
+        <img src="{{ url($post->full_path_image) }}" class="img-fluid py-2" alt="imagen no encontrada">
         @endif
         <div class="form-group">
             <strong>Me gusta:</strong> {{ $post->likes }}
