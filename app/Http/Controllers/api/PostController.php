@@ -31,6 +31,7 @@ class PostController extends Controller
             Post::orderBy('updated_at', 'DESC')
             ->with(['category', 'tags'])
             ->sortByCategory($request->category)
+            ->search($request->search)
             ->where('status', 'posted')
             ->votesCount()
             ->paginate(10)

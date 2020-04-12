@@ -44,6 +44,13 @@ class Post extends Model
             return $query->where('user_id',$user->id);
     }
 
+    public function scopeSearch($query, $keyword) {
+        if (isset($keyword)) {
+            return $query->where('title', 'LIKE', "%$keyword%")
+                ->orWhere('content', 'LIKE', "%$keyword%");
+        }
+    }
+
     public function scopeSortByCategory($query, $category) {
         if( $category && $category !== 'all' )
             return $query->whereHas('category', function ($q) use ($category) {

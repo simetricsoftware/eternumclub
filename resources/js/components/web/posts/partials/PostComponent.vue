@@ -70,7 +70,7 @@ export default {
         }
     },
     methods: {
-        truncate(text, n = 100, useWordBoundary = true) {
+        truncate(text, n = 20, useWordBoundary = true) {
             if (text.length <= n || !this.compact) return text
             let subString = text.substring(0, n - 1)
             return (useWordBoundary ?

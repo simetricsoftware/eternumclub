@@ -19,10 +19,7 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                <search-component></search-component>
                 <div v-if="user">
                     <li class="nav-item ml-auto">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -49,8 +46,10 @@
 </template>
 
 <script>
+import SearchComponent from './SearchComponent'
 import { mapState } from 'vuex'
 export default {
+    components: { SearchComponent },
     computed: {
         ...mapState([
             'user'
