@@ -49,7 +49,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Rotas para la web SPA
+//Rutas para la web SPA
 Route::namespace('web')->name('web.')->group(function() {
     Route::get('/', 'WebController@index')->name('index');
     Route::fallback('WebController@index');

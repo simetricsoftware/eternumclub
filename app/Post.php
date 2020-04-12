@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Voteable;
 
 class Post extends Model
 {
+    use Voteable;
+
     protected $fillable = [
         'title', 'slug', 'content', 'category_id', 'status', 'image_post_id', 'user_id'
     ];
@@ -45,17 +48,6 @@ class Post extends Model
             return $query->whereHas('category', function ($q) use ($category) {
                 $q->where('title', $category);
             });
-    }
-
-    public function scopeVotesCount($query) {
-        return $query->withCount([
-            'votes', 'votes as likes' => function($vote) {
-                $vote->where('vote_type','like');
-            },
-            'votes', 'votes as dislikes' => function($vote) {
-                $vote->where('vote_type','dislike');
-            }
-        ]);
     }
 
     public function setTags($tags) {

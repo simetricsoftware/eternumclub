@@ -25,7 +25,7 @@ class Post extends JsonResource
             'category'  => Category::make($this->whenLoaded('category')),
             'image'     => $this->image_url,
             'votes'     => [
-                'user_vote_type'    => $this->when($request->user('api'), Vote::make($this->votes->first())),
+                'user_vote_type'    => $this->when($this->whenLoaded('votes'), Vote::make($this->votes->first())),
                 'likes'             => $this->likes,
                 'dislikes'          => $this->dislikes,
             ],

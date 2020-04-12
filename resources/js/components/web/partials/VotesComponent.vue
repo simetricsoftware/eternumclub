@@ -44,7 +44,6 @@ export default {
         vote(vote) {
             axios.put(this.url, { type: vote })
             .then(response => {
-                console.log(response.data);
                 this.$emit('voted')
             })
         },

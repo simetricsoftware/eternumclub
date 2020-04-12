@@ -23,7 +23,7 @@ class Comment extends JsonResource
             'id'        => $this->id,
             'content'   => $this->content,
             'votes'     => [
-                'user_vote_type'    => $this->when($request->user('api'), Vote::make($this->votes->first())),
+                'user_vote_type'    => $this->when($this->whenLoaded('votes'), Vote::make($this->votes->first())),
                 'likes'             => $this->likes,
                 'dislikes'          => $this->dislikes,
             ],

@@ -3,11 +3,11 @@
     <div v-if="post" class="card my-2">
         <div class="card-header">
             <div :class="`overflow-hidden ${ compact ? 'overflow-image' : ''}`">
-                <img class="w-100 img-thumbnail" :src="post.image.url" alt="">
+                <img class="w-100 img-thumbnail" :src="'/storage/'+post.image" alt="">
             </div>
         </div>
         <div class="card-body">
-            <div>
+            <div class="container">
                 <span class="badge badge-primary">
                     {{ post.category.title }}
                 </span>
@@ -16,8 +16,14 @@
                         {{ tag.name }}
                     </span>
                 </div>
-                <div v-if="!compact" class="float-right">
-                    <votes-component :votes="this.post.votes" :tag="this.post.id" :url="url" @voted="$emit('voted')"></votes-component>
+                <div class="float-right">
+                    <votes-component v-if="!compact" :votes="this.post.votes" :tag="this.post.id" :url="url" @voted="$emit('voted')"></votes-component>
+                    <div v-else>
+                        <font-awesome-icon icon="thumbs-up" />
+                        <span class="badge badge-light">{{ post.votes.likes }}</span>
+                        <font-awesome-icon icon="thumbs-down" />
+                        <span class="badge badge-light">{{ post.votes.dislikes }}</span>
+                    </div>
                 </div>
             </div>
             <hr>

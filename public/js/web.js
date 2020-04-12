@@ -10644,8 +10644,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
       axios.put(this.url, {
         type: _vote
       }).then(function (response) {
-        console.log(response.data);
-
         _this.$emit('voted');
       });
     },
@@ -10847,6 +10845,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 /* harmony import */ var _partials_VotesComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../partials/VotesComponent */ "./resources/js/components/web/partials/VotesComponent.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -30511,9 +30515,7 @@ var render = function() {
           },
           [
             _vm._v(
-              "\r\n                " +
-                _vm._s(_vm.message) +
-                "\r\n                "
+              "\n                " + _vm._s(_vm.message) + "\n                "
             ),
             _c(
               "button",
@@ -30542,9 +30544,7 @@ var render = function() {
           },
           [
             _vm._v(
-              "\r\n                " +
-                _vm._s(_vm.error) +
-                "\r\n                "
+              "\n                " + _vm._s(_vm.error) + "\n                "
             ),
             _c(
               "button",
@@ -30603,7 +30603,7 @@ var render = function() {
           : _c("div", { staticClass: "text-center" }, [
               _c("a", { attrs: { href: "/login" } }, [
                 _vm._v(
-                  "\r\n                    Inicia sesión para realizar comentarios\r\n                "
+                  "\n                    Inicia sesión para realizar comentarios\n                "
                 )
               ])
             ])
@@ -30825,7 +30825,7 @@ var render = function() {
           },
           [
             _vm._v(
-              "\r\n            " + _vm._s(_vm.comment.content) + "\r\n        "
+              "\n            " + _vm._s(_vm.comment.content) + "\n        "
             )
           ]
         ),
@@ -31037,7 +31037,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                            " +
+                            "\n                            " +
                               _vm._s(_vm.user.name) +
                               " "
                           ),
@@ -31341,9 +31341,9 @@ var render = function() {
               _vm._v(" "),
               _c("div", [
                 _vm._v(
-                  "\r\n                    Total " +
+                  "\n                    Total " +
                     _vm._s(_vm.postsResult.meta.total) +
-                    " posts\r\n                "
+                    " posts\n                "
                 )
               ])
             ],
@@ -31448,19 +31448,19 @@ var render = function() {
               [
                 _c("img", {
                   staticClass: "w-100 img-thumbnail",
-                  attrs: { src: _vm.post.image.url, alt: "" }
+                  attrs: { src: "/storage/" + _vm.post.image, alt: "" }
                 })
               ]
             )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
-            _c("div", [
+            _c("div", { staticClass: "container" }, [
               _c("span", { staticClass: "badge badge-primary" }, [
                 _vm._v(
-                  "\r\n                    " +
+                  "\n                    " +
                     _vm._s(_vm.post.category.title) +
-                    "\r\n                "
+                    "\n                "
                 )
               ]),
               _vm._v(" "),
@@ -31473,9 +31473,9 @@ var render = function() {
                         { staticClass: "badge badge-success mr-1" },
                         [
                           _vm._v(
-                            "\r\n                        " +
+                            "\n                        " +
                               _vm._s(tag.name) +
-                              "\r\n                    "
+                              "\n                    "
                           )
                         ]
                       )
@@ -31484,12 +31484,12 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              !_vm.compact
-                ? _c(
-                    "div",
-                    { staticClass: "float-right" },
-                    [
-                      _c("votes-component", {
+              _c(
+                "div",
+                { staticClass: "float-right" },
+                [
+                  !_vm.compact
+                    ? _c("votes-component", {
                         attrs: {
                           votes: this.post.votes,
                           tag: this.post.id,
@@ -31501,10 +31501,30 @@ var render = function() {
                           }
                         }
                       })
-                    ],
-                    1
-                  )
-                : _vm._e()
+                    : _c(
+                        "div",
+                        [
+                          _c("font-awesome-icon", {
+                            attrs: { icon: "thumbs-up" }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "badge badge-light" }, [
+                            _vm._v(_vm._s(_vm.post.votes.likes))
+                          ]),
+                          _vm._v(" "),
+                          _c("font-awesome-icon", {
+                            attrs: { icon: "thumbs-down" }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "badge badge-light" }, [
+                            _vm._v(_vm._s(_vm.post.votes.dislikes))
+                          ])
+                        ],
+                        1
+                      )
+                ],
+                1
+              )
             ]),
             _vm._v(" "),
             _c("hr"),
@@ -48801,7 +48821,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\larablog\resources\js\modules\web.js */"./resources/js/modules/web.js");
+module.exports = __webpack_require__(/*! /home/christian/http/larablog/resources/js/modules/web.js */"./resources/js/modules/web.js");
 
 
 /***/ })

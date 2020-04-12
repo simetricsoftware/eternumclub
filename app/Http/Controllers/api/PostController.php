@@ -29,7 +29,7 @@ class PostController extends Controller
     {
         return new PostCollection(
             Post::orderBy('updated_at', 'DESC')
-            ->with(['category', 'image', 'tags'])
+            ->with(['category', 'tags'])
             ->sortByCategory($request->category)
             ->where('status', 'posted')
             ->votesCount()
@@ -40,7 +40,7 @@ class PostController extends Controller
     public function recents(Request $request) {
         return new PostCollection(
             Post::orderBy('updated_at', 'DESC')
-            ->with(['category', 'image', 'tags'])
+            ->with(['category', 'tags'])
             ->where('status', 'posted')
             ->where('slug', '<>', $request->curren_post)
             ->votesCount()
@@ -55,13 +55,15 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(String $slug)
+    public function show(Request $request, String $slug)
     {
+        $user = $request->user('api');
         return new PostResource(
-            Post::with(['category', 'image', 'tags'])
+            Post::with(['category', 'tags'])
+            ->votesUser($user)
+            ->votesCount()
             ->where('slug', $slug)
             ->where('status', 'posted')
-            ->votesCount()
             ->firstOrFail()
         );
     }
