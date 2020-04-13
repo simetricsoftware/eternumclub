@@ -10,7 +10,9 @@ use App\Traits\Voteable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreComment;
 use App\Http\Resources\Comment as CommentResource;
+use App\Mail\CommentPublished;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -53,11 +55,14 @@ class CommentController extends Controller
 
         $p = Post::where('slug', $post)->first();
         $data = $request->validated();
-        Comment::create([
+        $comment = Comment::create([
             'content' => $data['content'],
             'post_id' => $p->id,
             'user_id' => $request->user()->id
         ]);
+
+        Mail::to($p->user->email)->send(new CommentPublished($comment));
+
         return $this->succesResponse();
     }
 
