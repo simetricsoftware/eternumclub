@@ -6,16 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUser;
 use App\Http\Requests\UpdateUser;
 use App\User;
+use App\Events\UserCreated;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function __construct() {
-        // $this->middleware('auth');
-        // $this->authorizeResource(User::class, 'user');
+        $this->middleware('auth');
+        $this->authorizeResource(User::class, 'user');
     }
 
     /**
@@ -51,8 +53,14 @@ class UserController extends Controller
      */
     public function store(StoreUser $request)
     {
-        $user = User::create($request->validated());
+        $data = collect($request->validated())->merge(['email_verified_at' => now()]);
+        $password = Hash::make($request->password);
+        $data['password'] = $password;
+        $user = User::create($data->toArray());
         $user->assignRole('admin');
+
+        event(new UserCreated($user, $request->password));
+
         return redirect()->route('users.show', $user)->with(['status' => 'Usuario creado con exito']);
     }
 
