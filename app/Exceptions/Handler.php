@@ -54,11 +54,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-
-        if($exception instanceof NotFoundHttpException) {
-            return $this->errorResponse(null, 'route-not-found', 404);
-        }elseif ($exception instanceof ModelNotFoundException) {
-            return $this->errorResponse(null, 'resource-not-found', 404);
+        if($request->is('api/*')) {
+            if($exception instanceof NotFoundHttpException) {
+                return $this->errorResponse(null, 'route-not-found', 404);
+            }elseif ($exception instanceof ModelNotFoundException) {
+                return $this->errorResponse(null, 'resource-not-found', 404);
+            }
         }
         return parent::render($request, $exception);
     }

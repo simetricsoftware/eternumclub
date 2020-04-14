@@ -1,0 +1,16 @@
+{
+    "Login"                    : "Iniciar sesión",
+    "Remember Me"              : "Recuerdame",
+    "E-Mail Address"           : "Dirección de correo",
+    "Password"                 : "Contraseña",
+    "Forgot Your Password?"    : "Olvidé mi contraseña",
+    "Register"                 : "Registrarse",
+    "Name"                     : "Nombre",
+    "Lastname"                 : "Apellido",
+    "Confirm Password"         : "Confirmar contraseña",
+    "Please confirm your password before continuing." : "Porfavor confirma tu contraseña antes de continuar",
+    "Reset Password"           : "Reiniciar contraseña",
+    "Send Password Reset Link" : "Enviar reinicio de contraseña",
+    "Verify Your Email Address": "Verifica tu dirección de email",
+    "click here to request another": "click aquí para enviar nuevamente"
+}
