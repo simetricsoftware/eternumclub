@@ -28,13 +28,12 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $post)
+    public function index(Request $request, Post $post)
     {
         $user = $request->user('api');
-        $p = Post::where('slug', $post)->first();
         return CommentResource::collection(
             Comment::orderBy('updated_at', 'DESC')
-                ->where('post_id', $p->id)
+                ->where('post_id', $post->id)
                 ->with(['user.roles:id,name','user.permissions:id,name', 'user.roles.permissions:id,name'])
                 ->votesUser($user)
                 ->votesCount()
@@ -49,19 +48,18 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreComment $request, $post)
+    public function store(StoreComment $request, Post $post)
     {
         $this->authorize('create', Comment::class);
 
-        $p = Post::where('slug', $post)->first();
         $data = $request->validated();
         $comment = Comment::create([
             'content' => $data['content'],
-            'post_id' => $p->id,
+            'post_id' => $post->id,
             'user_id' => $request->user()->id
         ]);
 
-        Mail::to($p->user->email)->send(new CommentPublished($comment));
+        Mail::to($post->user->email)->send(new CommentPublished($comment));
 
         return $this->succesResponse();
     }

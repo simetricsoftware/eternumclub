@@ -24,11 +24,11 @@ Route::namespace('api')->group(function() {
     Route::prefix('posts')->group(function() {
         Route::get('/', 'PostController@index');
         Route::get('recents', 'PostController@recents');
-        Route::get('{slug}', 'PostController@show');
-        Route::put('{post}/vote', 'PostController@vote');
+        Route::get('{post:slug}', 'PostController@show');
+        Route::put('{post:slug}/vote', 'PostController@vote');
 
-        Route::resource('{post}/comments', 'CommentController')->except('create', 'edit', 'show');
-        Route::put('{post}/comments/{comment}/vote', 'CommentController@vote');
+        Route::resource('{post:slug}/comments', 'CommentController')->except('create', 'edit', 'show');
+        Route::put('{post:slug}/comments/{comment}/vote', 'CommentController@vote');
     });
 
     Route::get('categories', 'CategoryController@index');

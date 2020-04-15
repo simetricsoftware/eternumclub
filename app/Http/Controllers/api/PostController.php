@@ -69,9 +69,8 @@ class PostController extends Controller
         );
     }
 
-    public function vote(Request $request, $post)
+    public function vote(Request $request, Post $post)
     {
-        $post = Post::where('slug', $post)->get()->first();
         $this->saveVote($post, $request->type);
         return $this->succesResponse();
     }
