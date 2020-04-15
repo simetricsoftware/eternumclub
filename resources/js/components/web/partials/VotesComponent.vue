@@ -1,10 +1,10 @@
 <template>
     <div>
-        <button :class="`btn btn-sm ${voteType === 'like' ? 'btn-primary' : 'btn-secondary'}`" type="button" name="button" data-toggle="popover" data-container="body" :id="`like-${tag}`" data-placement="top" @click="vote('like')" @mouseover="tooglePopLikes(true)" @mouseleave="tooglePopLikes(false)">
+        <button :class="['btn', 'btn-sm', voteType === 'like' ? 'btn-primary' : 'btn-secondary']" type="button" name="button" data-toggle="popover" data-container="body" :id="`like-${tag}`" data-placement="top" @click="vote('like')" @mouseover="tooglePopLikes(true)" @mouseleave="tooglePopLikes(false)">
             <font-awesome-icon icon="thumbs-up" />
             <span class="badge badge-light">{{ votes.likes }}</span>
         </button>
-        <button :class="`btn btn-sm ${voteType === 'dislike' ? 'btn-primary' : 'btn-secondary'}`" type="button" name="button" data-toggle="popover" data-container="body" :id="`dislike-${tag}`" data-placement="top" @click="vote('dislike')" @mouseover="tooglePopDislikes(true)" @mouseleave="tooglePopDislikes(false)">
+        <button :class="['btn', 'btn-sm', voteType === 'dislike' ? 'btn-primary' : 'btn-secondary']" type="button" name="button" data-toggle="popover" data-container="body" :id="`dislike-${tag}`" data-placement="top" @click="vote('dislike')" @mouseover="tooglePopDislikes(true)" @mouseleave="tooglePopDislikes(false)">
             <font-awesome-icon icon="thumbs-down" />
             <span class="badge badge-light">{{ votes.dislikes }}</span>
         </button>

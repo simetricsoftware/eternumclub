@@ -43,6 +43,13 @@ Route::prefix('dashboard')->namespace('web\dashboard')->group(function() {
         Route::resource('{post}/comments', 'CommentController')->only(['index', 'show', 'destroy']);
     });
 
+    Route::get('paymentmethods/subscriptions/create', 'PaymentMethodController@createSubscription');
+    Route::post('paymentmethods/subscriptions', 'PaymentMethodController@storeSubscription');
+    Route::get('paymentmethods/subscriptions/show', 'PaymentMethodController@showSubscriptions');
+    Route::get('paymentmethods/singlecharges/create', 'PaymentMethodController@createSingleCharge');
+    Route::post('paymentmethods/singlecharges', 'PaymentMethodController@storeSingleCharge');
+    Route::get('paymentmethods/singlecharges/show', 'PaymentMethodController@showSingleCharge');
+
 });
 
 Auth::routes(['verify' => true]);

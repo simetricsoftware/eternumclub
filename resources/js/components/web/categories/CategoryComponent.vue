@@ -2,9 +2,9 @@
   <div>
       <h3>Categorias</h3>
       <div class="list-group">
-          <button :class="`list-group-item list-group-item-action ${active === 'all' ? 'active' : ''}`" @click="emitCategory('all')">Todas</button>
+          <button :class="['list-group-item', 'list-group-item-action', active === 'all' ? 'active' : '']" @click="emitCategory('all')">Todas</button>
           <button
-            :class="`list-group-item list-group-item-action ${active === category.title ? 'active' : ''}`"
+            :class="['list-group-item', 'list-group-item-action', active === category.title ? 'active' : '']"
             v-for="category in categories"
             :key="category.title"
             @click="emitCategory(category.title)"

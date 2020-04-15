@@ -1,9 +1,9 @@
 <template>
 <div>
     <div v-if="post" class="card my-2">
-        <div class="card-header">
-            <div :class="`overflow-hidden ${ compact ? 'overflow-image' : ''}`">
-                <img class="w-100 img-thumbnail" :src="post.image" alt="">
+        <div class="card-header text-center">
+            <div :class="['overflow-hidden', compact ? 'overflow-image' : '']">
+                <img class="w-100 img-thumbnail" :src="post.image" alt="Imagen no encontrada">
             </div>
         </div>
         <div class="card-body">

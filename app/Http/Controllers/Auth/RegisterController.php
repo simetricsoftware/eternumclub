@@ -73,6 +73,7 @@ class RegisterController extends Controller
         ]);
 
         $user->assignRole('guest');
+        $user->createAsStripeCustomer();
 
         return $user;
     }

@@ -10575,13 +10575,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     SearchComponent: _SearchComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['user']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['user'])),
+  data: function data() {
+    return {
+      token: ''
+    };
+  },
+  methods: {
+    logout: function logout() {
+      document.getElementById('logout-form').submit();
+    }
+  },
+  mounted: function mounted() {
+    this.token = $('meta[name="csrf-token"]').attr('content');
+  }
 });
 
 /***/ }),
@@ -30532,9 +30551,11 @@ var render = function() {
         _c(
           "button",
           {
-            class:
-              "list-group-item list-group-item-action " +
-              (_vm.active === "all" ? "active" : ""),
+            class: [
+              "list-group-item",
+              "list-group-item-action",
+              _vm.active === "all" ? "active" : ""
+            ],
             on: {
               click: function($event) {
                 return _vm.emitCategory("all")
@@ -30549,9 +30570,11 @@ var render = function() {
             "button",
             {
               key: category.title,
-              class:
-                "list-group-item list-group-item-action " +
-                (_vm.active === category.title ? "active" : ""),
+              class: [
+                "list-group-item",
+                "list-group-item-action",
+                _vm.active === category.title ? "active" : ""
+              ],
               on: {
                 click: function($event) {
                   return _vm.emitCategory(category.title)
@@ -31115,7 +31138,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm.user
                   ? _c("div", [
-                      _c("li", { staticClass: "nav-item ml-auto" }, [
+                      _c("li", { staticClass: "nav-item dropdown" }, [
                         _c(
                           "a",
                           {
@@ -31139,13 +31162,52 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(2)
+                        _c(
+                          "div",
+                          {
+                            staticClass: "dropdown-menu dropdown-menu-right",
+                            attrs: { "aria-labelledby": "navbarDropdown" }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item",
+                                attrs: { href: "#" },
+                                on: { click: _vm.logout }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                Cerrar sesión\n                            "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "form",
+                              {
+                                staticStyle: { display: "none" },
+                                attrs: {
+                                  id: "logout-form",
+                                  action: "logout",
+                                  method: "POST"
+                                }
+                              },
+                              [
+                                _c("input", {
+                                  attrs: { type: "hidden", name: "_token" },
+                                  domProps: { value: _vm.token }
+                                })
+                              ]
+                            )
+                          ]
+                        )
                       ])
                     ])
                   : _c("div", { staticClass: "d-flex" }, [
-                      _vm._m(3),
+                      _vm._m(2),
                       _vm._v(" "),
-                      _vm._m(4)
+                      _vm._m(3)
                     ])
               ],
               1
@@ -31187,23 +31249,6 @@ var staticRenderFns = [
         _vm._v("Dashboard")
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "dropdown-menu dropdown-menu-right",
-        attrs: { "aria-labelledby": "navbarDropdown" }
-      },
-      [
-        _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-          _vm._v("Cerrar sesión")
-        ])
-      ]
-    )
   },
   function() {
     var _vm = this
@@ -31357,9 +31402,11 @@ var render = function() {
     _c(
       "button",
       {
-        class:
-          "btn btn-sm " +
-          (_vm.voteType === "like" ? "btn-primary" : "btn-secondary"),
+        class: [
+          "btn",
+          "btn-sm",
+          _vm.voteType === "like" ? "btn-primary" : "btn-secondary"
+        ],
         attrs: {
           type: "button",
           name: "button",
@@ -31393,9 +31440,11 @@ var render = function() {
     _c(
       "button",
       {
-        class:
-          "btn btn-sm " +
-          (_vm.voteType === "dislike" ? "btn-primary" : "btn-secondary"),
+        class: [
+          "btn",
+          "btn-sm",
+          _vm.voteType === "dislike" ? "btn-primary" : "btn-secondary"
+        ],
         attrs: {
           type: "button",
           name: "button",
@@ -31620,17 +31669,16 @@ var render = function() {
   return _c("div", [
     _vm.post
       ? _c("div", { staticClass: "card my-2" }, [
-          _c("div", { staticClass: "card-header" }, [
+          _c("div", { staticClass: "card-header text-center" }, [
             _c(
               "div",
               {
-                class:
-                  "overflow-hidden " + (_vm.compact ? "overflow-image" : "")
+                class: ["overflow-hidden", _vm.compact ? "overflow-image" : ""]
               },
               [
                 _c("img", {
                   staticClass: "w-100 img-thumbnail",
-                  attrs: { src: _vm.post.image, alt: "" }
+                  attrs: { src: _vm.post.image, alt: "Imagen no encontrada" }
                 })
               ]
             )

@@ -121,6 +121,8 @@ return [
 
     'key' => env('APP_KEY'),
 
+    'stripe_pk' => env('STRIPE_KEY'),
+
     'cipher' => 'AES-256-CBC',
 
     /*

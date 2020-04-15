@@ -21,13 +21,19 @@
             <ul class="navbar-nav ml-auto">
                 <search-component></search-component>
                 <div v-if="user">
-                    <li class="nav-item ml-auto">
+                    <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ user.name }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Cerrar sesión</a>
+                            <a class="dropdown-item" href="#" @click="logout">
+                                Cerrar sesión
+                            </a>
+
+                            <form id="logout-form" action="logout" method="POST" style="display: none;">
+                                <input type="hidden" name="_token" :value="token">
+                            </form>
                         </div>
                     </li>
                 </div>
@@ -54,6 +60,19 @@ export default {
         ...mapState([
             'user'
         ])
+    },
+    data() {
+        return {
+            token: ''
+        }
+    },
+    methods:{
+        logout() {
+            document.getElementById('logout-form').submit();
+        }
+    },
+    mounted(){
+        this.token = $('meta[name="csrf-token"]').attr('content')
     }
 }
 </script>
