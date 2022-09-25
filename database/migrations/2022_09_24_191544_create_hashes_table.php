@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('hashes', function (Blueprint $table) {
             $table->id();
             $table->string('hash');
-            $table->boolean('was_used')->default(false);
-            $table->foreignId('user_id')->constrained();
+            $table->string('file');
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

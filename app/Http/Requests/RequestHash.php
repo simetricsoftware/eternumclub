@@ -28,7 +28,7 @@ class RequestHash extends FormRequest
             'email' => 'required|email',
             'name' => 'required|string',
             'phone' => 'required|string',
-            'redirect_to' => 'required|url',
+            // 'redirect_to' => 'required|url',
         ];
     }
 }

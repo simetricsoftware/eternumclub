@@ -11,7 +11,7 @@ class Hash extends Model
 
     protected $fillable = [
         'hash',
-        'was_used',
+        'file',
     ];
 
     public function user()

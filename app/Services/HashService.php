@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\QrRequested;
 use App\Models\User;
 use App\Models\Hash;
+use Illuminate\Contracts\Cache\Store;
+use Illuminate\Http\UploadedFile;
 
 class HashService
 { 
@@ -14,7 +16,9 @@ class HashService
     {
         $file_name = "unused-qr/$hash.svg";
 
-        if(!Hash::where('hash', $hash)->exists())
+        $hash = Hash::firstWhere('hash', $hash);
+
+        if($hash->user === null)
         {
             $user = User::firstOrCreate([
                 'email' => $email,
@@ -24,11 +28,7 @@ class HashService
                 'password' => bcrypt($hash),
             ]);
 
-            Hash::make([
-                'hash' => $hash,
-            ])
-            ->user()->associate($user)
-            ->save();
+            $hash->user()->associate($user)->save();
 
             $svg_str = QrCode::size(600)
                 ->style('round')
@@ -61,5 +61,34 @@ class HashService
         ]);
 
         Storage::move("public/unused-qr/$hash.svg", "used-qr/$hash.svg");
+    }
+
+    public function save(string $hash, UploadedFile $file)
+    {
+        $path = Storage::disk('public')->putFile('hashes', $file);;
+
+        Hash::create([
+            'hash' => $hash,
+            'file' => $path,
+        ]);
+    }
+
+    public function update(Hash $hash, string $hash_str, UploadedFile $file)
+    {
+        Storage::disk('public')->delete($hash->file);
+
+        $path = Storage::disk('public')->putFile('hashes', $file);;
+
+        $hash->update([
+            'hash' => $hash_str,
+            'file' => $path,
+        ]);
+    }
+
+    public function delete(Hash $hash)
+    {
+        Storage::disk('public')->delete($hash->file);
+
+        $hash->delete();
     }
 }

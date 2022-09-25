@@ -14,18 +14,32 @@ use App\Http\Controllers\HashController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome')->name('home');
+Route::view('/events', 'web.events')->name('events');
+Route::view('/club', 'web.club')->name('club');
+Route::get('/galery', [ HashController::class, 'galery' ])->name('galery');
+Route::view('/purchase', 'web.purchase')->name('purchase');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::prefix('dashboard')->middleware(['auth', 'role:admin'])->group(function()
+{
+    Route::view('/', 'dashboard')->name('dashboard');
+
+    Route::controller(HashController::class)->prefix('hashes')->group(function()
+    {
+        Route::get('/', 'index')->name('dashboard.hashes.index');
+        Route::get('/create', 'create')->name('dashboard.hashes.create');
+        Route::post('/create', 'save')->name('dashboard.hashes.save');
+        Route::get('/edit/{hash}', 'edit')->name('dashboard.hashes.edit');
+        Route::put('/edit/{hash}', 'update')->name('dashboard.hashes.update');
+        Route::delete('/edit/{hash}', 'delete')->name('dashboard.hashes.delete');
+    });
+});
 
 require __DIR__.'/auth.php';
 
 Route::controller(HashController::class)->group(function()
 {
     Route::get('request-qr', 'requestQr')->name('request-qr');
-    Route::get('register-hash', 'registerHash')->middleware([ 'auth:sanctum', 'unused-url' ])->name('register-hash');
+    Route::get('register-hash', 'registerHash', 'role:admin')->middleware([ 'auth:sanctum', 'unused-url' ])->name('register-hash');
+    Route::view('confirmation', 'web.confirmation')->name('confirmation');
 });
