@@ -1,51 +1,51 @@
-# Larablog
+# larablog
 
-Larablog es una plataforma web que permite instalar un sistema completo para la administración de un Blog.
+Larablog is a web platform that allows you to install a complete system for managing a blog.
 
 [TOC]
 
-## Características
+## Characteristic
 
-- Registro en línea de usuarios.
+- Online registration of users.
 
-- Manejo de roles y permisos.
+- Management of roles and permissions.
 
-- Formularios con texto enriquecido.
+- Forms with rich text.
 
-- Sistema de votos y me gustas.
+- Voting system and I like you.
 
-- Posibilidad de interacutar a través de comentarios.
+- Possibility of interacting through comments.
 
-## Requisitos mínimos
-El sistema es una plataforma que utiliza tecnologías web modernas, por lo que requiere de los siguientes requisitos para funcionar correctamente:
+## Minimum requirements
+The system is a platform that uses modern web technologies, so it requires the following requirements to work properly:
 
-- PHP v7.2 o superior
-- Nginx v1.19 o superior
-- Mysql 8.0.12 o superior
-- Docker v20.10 o superior (Opcional si se desea ejecutar la imagen disponible)
+- PHP v7.2 or higher
+- Nginx v1.19 or higher
+- MySQL 8.0.12 or higher
+- Docker v20.10 or higher (Optional if you want to run the available image)
 
-Alternativamente se incluye un archivo Dockerfile que permite construir una imagen de Docker para poder ser lanzado desde un contenedor.
+Alternatively, a Dockerfile is included that allows you to build a Docker image to be launched from a container.
 
-## Instalación
+## Facility
 
-### Instalación Local
+### Local Installation
 
-- Clonar el repositorio
+- Clone the repository
 
 ```sh
 git clone git@gitlab.com:chrisalban/larablog.git
 cd larablog
 ```
 
-- Instalar las dependencias
+- Install dependencies
 
 ```shell
 composer install
 ```
 
-- Configurar el acceso a la base de datos y cliente de correo
+- Configure access to the database and mail client
 
-- Configurar el archivo `.env`, el proyecto incluye un archivo de configuración de ejemplo `.env.example` del cual se puede copiar las configuraciones básicas.
+- Configure the `.env` file, the project includes an example configuration file `.env.example` from which you can copy the basic configurations.
 
 ```shell
 cp .env.example .env
@@ -55,154 +55,155 @@ cp .env.example .env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=larablog //Colocar el nombre de la base de datos
-DB_USERNAME=larablog_dev //Colocar el nombre de usuario de la base de datos
-DB_PASSWORD=larablog_dev //Colocar la contraseña de la base de datos
+DB_DATABASE=larablog //Put the name of the database
+DB_USERNAME=larablog_dev //Put the database username
+DB_PASSWORD=larablog_dev //Set the database password
 ```
 
-Opcionalmente colocar el usuario y contraseña del cliente de correo electrónico
+Optionally place the username and password of the email client
 
 ```
 MAIL_MAILER=smtp
-MAIL_HOST=smtp.mailtrap.io // Colocar el servidor del cliente de correo
-MAIL_PORT=2525 // Colocar el puerto del cliente de correo
-MAIL_USERNAME=null // Colocar el nombre de usuario del cliente de correo
-MAIL_PASSWORD=null // Colocar la contraseña del cliente de correo
-MAIL_ENCRYPTION=null // Colocar el tipo de encriptación
+MAIL_HOST=smtp.mailtrap.io // Set the mail client server
+MAIL_PORT=2525 // Set the port of the mail client
+MAIL_USERNAME=null // Put the username of the mail client
+MAIL_PASSWORD=null // Put the password of the mail client
+MAIL_ENCRYPTION=null // Set the encryption type
 MAIL_FROM_ADDRESS=null
 MAIL_FROM_NAME="${APP_NAME}"
 ```
-- Ejecutar las migraciones y cargar la aplicación con datos de prueba
+- Run the migrations and load the app with test data
 
 ```shell
 php artisan migrate --seed
 ```
 
-- Generar la llave de la aplicación
+- Generate application key
 
 ```shell
 php artisan key:generate
 php artisan passport:install
 ```
 
-**Nota**: Para que el proyecto funcione correctamente se debe configurar un host virtual apuntando a la carpeta `public` y agregarlo al archivo de redirecciones de host del sistema operativo, en caso de utilizar el servidor web Nginx se puede utilizar la configuración que se encuentra dentro de la carpeta `docker/nginx/cond.d`, y modificar el archivo `app.conf`.
+**Note**: For the project to work correctly, you must configure a virtual host pointing to the `public` folder and add it to the host redirection file of the operating system, in case of using the Nginx web server you can use the configuration found inside the `docker/nginx/cond.d` folder, and modify the `app.conf` file.
 
 ```nginx
 ...
-root /var/www/public # Cambiar la ruta a la ruta del proyecto
+root /var/www/public # Change the path to the project path
 ...
-fastcgi_pass larablog:9000 # Cambiar por el inteprete de php ejemplo 127.0.0.1:9000 o unix:/var/run/php/php7.4-fpm.sock
+fastcgi_pass larablog:9000 # Switch to php interpreter example 127.0.0.1:9000 or unix:/var/run/php/php7.4-fpm.sock
 ```
 
-### Instalación desde imagen de Docker
+### Install from Docker image
 
-Para facilitar el despliegue y garantizar el correcto funcionamiento de la aplicación, hay disponible una imagen de Docker que contiene todas las configuraciones y dependencias necesarias del proyecto.
+To facilitate deployment and ensure proper application operation, a Docker image is available that contains all the necessary configurations and dependencies of the project.
 
-- Clonar el repositorio
+- Clone the repository
 
 ```shell
 git clone git@gitlab.com:chrisalban/larablog.git
 cd larablog
 ```
-- Copiar los archivos de configuración
+- Copy the configuration files
 
 ```shell
 cp docker-compose.example.yml docker-compose.yml
 cp nginx.example.conf nginx.conf
 ```
 
-- Ejecutar el archivo de configuración `docker-compose.yml` utilizando el comando `docker-compose`.
+- Run the `docker-compose.yml` configuration file using the `docker-compose` command.
 
 ```shell
 docker-compose up -d
 ```
 
-- Se comenzará a construir la imagen y se ejecutarán todos los contenedores, se debe ingresar dentro del contenedor `larablog-php` para ejecutar la migración de la base de datos.
+- The image will start to be built and all the containers will be executed, it must be entered inside the `larablog-php` container to execute the migration of the database.
 
 ```shell
 docker exec -it larablog-php bash
 ```
 
-- Instalar las dependencias
+- Install dependencies
 
 ```shell
 composer install
 ```
 
-**NOTA:** No se debe configurar la base de datos, se debe dejar la configuración que viene por defecto.
+**NOTE:** The database should not be configured, the default configuration should be left.
 
-- Configurar el archivo `.env`, el proyecto incluye un archivo de configuración de ejemplo `.env.example` el cual se debe copiar.
+- Configure the `.env` file, the project includes an example configuration file `.env.example` which must be copied.
 
 ```shell
 cp .env.example .env
 ```
 
-- Opcionalmente colocar el usuario y contraseña del cliente de correo electrónico
+- Optionally place the username and password of the email client
 
 ```
 MAIL_MAILER=smtp
-MAIL_HOST=smtp.mailtrap.io // Colocar el servidor del cliente de correo
-MAIL_PORT=2525 // Colocar el puerto del cliente de correo
-MAIL_USERNAME=null // Colocar el nombre de usuario del cliente de correo
-MAIL_PASSWORD=null // Colocar la contraseña del cliente de correo
-MAIL_ENCRYPTION=null // Colocar el tipo de encriptación
+MAIL_HOST=smtp.mailtrap.io // Set the mail client server
+MAIL_PORT=2525 // Set the port of the mail client
+MAIL_USERNAME=null // Put the username of the mail client
+MAIL_PASSWORD=null // Put the password of the mail client
+MAIL_ENCRYPTION=null // Set the encryption type
 MAIL_FROM_ADDRESS=null
 MAIL_FROM_NAME="${APP_NAME}"
 ```
-- Dentro del contenedor ejecutar el comando de la migración.
+- Inside the container run the migration command.
 
 ```shell
 php artisan migrate --seed
 ```
 
-- Generar la llave de la aplicación
+- Generate application key
 
 ```shell
 php artisan key:generate
 php artisan passport:install
 ```
 
-- Configurar el host virtual `/etc/hosts`, en el equipo, no en el contenedor
+- Configure the virtual host `/etc/hosts`, on the machine, not in the container
 ```shell
 echo "192.168.0.242 larablog.test" | sudo tee -a /etc/hosts
 ```
 
-### Usuarios por defecto
+### Default users
 
-Después de ejecutar la migración con el modificador `--seed` para alimentar la base de datos con datos de prueba se podrá ingresar al sistema con las siguientes credenciales.
+After running the migration with the `--seed` switch to feed the database with test data, you can login with the following credentials
+cials.
 
-- **Administrador**: 
+- **Administrator**:
 
-  Correo: admin@admin.com
+   Email: admin@admin.com
 
-  Contraseña: admin
+   Password: admin
 
-- **Moderador**
+- **Moderator**
 
-  Correo: moderator@moderator.com
+   Email: moderator@moderator.com
 
-  Contraseña: moderator
+   Password: moderator
 
-- **Escritor**
+- **Writer**
 
-  Correo: writer@writer.com
+   Email: writer@writer.com
 
-  Contraseña: writer
+   Password: writer
   
-- **Invitado**
+- **Guest**
 
-  Correo: guest@guest.com
+   Email: guest@guest.com
 
-  Contraseña: guest
-  
+   Password: guest
 
-## Capturas
 
-![Categorías](screenshots/categories.png)
+## Captures
+
+![Categories](screenshots/categories.png)
 
 ![Editor](screenshots/editor.png)
 
-![Permisos](screenshots/permissions.png)
+![Permissions](screenshots/permissions.png)
 
 ![Post](screenshots/post.png)
 
