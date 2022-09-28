@@ -164,7 +164,7 @@ php artisan passport:install
 
 - Configure the virtual host `/etc/hosts`, on the machine, not in the container
 ```shell
-echo "192.168.0.242 larablog.test" | sudo tee -a /etc/hosts
+echo "127.0.0.1 larablog.test" | sudo tee -a /etc/hosts
 ```
 
 ### Default users
