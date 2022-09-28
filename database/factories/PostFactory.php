@@ -14,6 +14,6 @@ $factory->define(Post::class, function (Faker $faker) {
         'content'       => $faker->text(500),
         'status'        => $faker->randomElement(['posted', 'unposted']),
         'category_id'   => $faker->numberBetween(1, 10),
-        'image_url'     => 'https://picsum.photos/700/400?random=1'
+        'image_url'     => 'blog_default.jpg'
     ];
 });

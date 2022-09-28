@@ -1,79 +1,204 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Larablog
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Larablog es una plataforma web para que permite instalar un sistema completo para la administración de un Blog.
 
-## About Laravel
+[TOC]
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Características
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Registro en línea de usuarios.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Manejo de roles y permisos.
 
-## Learning Laravel
+- Formularios con texto enriquesido.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Sistema de votos y me gustas.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Posibilidad de interacutar a travez de comentarios.
 
-## Laravel Sponsors
+## Requisitos mínimos
+El sistema es una plataforma web que utiliza tecnologías modernas web, por lo que requiere de los siguientes requisitos para funcionar correctamente:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- PHP v7.2 o superior
+- Nginx v1.19 o superior
+- Mysql 8.0.12 o superior
+- Docker v20.10 o superior (Opcional si se desea ejecutar la imagen disponible)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-- [云软科技](http://www.yunruan.ltd/)
+Alternativamente se incluye un archivo Dockerfile que permite construir una imágen de Docker para poder ser lanzado desde un contenedor.
 
-## Contributing
+## Instalación
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Instalación Local
 
-## Code of Conduct
+Clonar el repositorio
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```sh
+git clone git@gitlab.com:chrisalban/larablog.git
+cd ../larablog
+```
 
-## Security Vulnerabilities
+Instalar las dependencias
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```shell
+composer install
+```
 
-## License
+Configurar el acceso a la base de datos y cliente de correo
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Configurar el archivo `.env`, el proyecto incluye un archivo de configuración de ejemplo `.env.example` del cual se puede copiar las configuraciones básicas.
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=larablog //Colocar el nombre de la base de datos
+DB_USERNAME=larablog_dev //Colocar el nombre de usuario de la base de datos
+DB_PASSWORD=larablog_dev //Colocar la contraseña de la base de datos
+```
+
+Opcional mente colocar el usuario y contraseña del cliente de correo electrónico
+
+```
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io // Colocar el servidor del cliente de correo
+MAIL_PORT=2525 // Colocar el puerto del cliente de correo
+MAIL_USERNAME=null // Colocar el nombre de usuario del cliente de correo
+MAIL_PASSWORD=null // Colocar la contraseña del cliente de correo
+MAIL_ENCRYPTION=null // Colocar el tipo de encriptación
+MAIL_FROM_ADDRESS=null
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+Generar la llave de la aplicación
+
+```shell
+php artisan key:generate
+php artisan passport:install
+```
+
+Ejecutar las migraciones y cargar la aplicación con datos de prueba
+
+```shell
+php artisan migrate --seed
+```
+**Nota**: Para que el proyecto funcione correctamente se debe configurar un host virtual apuntando a la carpeta `public` y agregarlo al archivo de redirecciónes de host del sistema operativo, en caso de utilizar el servidor web Nginx se puede utilizar la configuración que se encuentra dentro de la carpeta `docker/nginx/cond.d`, y modificar el archivo `app.conf`.
+
+```nginx
+...
+root /var/www/public # Cambiar la ruta a la ruta del proyecto
+...
+fastcgi_pass larablog:9000 # Cambiar por el inteprete de php ejemplo 127.0.0.1:9000 o unix:/var/run/php/php7.4-fpm.sock
+```
+
+### Instalación desde imagen de Docker
+
+Para facilitar el despliegue y garantizar el correcto funcionamiento de la aplicación, hay disponible una imagen de Docker que contiene todas las configuraciones y dependencias necesarias del proyecto.
+
+- Clonar el repositorio
+
+```shell
+git clone git@gitlab.com:chrisalban/larablog.git
+cd ../larablog
+```
+- Copiar los archivos de configuración
+
+```shell
+cp docker-compose.example.yml docker-compose.yml
+cp nginx.example.conf nginx.conf
+```
+
+- Ejecutar el archivo de configuración `docker-compose.yml` utilizando el comando `docker-compose`.
+
+```shell
+docker-compose up -d
+```
+
+- Se comenzará a construir la imagen y se ejecutarán todos los contenedores, se debe ingresar dentro del contenedor `larablog-php` para ejecutar la migración de la base de datos.
+
+```shell
+docker exec -it larablog-php bash
+```
+
+- Instalar las dependencias
+
+```shell
+composer install
+```
+
+**NOTA:** No se debe configurar la base de datos, se debe dejar la configuración que viene por defecto.
+
+- Configurar el archivo `.env`, el proyecto incluye un archivo de configuración de ejemplo `.env.example` el cual se debe copiar.
+
+- Opcional mente colocar el usuario y contraseña del cliente de correo electrónico
+
+```
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io // Colocar el servidor del cliente de correo
+MAIL_PORT=2525 // Colocar el puerto del cliente de correo
+MAIL_USERNAME=null // Colocar el nombre de usuario del cliente de correo
+MAIL_PASSWORD=null // Colocar la contraseña del cliente de correo
+MAIL_ENCRYPTION=null // Colocar el tipo de encriptación
+MAIL_FROM_ADDRESS=null
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+- Generar la llave de la aplicación
+
+```shell
+php artisan key:generate
+php artisan passport:install
+```
+
+- Dentro del contenedor ejecutar el comando de la migración.
+
+```shell
+php artisan migrate --seed
+```
+
+- Configurar el host virtual `/etc/hosts`
+```shell
+larablog.test 127.0.0.1
+```
+
+### Usuarios por defecto
+
+Después de ejecutar la migración con el modificador `--seed` para alimentar la base de datos con datos de prueba se podrá ingresar al sistema con las siguientes credenciales.
+
+- **Administrador**: 
+
+  Correo: admin@admin.com
+
+  Contraseña: admin
+
+- **Moderador**
+
+  Correo: moderator@moderator.com
+
+  Contraseña: moderator
+
+- **Escritor**
+
+  Correo: writer@writer.com
+
+  Contraseña: writer
+  
+- **Invitado**
+
+  Correo: guest@guest.com
+
+  Contraseña: guest
+  
+
+## Capturas
+
+![Categorías](screenshots/categories.png)
+
+![Editor](screenshots/editor.png)
+
+![Permisos](screenshots/permissions.png)
+
+![Post](screenshots/post.png)
+
+![Posts](screenshots/posts.png)
+
+![Wellcome](screenshots/wellcome.png)
