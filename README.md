@@ -1,6 +1,6 @@
 # Larablog
 
-Larablog es una plataforma web para que permite instalar un sistema completo para la administración de un Blog.
+Larablog es una plataforma web que permite instalar un sistema completo para la administración de un Blog.
 
 [TOC]
 
@@ -10,42 +10,46 @@ Larablog es una plataforma web para que permite instalar un sistema completo par
 
 - Manejo de roles y permisos.
 
-- Formularios con texto enriquesido.
+- Formularios con texto enriquecido.
 
 - Sistema de votos y me gustas.
 
-- Posibilidad de interacutar a travez de comentarios.
+- Posibilidad de interacutar a través de comentarios.
 
 ## Requisitos mínimos
-El sistema es una plataforma web que utiliza tecnologías modernas web, por lo que requiere de los siguientes requisitos para funcionar correctamente:
+El sistema es una plataforma que utiliza tecnologías web modernas, por lo que requiere de los siguientes requisitos para funcionar correctamente:
 
 - PHP v7.2 o superior
 - Nginx v1.19 o superior
 - Mysql 8.0.12 o superior
 - Docker v20.10 o superior (Opcional si se desea ejecutar la imagen disponible)
 
-Alternativamente se incluye un archivo Dockerfile que permite construir una imágen de Docker para poder ser lanzado desde un contenedor.
+Alternativamente se incluye un archivo Dockerfile que permite construir una imagen de Docker para poder ser lanzado desde un contenedor.
 
 ## Instalación
 
 ### Instalación Local
 
-Clonar el repositorio
+- Clonar el repositorio
 
 ```sh
 git clone git@gitlab.com:chrisalban/larablog.git
-cd ../larablog
+cd larablog
 ```
 
-Instalar las dependencias
+- Instalar las dependencias
 
 ```shell
 composer install
 ```
 
-Configurar el acceso a la base de datos y cliente de correo
+- Configurar el acceso a la base de datos y cliente de correo
 
-Configurar el archivo `.env`, el proyecto incluye un archivo de configuración de ejemplo `.env.example` del cual se puede copiar las configuraciones básicas.
+- Configurar el archivo `.env`, el proyecto incluye un archivo de configuración de ejemplo `.env.example` del cual se puede copiar las configuraciones básicas.
+
+```shell
+cp .env.example .env
+```
 
 ```
 DB_CONNECTION=mysql
@@ -56,7 +60,7 @@ DB_USERNAME=larablog_dev //Colocar el nombre de usuario de la base de datos
 DB_PASSWORD=larablog_dev //Colocar la contraseña de la base de datos
 ```
 
-Opcional mente colocar el usuario y contraseña del cliente de correo electrónico
+Opcionalmente colocar el usuario y contraseña del cliente de correo electrónico
 
 ```
 MAIL_MAILER=smtp
@@ -68,20 +72,20 @@ MAIL_ENCRYPTION=null // Colocar el tipo de encriptación
 MAIL_FROM_ADDRESS=null
 MAIL_FROM_NAME="${APP_NAME}"
 ```
+- Ejecutar las migraciones y cargar la aplicación con datos de prueba
 
-Generar la llave de la aplicación
+```shell
+php artisan migrate --seed
+```
+
+- Generar la llave de la aplicación
 
 ```shell
 php artisan key:generate
 php artisan passport:install
 ```
 
-Ejecutar las migraciones y cargar la aplicación con datos de prueba
-
-```shell
-php artisan migrate --seed
-```
-**Nota**: Para que el proyecto funcione correctamente se debe configurar un host virtual apuntando a la carpeta `public` y agregarlo al archivo de redirecciónes de host del sistema operativo, en caso de utilizar el servidor web Nginx se puede utilizar la configuración que se encuentra dentro de la carpeta `docker/nginx/cond.d`, y modificar el archivo `app.conf`.
+**Nota**: Para que el proyecto funcione correctamente se debe configurar un host virtual apuntando a la carpeta `public` y agregarlo al archivo de redirecciones de host del sistema operativo, en caso de utilizar el servidor web Nginx se puede utilizar la configuración que se encuentra dentro de la carpeta `docker/nginx/cond.d`, y modificar el archivo `app.conf`.
 
 ```nginx
 ...
@@ -98,7 +102,7 @@ Para facilitar el despliegue y garantizar el correcto funcionamiento de la aplic
 
 ```shell
 git clone git@gitlab.com:chrisalban/larablog.git
-cd ../larablog
+cd larablog
 ```
 - Copiar los archivos de configuración
 
@@ -129,7 +133,11 @@ composer install
 
 - Configurar el archivo `.env`, el proyecto incluye un archivo de configuración de ejemplo `.env.example` el cual se debe copiar.
 
-- Opcional mente colocar el usuario y contraseña del cliente de correo electrónico
+```shell
+cp .env.example .env
+```
+
+- Opcionalmente colocar el usuario y contraseña del cliente de correo electrónico
 
 ```
 MAIL_MAILER=smtp
@@ -141,6 +149,11 @@ MAIL_ENCRYPTION=null // Colocar el tipo de encriptación
 MAIL_FROM_ADDRESS=null
 MAIL_FROM_NAME="${APP_NAME}"
 ```
+- Dentro del contenedor ejecutar el comando de la migración.
+
+```shell
+php artisan migrate --seed
+```
 
 - Generar la llave de la aplicación
 
@@ -149,15 +162,9 @@ php artisan key:generate
 php artisan passport:install
 ```
 
-- Dentro del contenedor ejecutar el comando de la migración.
-
+- Configurar el host virtual `/etc/hosts`, en el equipo, no en el contenedor
 ```shell
-php artisan migrate --seed
-```
-
-- Configurar el host virtual `/etc/hosts`
-```shell
-larablog.test 127.0.0.1
+echo "192.168.0.242 larablog.test" | sudo tee -a /etc/hosts
 ```
 
 ### Usuarios por defecto
