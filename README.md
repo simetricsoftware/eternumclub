@@ -1,4 +1,4 @@
-# larablog
+# Larablog
 
 Larablog is a web platform that allows you to install a complete system for managing a blog.
 
@@ -26,7 +26,7 @@ The system is a platform that uses modern web technologies, so it requires the f
 
 Alternatively, a Dockerfile is included that allows you to build a Docker image to be launched from a container.
 
-## Facility
+## Installation
 
 ### Local Installation
 
