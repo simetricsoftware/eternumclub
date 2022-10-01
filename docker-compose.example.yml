@@ -1,7 +1,7 @@
 # For more information: https://laravel.com/docs/eternum
 version: '3'
 services:
-    laravel.test:
+    eternum:
         build:
             context: ./vendor/laravel/eternum/runtimes/8.1
             dockerfile: Dockerfile
