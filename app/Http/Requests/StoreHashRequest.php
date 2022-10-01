@@ -24,7 +24,7 @@ class StoreHashRequest extends FormRequest
     public function rules()
     {
         return [
-            'hash' => 'required|string|unique:id',
+            'hash' => 'required|string|unique:hashes,hash',
             'file' => 'required|image',
         ];
     }

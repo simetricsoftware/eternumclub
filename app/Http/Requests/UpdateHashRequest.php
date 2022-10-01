@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Hash;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateHashRequest extends FormRequest
 {
@@ -24,8 +26,8 @@ class UpdateHashRequest extends FormRequest
     public function rules()
     {
         return [
-            'hash' => "required|string|unique:id,$this->id",
-            'file' => 'required|image',
+            'hash' => [ 'required', 'string', Rule::unique(Hash::class, 'hash')->ignore($this->id), ],
+            'file' => 'sometimes|required|image',
         ];
     }
 }

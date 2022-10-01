@@ -1,4 +1,5 @@
 <div class="grid grid-cols-2 gap-4">
+    <input type="hidden" name="id" value="{{ $hash->id }}">
     <div class="flex flex-col gap-4">
         <x-input-label value="Hash" />
         <x-text-input name="hash" :value="old('hash', $hash->hash)"/>

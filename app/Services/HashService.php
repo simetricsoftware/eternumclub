@@ -73,16 +73,18 @@ class HashService
         ]);
     }
 
-    public function update(Hash $hash, string $hash_str, UploadedFile $file)
+    public function update(Hash $hash, string $hash_str, ?UploadedFile $file)
     {
-        Storage::disk('public')->delete($hash->file);
+        if($file !== null)
+        { 
+            Storage::disk('public')->delete($hash->file);
+            $path = Storage::disk('public')->putFile('hashes', $file);;
+            $hash->file = $path;
+        }
 
-        $path = Storage::disk('public')->putFile('hashes', $file);;
 
-        $hash->update([
-            'hash' => $hash_str,
-            'file' => $path,
-        ]);
+        $hash->hash = $hash_str;
+        $hash->save();
     }
 
     public function delete(Hash $hash)
