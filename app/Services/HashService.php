@@ -124,7 +124,9 @@ class HashService
 
         $hash->user_id = null; 
 
-        Storage::disk('public')->delete($hash->voucher);
+        if($hash->voucher)
+            Storage::disk('public')->delete($hash->voucher);
+
         $hash->voucher = null; 
         $hash->approved_at = null; 
 
