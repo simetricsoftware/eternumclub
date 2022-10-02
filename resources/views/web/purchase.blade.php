@@ -116,8 +116,8 @@
             cancellationUrl: "https://localhost/request-qr",
         })
 
-        fetch('https://pay.payphonetodoesposible.com/api/Links', {
-        /* fetch('https://pay.payphonetodoesposible.com/api/button/Prepare', { */
+        /* fetch('https://pay.payphonetodoesposible.com/api/Links', { */
+        fetch('https://pay.payphonetodoesposible.com/api/button/Prepare', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
