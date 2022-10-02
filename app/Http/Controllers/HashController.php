@@ -84,7 +84,7 @@ class HashController extends Controller
     {
         $this->hash_service->registerHash($request->hash, $request->email);
 
-        return redirect()->route('dashboard.hashes.index');
+        return redirect()->route('approved');
     }
 
     public function reverse(string $hash)

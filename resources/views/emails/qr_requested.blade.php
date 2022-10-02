@@ -1,1 +1,1 @@
-<img src="{{ $qr_url }}" alt="">
+<img width="250px" src="{{ $qr_url }}" alt="">

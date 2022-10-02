@@ -20,7 +20,7 @@ class UnusedHash
         $hash_already_registered = Hash::where('hash', $request->hash)->where('was_used', true)->exists();
 
         if($hash_already_registered)
-            abort(403);
+            return redirect()->route('denied');
 
         return $next($request);
     }

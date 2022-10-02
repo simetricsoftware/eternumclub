@@ -44,4 +44,6 @@ Route::controller(HashController::class)->group(function()
     Route::post('register-voucher', 'registerVoucher')->name('register-voucher');
     Route::get('register-hash', 'registerHash')->middleware([ 'auth:sanctum', 'unused-hash', 'role:admin' ])->name('register-hash');
     Route::view('confirmation', 'web.confirmation')->name('confirmation');
+    Route::view('denied', 'web.denied')->name('denied');
+    Route::view('approved', 'web.approved')->name('approved');
 });

@@ -55,25 +55,48 @@
                                         <li>
                                             <tr>
                                                 <td>
-                                                    <h4>Realiza tu pago con PayPhone, la mejor forma de pagar en Ecuador y el mundo </h4>
+                                                    <h4>Realiza tu pago con PayPhone, o transferencia bancaria</h4>
                                                 </td>
                                             </tr>
-
                                         </li>
+
                                         <li>
                                             <tr>
                                                 <td>
-                                                    <h4>Una vez realizado el pago recibirás a tu correo un código QR el cual contiene tu NFT </h4>
+                                                    <h4><img src="{{ asset('assets/images/pb_ico.png') }}"> <br>
+                                                        Ahorros - 12002229744 <br>
+                                                        Nombre: Christian Albán C.I - 1722525613<br>
+                                                        Correo: ventas@eternumclub.com
+                                                    </h4>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td>
+                                                    <h4><img src="{{ asset('assets/images/bp_ico.png') }}"> <br>
+                                                        Ahorros - 2204536874 <br>
+                                                        Nombre: Steve Acosta C.I - 1725889685 <br>
+                                                        Correo: ventas@eternumclub.com
+
+                                        <li>
+                                            <tr>
+                                                <td>
+                                                    <h4>Una vez realizado el pago recibirás a tu correo un código QR para el día del evento</h4>
+                                                </td>
+                                            </tr>
+                                        </li>
+
+
+                                        </h4>
+                                        </td>
+                                        </tr>
                                         </li>
                                     </ul>
                                     <h3>Siguenos</h3>
                                     <a href="http://www.facebook.com" title="" class="fa-icon">
-                                        <i class="fa fa-instagram"></i>
+                                        <img src="{{ asset('assets/images/insta_ico.png') }}">
                                     </a>
                                     <a href="http://www.twitter.com" title="" class="fa-icon">
-                                        <i class="fa fa-twitter"></i>
+                                        <img src="{{ asset('assets/images/tik_tok.png') }}">
                                     </a>
 
 
