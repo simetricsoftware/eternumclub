@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RequestHash;
 use App\Http\Requests\RegisterHash;
+use App\Http\Requests\RegisterVoucher;
 use App\Http\Requests\StoreHashRequest;
 use App\Http\Requests\UpdateHashRequest;
 use App\Models\Hash;
 use App\Services\HashService;
+use Illuminate\Http\Request;
 
 class HashController extends Controller
 {
@@ -15,9 +17,9 @@ class HashController extends Controller
         protected HashService $hash_service,
     ) {}
 
-    public function index()
+    public function index(Request $request)
     {
-        $hashes = Hash::all();
+        $hashes = Hash::filterHash($request->hash)->get();
 
         return view('dashboard.hash.index')->with([ 'hashes' => $hashes ]);
     }
@@ -60,21 +62,28 @@ class HashController extends Controller
         return view('web.galery')->with([ 'hashes' => $hashes ]);
     }
 
-    public function requestQr(RequestHash $request)
+    public function registerVoucher(RegisterVoucher $request)
     {
-        $qr_url = $this->hash_service->requestQr($request->hash, $request->email, $request->name, $request->phone);
+        $this->hash_service->registerVoucher($request->hash, $request->email, $request->name, $request->phone, $request->file('voucher'));
 
-        $url = $this->hash_service->requestUrl($request->hash, $request->email);
-
-        $this->hash_service->sendByEmail($request->email, $qr_url, $url);
-        
         return redirect()->route('confirmation');
+    }
+
+    public function requestQr(string $hash)
+    {
+        $hash = Hash::firstWhere('hash', $hash);
+
+        $qr_url = $this->hash_service->requestQr($hash);
+
+        $this->hash_service->sendByEmail($hash->user->email, $qr_url);
+        
+        return redirect()->route('dashboard.hashes.index');
     }
 
     public function registerHash(RegisterHash $request)
     {
         $this->hash_service->registerHash($request->hash, $request->email);
 
-        return response()->noContent();
+        return redirect()->route('dashboard.hashes.index');
     }
 }

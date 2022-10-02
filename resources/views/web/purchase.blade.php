@@ -17,18 +17,23 @@
 
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
-                        <form onsubmit="prepare(event)" class="reveal-content">
+                        <form action="{{ route('register-voucher') }}" class="reveal-content" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <input type="hidden" id="hash" name="hash" value="{{ request()->hash }}">
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Celular">
+                                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Celular" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="voucher">Carga el comprobante de tu transferencia</label>
+                                        <input type="file" class="form-control" id="voucher" name="voucher" required accept="image/jpeg,image/png">
                                     </div>
 
                                     <button type="submit" class="btn btn-default btn-lg">Finalizar compra</button>

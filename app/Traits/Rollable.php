@@ -17,6 +17,8 @@ trait Rollable
         throw_if($role === null, 'Role non exists');
 
         $this->role()->associate($role);
+
+        return $this;
     }
 
     public function hasRole(string $role): bool

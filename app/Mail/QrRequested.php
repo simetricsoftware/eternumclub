@@ -17,8 +17,7 @@ class QrRequested extends Mailable
      * @return void
      */
     public function __construct(
-        protected string $qr_url,
-        protected string $url,
+        private string $qr_url,
     )
     {}
 
@@ -31,7 +30,6 @@ class QrRequested extends Mailable
     {
         return $this->view('emails.qr_requested')->with([
             'qr_url' => $this->qr_url,
-            'url' => $this->url
         ]);
     }
 }

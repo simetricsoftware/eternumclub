@@ -19,10 +19,17 @@
                                 <img class="h-40" src="{{ asset("storage/$hash->file") }}" alt="{{ $hash->hash }}">
                             </div>
                             <div class="flex flex-col items-stretch gap-4 w-full">
+                                <a href="{{ asset("storage/$hash->voucher") }}">
+                                    <img class="h-40" src="{{ asset("storage/$hash->voucher") }}" alt="{{ $hash->hash }}">
+                                </a>
                                 <span class="w-full p-4">{{ $hash->hash }}</span>
                                 <div class="flex w-full justify-end p-4">
+                                    @if($hash->not_assigned) 
                                     <x-nav-link :href="route('dashboard.hashes.edit', [ 'hash' => $hash ])">Edit</x-nav-link>
-                                    
+                                    @endif
+                                    @if($hash->voucher && $hash->not_used) 
+                                        <x-nav-link :href="route('dashboard.hashes.approvate', [ 'hash' => $hash->hash ])">Aprobar</x-nav-link>
+                                    @endif
                                 </div>
                             </div>
                         </li>

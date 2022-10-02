@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RequestHash extends FormRequest
+class RegisterVoucher extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,7 @@ class RequestHash extends FormRequest
             'email' => 'required|email',
             'name' => 'required|string',
             'phone' => 'required|string',
-            // 'redirect_to' => 'required|url',
+            'voucher' => 'required|image',
         ];
     }
 }

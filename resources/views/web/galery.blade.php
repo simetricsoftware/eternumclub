@@ -22,7 +22,7 @@
         @foreach($hashes as $hash)
         <div class="col-xs-12 col-md-6">
             <img src="{{ asset("storage/$hash->file") }}" class="img-responsive" alt="">
-            <p style="font-size: 2rem;">ETERNUM PUMPKIN #{{ $loop->index + 1 }}</p>
+            <p style="font-size: 2rem;">ETERNUM PUMPKIN #{{ $loop->index + 1 }} $12</p>
             <p style="text-align: center;">
                 @isset($hash->user)
                 <span class="btn btn-danger btn-lg" role="alert">No diponible</span>
