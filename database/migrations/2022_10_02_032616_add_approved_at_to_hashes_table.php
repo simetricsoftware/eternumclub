@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('hashes', function (Blueprint $table) {
-            $table->boolean('was_used')->default(false)->after('voucher');
+            $table->timestamp('approved_at')->nullable()->after('voucher');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('hashes', function (Blueprint $table) {
-            $table->dropColumn('was_used');
+            $table->dropColumn('approved_at');
         });
     }
 };

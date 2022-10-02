@@ -57,6 +57,10 @@ class HashService
                 ->generate($this->requestUrl($hash, $hash->user->email));
 
         Storage::disk('public')->put($file_name, $svg_str);
+
+        $hash->approved_at = now(); 
+
+        $hash->save();
         
         return Storage::disk('public')->url($file_name);
     }
@@ -112,5 +116,20 @@ class HashService
         Storage::disk('public')->delete($hash->file);
 
         $hash->delete();
+    }
+
+    public function reverseHash(string $hash)
+    {
+        $hash = Hash::firstWhere('hash', $hash); 
+
+        $hash->user_id = null; 
+
+        Storage::disk('public')->delete($hash->voucher);
+        $hash->voucher = null; 
+        $hash->approved_at = null; 
+
+        $hash->was_used = false; 
+
+        $hash->save();
     }
 }

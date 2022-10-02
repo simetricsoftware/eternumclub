@@ -86,4 +86,11 @@ class HashController extends Controller
 
         return redirect()->route('dashboard.hashes.index');
     }
+
+    public function reverse(string $hash)
+    {
+        $this->hash_service->reverseHash($hash);
+
+        return redirect()->route('dashboard.hashes.index');
+    }
 }

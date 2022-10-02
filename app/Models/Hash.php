@@ -16,6 +16,7 @@ class Hash extends Model
         'file',
         'voucher',
         'was_used',
+        'approved_at',
     ];
 
     public function user()
@@ -34,6 +35,13 @@ class Hash extends Model
     { 
         return Attribute::make( 
             get: fn() => $this->user_id === null
+        );
+    }
+
+    public function assigned(): Attribute 
+    { 
+        return Attribute::make( 
+            get: fn() => !$this->not_assigned
         );
     }
 

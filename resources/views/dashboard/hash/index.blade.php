@@ -28,7 +28,10 @@
                                     <x-nav-link :href="route('dashboard.hashes.edit', [ 'hash' => $hash ])">Edit</x-nav-link>
                                     @endif
                                     @if($hash->voucher && $hash->not_used) 
-                                        <x-nav-link :href="route('dashboard.hashes.approvate', [ 'hash' => $hash->hash ])">Aprobar</x-nav-link>
+                                    <x-nav-link :href="route('dashboard.hashes.approvate', [ 'hash' => $hash->hash ])">{{ $hash->approved_at }} Aprobar</x-nav-link>
+                                    @endif
+                                    @if($hash->assigned) 
+                                    <x-nav-link :href="route('dashboard.hashes.reverse', [ 'hash' => $hash->hash ])">Reversar</x-nav-link>
                                     @endif
                                 </div>
                             </div>
