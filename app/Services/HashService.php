@@ -1,14 +1,15 @@
 <?php
 namespace App\Services;
 
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\QrRequested;
 use App\Mail\RegisterVoucher;
-use App\Models\User;
 use App\Models\Hash;
+use App\Models\User;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class HashService
 { 
@@ -34,7 +35,13 @@ class HashService
             $hash->user()->associate($user);
         }
 
-        $hash->voucher = Storage::disk('public')->putFile("vouchers", $voucher);
+        $voucher_img = Image::make($voucher);
+
+        $image_name = 'vouchers/' . now()->timestamp . '.jpg'; 
+
+        $voucher_img->orientate()->widen(600)->save(storage_path("app/public/$image_name")); 
+
+        $hash->voucher = $image_name;
 
         Mail::to(env('MAIL_SALES_ADDRESS'))->send(new RegisterVoucher( 
             $hash->hash, 
