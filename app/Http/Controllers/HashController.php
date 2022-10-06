@@ -75,7 +75,7 @@ class HashController extends Controller
 
         $qr_url = $this->hash_service->requestQr($hash);
 
-        $this->hash_service->sendByEmail($hash->user->email, $qr_url);
+        $this->hash_service->sendByEmail($hash->user, $qr_url);
         
         return redirect()->route('dashboard.hashes.index');
     }

@@ -24,16 +24,28 @@
                                 <div class="col-md-7">
                                     <div class="form-group">
                                         <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                        @error('email')
+                                            <span>{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" required>
+                                        @error('name')
+                                            <span>{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <input type="tel" class="form-control" id="phone" name="phone" placeholder="Celular" required>
+                                        @error('phone')
+                                            <span>{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="voucher">Carga el comprobante de tu transferencia</label>
                                         <input type="file" class="form-control" id="voucher" name="voucher" required accept="image/jpeg,image/png">
+                                        @error('voucher')
+                                            <span>{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <button type="submit" class="btn btn-default btn-lg">Finalizar compra</button>

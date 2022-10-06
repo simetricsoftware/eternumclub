@@ -15,13 +15,17 @@
                     <ul>
                         @foreach($hashes as $hash)
                         <li class="flex border rounded">
-                            <div>
+                            <div class="flex w-1/3">
                                 <img class="h-40" src="{{ asset("storage/$hash->file") }}" alt="{{ $hash->hash }}">
-                            </div>
-                            <div class="flex flex-col items-stretch gap-4 w-full">
-                                <a href="{{ asset("storage/$hash->voucher") }}">
+                                @isset($hash->voucher) 
+                                <a class="ml-2" target="_blank" href="{{ asset("storage/$hash->voucher") }}">
                                     <img class="h-40" src="{{ asset("storage/$hash->voucher") }}" alt="{{ $hash->hash }}">
                                 </a>
+                                @else
+                                <span>Sin comprobante</span>
+                                @endisset
+                            </div>
+                            <div class="flex flex-col justify-between gap-4 h-40 w-2/3">
                                 <span class="w-full p-4">{{ $hash->hash }}</span>
                                 <div class="flex w-full justify-end p-4">
                                     @if($hash->not_assigned) 

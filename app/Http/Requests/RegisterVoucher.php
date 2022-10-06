@@ -28,7 +28,7 @@ class RegisterVoucher extends FormRequest
             'email' => 'required|email',
             'name' => 'required|string',
             'phone' => 'required|string',
-            'voucher' => 'required|image',
+            'voucher' => 'required|file',
         ];
     }
 }

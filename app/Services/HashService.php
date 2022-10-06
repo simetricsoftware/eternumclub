@@ -56,10 +56,11 @@ class HashService
 
     public function requestQr(Hash $hash): string
     {
-        $file_name = "unused-qr/$hash->hash.svg";
+        $file_name = "unused-qr/$hash->hash.png";
 
         $svg_str = QrCode::size(600)
                 ->style('round')
+                ->format('png')
                 ->margin(2)
                 ->generate($this->requestUrl($hash, $hash->user->email));
 
@@ -77,9 +78,9 @@ class HashService
         return route('register-hash', [ 'hash' => $hash->hash, 'email' => $email ]);
     }
 
-    public function sendByEmail(string $to_email, string $qr_url): void
+    public function sendByEmail(User $user, string $qr_url): void
     {
-        Mail::to($to_email)->send(new QrRequested($qr_url));
+        Mail::to($user->email)->send(new QrRequested($user->name, $qr_url));
     }
 
     public function registerHash(string $hash, string $email)
