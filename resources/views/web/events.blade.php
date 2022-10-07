@@ -28,7 +28,7 @@
                                     <div class="card-container card-container-lg">
                                         <h4>001/001</h4>
                                         <h3>Halloween Boiler room 2022</h3>
-                                        <p style="font-size: 1.2rem;"> <b>44 nfts para celebrar halloween en el boiler room de DJ Ismael</b></p>
+                                        <p style="font-size: 1.2rem;"> <b>44 nfts para celebrar halloween en el boiler room de DJ Aelism</b></p>
                                         <a href="{{ route('galery') }}" title="" class="btn btn-default">COMPRAR</a>
                                     </div>
                                 </div>

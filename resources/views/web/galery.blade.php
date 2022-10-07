@@ -10,7 +10,7 @@
             <div class="text-center">
               <h1 class="h2">001 : Halloween Boiler Room 2022</h1>
             </div>
-            <p style="font-size: 2rem;">Celebramos Halloween con una fiesta de disfraces en el Eternum Club con un exclusivo y terrorifico SET a cargo de DJ Ismael con premio al mejor disfraz y barra libre all night</p>
+            <p style="font-size: 2rem;">Celebramos Halloween con una fiesta de disfraces en el Eternum Club con un exclusivo y terrorifico SET a cargo de DJ Aelism con premio al mejor disfraz y barra libre all night</p>
   
             <blockquote>
               <p style="text-align: center;">"Cause this is thriller, thriller night"</p>
