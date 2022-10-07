@@ -14,8 +14,8 @@
                     </div>
                     <ul>
                         @foreach($hashes as $hash)
-                        <li class="flex border rounded">
-                            <div class="flex w-1/3">
+                        <li class="flex flex-col md:flex-row border rounded">
+                            <div class="grid grid-cols-2 md:flex md:w-1/3">
                                 <img class="h-40" src="{{ asset("storage/$hash->file") }}" alt="{{ $hash->hash }}">
                                 @isset($hash->voucher) 
                                 <a class="ml-2" target="_blank" href="{{ asset("storage/$hash->voucher") }}">
@@ -25,9 +25,9 @@
                                 <span>Sin comprobante</span>
                                 @endisset
                             </div>
-                            <div class="flex flex-col justify-between gap-4 h-40 w-2/3">
-                                <span class="w-full p-4">{{ $hash->hash }}</span>
-                                <div class="flex w-full justify-end p-4">
+                            <div class="flex flex-col p-4 justify-between gap-4 md:h-40 md:w-2/3">
+                                <span class="w-full text-center md:text-start">{{ $hash->hash }}</span>
+                                <div class="flex w-full justify-center md:justify-end">
                                     @if($hash->not_assigned) 
                                     <x-nav-link :href="route('dashboard.hashes.edit', [ 'hash' => $hash ])">Edit</x-nav-link>
                                     @endif
