@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Hash;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -17,11 +18,7 @@ class RegisterVoucher extends Mailable
      * @return void
      */
     public function __construct( 
-        private string $hash,
-        private string $email,
-        private string $name,
-        private string $phone,
-        private string $voucher,
+        private Hash $hash,
     ) {}
 
     /**
@@ -31,12 +28,6 @@ class RegisterVoucher extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.register_voucher')->with([
-            'hash'      => $this->hash,
-            'email'     => $this->email,
-            'name'      => $this->name,
-            'phone'     => $this->phone,
-            'voucher'   => $this->voucher,
-        ]);
+        return $this->view('emails.register_voucher')->with([ 'hash' => $this->hash ]);
     }
 }

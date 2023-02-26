@@ -38,13 +38,11 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbar-collapse">
-                    <ul class="nav navbar-nav ">
-                        <li><a href="{{ route('home') }}" title="">I : Home</a></li>
-                        <li><a href="{{ route('events') }}" title="">II : Eventos</a></li>
-                        <li><a href="{{ route('club') }}" title="">III : Club</a></li>
+                    <ul class="nav navbar-nav">
+                        <li><a style="font-size: 3.2vh;" href="{{ route('home') }}" title="">I : Home</a></li>
+                        <li><a style="font-size: 3.2vh;" href="{{ route('events') }}" title="">II : Eventos</a></li>
+                        <li><a style="font-size: 3.2vh;" href="{{ route('club') }}" title="">III : Club</a></li>
                     </ul>
-
-
                 </div>
             </div>
         </nav>

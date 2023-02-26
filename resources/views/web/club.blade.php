@@ -13,13 +13,26 @@
             <div class="col-md-10 col-md-offset-1">
               <div class="row">
                 <div class="col-xs-12 col-md-6">
-                  <h3>Compra NFTs, asiste a eventos exclusivos</h3>
-                  <p style="font-size: 1.5rem;">Ahora puedes comprar tus entradas y guardarlas para siempre como un NFT dentro de la blockchain, además de obtener un coleccionable único que ganará valor con el tiempo puedes acceder a increíbles eventos o intercambiarlo por un objeto en la vida real!</p>
-                  <h3>No más PDFs, mejor NFTs </h3>
-                  <p style="font-size: 1.5rem;">No guardes tus entradas como PDFs, guárdalas en la blockchain donde estarán para siempre como un NFT, en Eternum club ahora es posible comprar increíbles colecciones de imágenes realizadas por grandes artistas del medio como entradas para tus eventos favoritos. </p>
-                  <h3>Tus entradas para siempre en la blockchain </h3>
-                  <p style="font-size: 1.5rem;"> Guarda esa entrada tan especial como un NFT para siempre, En Eternum lo hacemos realidad gracias a que guardamos todas nuestras colecciones en la red IPFS la cual utiliza la blockchain de Filecoin como medio de almacenamiento. 
-                  </p >
+                  <h3>Bienvenidos  a Eternum Club</h3>
+                  <p style="font-size: 1.5rem;">
+                    Encuentra tus eventos favoritos y compra tus entradas desde la comodidad de tu hogar.
+                    Nuestro sistema en línea es fácil y seguro. 
+                    Simplemente navega por nuestra selección de eventos y elige el que desees asistir. 
+                    Podrás ver información detallada sobre el evento, incluyendo la fecha, hora, ubicación y 
+                    precio de las entradas.</p>
+                  <h3>Como comprar entradas</h3>
+                  <p style="font-size: 1.5rem;">
+                    Una vez que hayas seleccionado tus entradas, podrás comprarlas llenando un sencillo formulario.
+                    Te enviaremos un correo electrónico de confirmación de compra adjunto con un código QR para que 
+                    puedas ingresar el día del evento.
+                  </p>
+                  <h3>Listo para farrear</h3>
+                  <p style="font-size: 1.5rem;">
+                    En caso de que necesites ayuda con tu compra, 
+                    nuestro equipo de atención al cliente está disponible
+                    para ayudarte por medio de nuestro correo electrónico info@simetricsoftware.com
+                    También contamos con una política de devolución de entradas para la mayoría de los eventos, en caso de que cambies de opinión o no puedas asistir. 
+                  </p>
                 </div>
                 <div class="col-xs-12 col-md-6">
                   <img src="./assets/images/sample.png" class="img-responsive" alt="">
