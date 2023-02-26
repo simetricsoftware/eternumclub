@@ -1,8 +1,7 @@
 <div> 
-    <span>Nombre:</span> {{ $name }}
-    <span>Correo:</span> {{ $email }}
-    <span>Teléfono:</span> {{ $phone }}
-    <span>Teléfono:</span> {{ $phone }}
+    <span>Nombre:</span> {{ $hash->name }}
+    <span>Correo:</span> {{ $hash->email }}
+    <span>Teléfono:</span> {{ $hash->phone }}
 </div>
-<img src="{{ $voucher }}">
-<a href="{{ route('dashboard.hashes.index', [ 'hash' => $hash ]) }}">Click para ir aprobar</a>
+<img src="{{ $hash->voucher }}">
+<a href="{{ route('events.show', [ 'event' => $hash->event, 'hash' => $hash ]) }}">Click para ir aprobar</a>

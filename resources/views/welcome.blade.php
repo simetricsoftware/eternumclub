@@ -7,14 +7,11 @@
         <div class="col-xs-12">
           <div class="hero-full-wrapper">
             <div class="text-content">
-              <h1>Bienvenido,<br>
+              <h1>Hola,<br>
                 <span id="typed-strings">
-                  <span>Etrnm Club</span>
-                  <span>Compra</span>
-                  <span>NFTs</span>
-                  <span>Accede a</span>
-                  <span>Eventos</span>
-
+                  <span>Bienvenido</span>
+                  <span>Al Eternum</span>
+                  <span>Club</span>
                 </span>
                 <span id="typed"></span>
               </h1>

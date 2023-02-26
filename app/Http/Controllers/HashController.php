@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RequestHash;
 use App\Http\Requests\RegisterHash;
 use App\Http\Requests\RegisterVoucher;
 use App\Http\Requests\StoreHashRequest;
 use App\Http\Requests\UpdateHashRequest;
+use App\Models\Event;
 use App\Models\Hash;
 use App\Services\HashService;
 use Illuminate\Http\Request;
@@ -52,32 +52,28 @@ class HashController extends Controller
     { 
         $this->hash_service->delete($hash);
         
-        return redirect()->route('dashboard.hashes.index');
+        return redirect()->route('events.show', [ 'event' => $hash->event]);
     }
 
-    public function galery()
+    public function galery(Event $event)
     {
-        $hashes = Hash::all();
-
-        return view('web.galery')->with([ 'hashes' => $hashes ]);
+        return view('web.galery')->with([ 'event' => $event ]);
     }
 
-    public function registerVoucher(RegisterVoucher $request)
+    public function registerVoucher(Event $event, RegisterVoucher $request)
     {
-        $this->hash_service->registerVoucher($request->hash, $request->email, $request->name, $request->phone, $request->file('voucher'));
+        $this->hash_service->registerVoucher($event, $request->only('email', 'name', 'phone'), $request->file('voucher'));
 
         return redirect()->route('confirmation');
     }
 
-    public function requestQr(string $hash)
+    public function requestQr(Hash $hash)
     {
-        $hash = Hash::firstWhere('hash', $hash);
-
         $qr_url = $this->hash_service->requestQr($hash);
 
-        $this->hash_service->sendByEmail($hash->user, $qr_url);
+        $this->hash_service->sendByEmail($hash, $qr_url);
         
-        return redirect()->route('dashboard.hashes.index');
+        return redirect()->route('events.show', [ 'event' => $hash->event ]);
     }
 
     public function registerHash(RegisterHash $request)
@@ -87,7 +83,7 @@ class HashController extends Controller
         return redirect()->route('approved');
     }
 
-    public function reverse(string $hash)
+    public function reverse(Hash $hash)
     {
         $this->hash_service->reverseHash($hash);
 

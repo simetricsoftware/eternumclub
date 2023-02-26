@@ -24,7 +24,6 @@ class RegisterVoucher extends FormRequest
     public function rules()
     {
         return [
-            'hash' => 'required|string',
             'email' => 'required|email',
             'name' => 'required|string',
             'phone' => 'required|string',
