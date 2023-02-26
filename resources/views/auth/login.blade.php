@@ -1,9 +1,15 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
+            <div class="bg-container py-2 px-4 flex items-center justify-center flex-col"> 
+                <div class="w-24 h-24"> 
+                    <a href="/">
+                        <x-application-logo class="fill-current text-gray-500" />
+                    </a>
+                </div>
+                
+                <span class="text-2xl text-white font-extrabold">Bienvenido</span>
+            </div>
         </x-slot>
 
         <!-- Session Status -->

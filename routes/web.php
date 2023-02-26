@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HashController;
 
@@ -17,12 +18,16 @@ use App\Http\Controllers\HashController;
 Route::view('/', 'welcome')->name('home');
 Route::view('/events', 'web.events')->name('events');
 Route::view('/club', 'web.club')->name('club');
-Route::get('/galery', [ HashController::class, 'galery' ])->name('galery');
-Route::view('/purchase', 'web.purchase')->name('purchase');
+Route::get('/events/{event}/galery', [ HashController::class, 'galery' ])->name('galery');
+Route::view('/events/{event}/purchase', 'web.purchase')->name('purchase');
 
 Route::prefix('dashboard')->middleware(['auth', 'role:admin'])->group(function()
 {
-    Route::view('/', 'dashboard')->name('dashboard');
+    Route::controller(EventController::class)->group(function()
+    {
+        Route::get('/', 'index')->name('events.index');
+        Route::get('/{event}', 'show')->name('events.show');
+    });
 
     Route::controller(HashController::class)->prefix('hashes')->group(function()
     {
@@ -32,7 +37,7 @@ Route::prefix('dashboard')->middleware(['auth', 'role:admin'])->group(function()
         Route::get('/edit/{hash}', 'edit')->name('dashboard.hashes.edit');
         Route::put('/edit/{hash}', 'update')->name('dashboard.hashes.update');
         Route::delete('/edit/{hash}', 'delete')->name('dashboard.hashes.delete');
-        Route::get('/request-qr/{hash}', 'requestQr')->name('dashboard.hashes.approvate');
+        Route::put('/request-qr/{hash}', 'requestQr')->name('dashboard.hashes.approvate');
         Route::get('/reverse/{hash}', 'reverse')->name('dashboard.hashes.reverse');
     });
 });
@@ -41,7 +46,7 @@ require __DIR__.'/auth.php';
 
 Route::controller(HashController::class)->group(function()
 {
-    Route::post('register-voucher', 'registerVoucher')->name('register-voucher');
+    Route::post('/events/{event}/register-voucher', 'registerVoucher')->name('register-voucher');
     Route::get('register-hash', 'registerHash')->middleware([ 'auth:sanctum', 'unused-hash', 'role:admin' ])->name('register-hash');
     Route::view('confirmation', 'web.confirmation')->name('confirmation');
     Route::view('denied', 'web.denied')->name('denied');

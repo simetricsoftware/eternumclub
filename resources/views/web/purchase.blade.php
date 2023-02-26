@@ -17,7 +17,7 @@
 
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
-                        <form action="{{ route('register-voucher') }}" class="reveal-content" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('register-voucher', [ 'event' => $event ]) }}" class="reveal-content" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" id="hash" name="hash" value="{{ request()->hash }}">
                             <div class="row">

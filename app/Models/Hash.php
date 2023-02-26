@@ -13,15 +13,17 @@ class Hash extends Model
 
     protected $fillable = [
         'hash',
-        'file',
+        'name',
+        'email',
+        'phone',
         'voucher',
         'was_used',
         'approved_at',
     ];
 
-    public function user()
+    public function event()
     { 
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Event::class);
     }
 
     public function notUsed(): Attribute 
