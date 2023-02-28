@@ -7,6 +7,7 @@
             <div class="col-xs-12 banner-container">
                <div class="banner-video-container">
                     <video class="banner-video" autoplay loop muted>
+                        <source src="{{ asset('assets/videos/lachavizavideo.mp4') }}" type="video/mp4">
                       <source src="{{ asset('assets/videos/lachavizavideo.webm') }}" type="video/webm">
                       Tu navegador no soporta video HTML5.
                     </video>
