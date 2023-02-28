@@ -43,7 +43,40 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="voucher">Carga el comprobante de tu transferencia</label>
+                                        <input type="text" class="form-control" id="instagram" name="instagram" placeholder="Tu nombre de usuario de instagram" required>
+                                        @error('instagram')
+                                            <span>{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            <input type="radio" class="form-control" name="sex" required value="M">
+                                            Mujer
+                                        </label>
+                                        <label>
+                                            <input type="radio" class="form-control" name="sex" required value="F">
+                                            Hombre
+                                        </label>
+                                        @error('sex')
+                                            <span>{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <p>Tienes listo tu outfit</p>
+                                        <label>
+                                            <input type="radio" class="form-control" name="is-ready" required value="0">
+                                            Si
+                                        </label>
+                                        <label>
+                                            <input type="radio" class="form-control" name="is-ready" required value="1">
+                                            No
+                                        </label>
+                                        @error('sex')
+                                            <span>{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="voucher">Selecciona la foto para tu invitación</label>
                                         <input type="file" class="form-control" id="voucher" name="voucher" required accept="image/jpeg,image/png">
                                         @error('voucher')
                                             <span>{{ $message }}</span>

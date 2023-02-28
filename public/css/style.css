@@ -95,6 +95,10 @@
   color: white;
 }
 
+input[type="radio"].form-control {
+  width: 2rem;
+}
+
 @media (min-width: 640px) {
     .banner-mobile {
         display: none;
