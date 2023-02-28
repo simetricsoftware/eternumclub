@@ -14,9 +14,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        $events = Event::forCurrentUser()->get();
 
-        return view('events', [ 'events' => $events ]);
+        return view('dashboard.events.index', [ 'events' => $events ]);
     }
 
     /**
@@ -83,5 +83,11 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         //
+    }
+
+
+    public function settings(Event $event)
+    {
+        return view('dashboard.events.settings', [ 'event' => $event ]);
     }
 }

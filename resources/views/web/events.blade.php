@@ -29,7 +29,7 @@
                                         <h4>001/001</h4>
                                         <h3>Halloween Boiler room 2022</h3>
                                         <p style="font-size: 1.2rem;"> <b>44 nfts para celebrar halloween en el boiler room de DJ Aelism</b></p>
-                                        <a href="{{ route('galery', [ 'event' => 1 ]) }}" title="" class="btn btn-default">COMPRAR</a>
+                                        <a href="#" title="" class="btn btn-default">FINALIZADA</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -40,7 +40,7 @@
                                         <h4>002/001</h4>
                                         <h3>Próximamente</h3>
                                         <p style="font-size: 1.2rem;"> <b>Wait for it</b></p>
-                                        <a href="./galery.html" title="" class="btn btn-default">COMPRAR</a>
+                                        <a href="{{ route('galery', [ 'event' => 2 ]) }}" title="" class="btn btn-default">COMPRAR</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -51,7 +51,6 @@
                                         <h4>003/001</h4>
                                         <h3>Próximamente</h3>
                                         <p style="font-size: 1.2rem;"> <b>Wait for it</b></p>
-                                        <a href="./galery.html" title="" class="btn btn-default">COMPRAR</a>
                                     </div>
                                 </div>
 

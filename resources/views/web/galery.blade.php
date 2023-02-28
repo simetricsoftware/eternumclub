@@ -4,13 +4,33 @@
 <div class="section-container">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12">
-          <img src="{{ asset('assets/images/eternumgif.gif') }}" class="img-responsive" alt="">
-          <div class="card-container" style= "margin-top:0.1px;">
+        <div class="col-xs-12 banner-container">
+          <img class="banner-mobile" src="{{ asset('assets/images/lachavizav.png') }}" class="img-responsive" alt="">
+          <img class="banner-desktop" src="{{ asset('assets/images/lachavizah.png') }}" class="img-responsive" alt="">
+          <div class="banner-video-container">
+              <video class="banner-video" autoplay loop muted>
+                <source src="{{ asset('assets/videos/lachavizavideo.webm') }}" type="video/webm">
+                Tu navegador no soporta video HTML5.
+              </video>
+              <div class="banner-gradient"></div>
+          </div>
+          <div class="card-container">
             <div class="text-center">
-              <h1 class="h2">001 : Halloween Boiler Room 2022</h1>
+              <h1 class="h2">LA CHAVISA FEST BY YANZIIZA (NOS MUDAMOS A EGIPTO )</h1>
             </div>
-            <p style="font-size: 2rem;">Celebramos Halloween con una fiesta de disfraces en el Eternum Club con un exclusivo y terrorifico SET a cargo de DJ Aelism con premio al mejor disfraz y barra libre all night</p>
+            <ul class="content-list">
+              <li>Estás cordialmente invitado a la fiesta privada más cool de Ambato.</li>
+              <li>Verificaremos tus datos.</li>
+              <li>Es obligatorio tu correo electrónico y número de teléfono (para enviarte el código QR de ingreso).</li>
+              <li>La fiesta será en Ranch Yanziiza (la ubicación exacta será enviada en tu invitación).</li>
+              <li>Te agradezco por seguir apoyándome en mi carrera y espero que puedas disfrutar conmigo el día viernes 17 de marzo.</li>
+              <li>Tendremos estricto derecho de admisión.</li>
+              <li>Buena vestimenta.</li>
+              <li>La fiesta contará con una temática egipcia en la cual esperamos que puedas vestirte de acuerdo a la temática.</li>
+              <li>El ingreso será únicamente con el código QR, por lo cual es privada y con su respectiva invitación.</li>
+              <li>El ingreso es de 7:30 pm a 9:30 pm.</li>
+              <li>Es una fiesta de panas amigos, así que no cualquiera podrá ingresar. Ñiaa 🪩</li>
+            </ul>    
           </div>
         </div>
 
@@ -18,7 +38,7 @@
             @isset($hash->user)
             <span class="btn btn-danger btn-lg" role="alert">No diponible</span>
             @else
-            <a href="{{ route('purchase', [ 'event' => $event ]) }}" class="btn btn-default btn-lg">COMPRAR AHORA</a>
+            <a href="{{ route('purchase', [ 'event' => $event ]) }}" class="btn btn-default btn-lg">REGISTRARME</a>
             @endisset
         </p>
         

@@ -1,0 +1,60 @@
+.banner-mobile {
+    display: block;
+    width: 100%;
+}
+
+.banner-desktop {
+    width: 100%;
+    display: none;
+}
+
+.content-list {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.content-list li {
+    font-size: 18px;
+}
+
+.banner-container {
+   padding: 0;
+}
+
+.banner-video-container {
+    position: relative;
+}
+
+.banner-gradient {
+    position: absolute;
+    background: linear-gradient(to top, #ffffff 20%, transparent 100%);
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.banner-video {
+  width: 100%;
+}
+
+.card-container {
+  margin-top: -15rem;
+  background-color: transparent;
+}
+
+@media (min-width: 640px) {
+    .banner-mobile {
+        display: none;
+    }
+
+    .banner-desktop {
+        display: block;
+    }
+
+    .card-container {
+      margin-top: -35rem;
+    }
+}
