@@ -62,7 +62,7 @@ class HashController extends Controller
 
     public function registerVoucher(Event $event, RegisterVoucher $request)
     {
-        $this->hash_service->registerVoucher($event, $request->only('email', 'name', 'phone'), $request->file('voucher'));
+        $this->hash_service->registerVoucher($event, $request->only('email', 'name', 'phone', 'sex', 'is-ready', 'instagram'), $request->file('voucher'));
 
         return redirect()->route('confirmation');
     }

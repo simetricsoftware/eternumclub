@@ -1,0 +1,114 @@
+/*
+* Hader
+* */
+
+.navbar-toggle {
+  width: calc(100% - 20px);
+}
+/*
+* Event
+* */
+.banner-mobile {
+    display: block;
+    width: 100%;
+}
+
+.banner-desktop {
+    width: 100%;
+    display: none;
+}
+
+.content-list {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.content-list li {
+    font-size: 18px;
+}
+
+.banner-container {
+   padding: 0;
+}
+
+.banner-video-container {
+    position: relative;
+}
+
+.banner-gradient {
+    position: absolute;
+    background: linear-gradient(to top, #ffffff 20%, transparent 100%);
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.banner-gradient-inverted.banner-gradient-inverted {
+    background: linear-gradient(to bottom, #ffffff 20%, transparent 100%);
+}
+
+.banner-video {
+  width: 100%;
+}
+
+.overlapping-content {
+  margin-top: -15rem;
+  background-color: transparent;
+}
+
+/*
+* Purchase
+* */
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container > h3 {
+    z-index: 10;
+    margin: 0 5rem;
+}
+
+.form-fields {
+    padding: 0 5rem;
+}
+
+/*
+* Galery
+* */
+
+.galery-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.text-white {
+  color: white;
+}
+
+input[type="radio"].form-control {
+  width: 2rem;
+}
+
+@media (min-width: 640px) {
+    .banner-mobile {
+        display: none;
+    }
+
+    .banner-desktop {
+        display: block;
+    }
+
+    .overlapping-content {
+      margin-top: -35rem;
+    }
+}

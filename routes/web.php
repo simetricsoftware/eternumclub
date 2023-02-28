@@ -27,6 +27,7 @@ Route::prefix('dashboard')->middleware(['auth', 'role:admin'])->group(function()
     {
         Route::get('/', 'index')->name('events.index');
         Route::get('/{event}', 'show')->name('events.show');
+        Route::get('/{event}/settings', 'settings')->name('events.settings');
     });
 
     Route::controller(HashController::class)->prefix('hashes')->group(function()

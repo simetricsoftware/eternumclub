@@ -17,6 +17,7 @@
     <title>Eternum Club</title>
 
     <link href="{{ asset('css/main.3f6952e4.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 
 </head>
@@ -28,7 +29,7 @@
     <div id="site-border-bottom"></div>
     <!-- Add your content of header -->
     <header>
-        <nav class="navbar  navbar-fixed-top navbar-inverse">
+        <nav class="navbar navbar-fixed-top navbar-inverse">
             <div class="container">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
