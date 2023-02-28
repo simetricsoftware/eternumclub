@@ -4,15 +4,17 @@
 <div class="section-container">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                <div class="section-container-spacer text-center">
-                    <h1 class="h2">Bienvenido al Club</h1>
-                    <tr>
-                        <td>
-                            <h3>Por favor ingresa tus datos para continuar con la compra</h3>
-                        </td>
-                    </tr>
-
+            <div class="col-xs-12 banner-container">
+               <div class="banner-video-container">
+                    <video class="banner-video" autoplay loop muted>
+                      <source src="{{ asset('assets/videos/lachavizavideo.webm') }}" type="video/webm">
+                      Tu navegador no soporta video HTML5.
+                    </video>
+                    <div class="banner-gradient"></div>
+                </div> 
+                <div class="section-container-spacer text-center overlapping-content form-container">
+                    <h1 class="h2">La Chavisa fest by Yansiiza</h1>
+                    <h3>Por favor ingresa tus datos para continuar</h3>
                 </div>
 
                 <div class="row">
@@ -21,7 +23,7 @@
                             @csrf
                             <input type="hidden" id="hash" name="hash" value="{{ request()->hash }}">
                             <div class="row">
-                                <div class="col-md-7">
+                                <div class="col-md-7 form-fields">
                                     <div class="form-group">
                                         <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                                         @error('email')
@@ -41,77 +43,47 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="voucher">Carga el comprobante de tu transferencia</label>
+                                        <input type="text" class="form-control" id="instagram" name="instagram" placeholder="Tu nombre de usuario de instagram" required>
+                                        @error('instagram')
+                                            <span>{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            <input type="radio" class="form-control" name="sex" required value="M">
+                                            Mujer
+                                        </label>
+                                        <label>
+                                            <input type="radio" class="form-control" name="sex" required value="F">
+                                            Hombre
+                                        </label>
+                                        @error('sex')
+                                            <span>{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <p>Tienes listo tu outfit</p>
+                                        <label>
+                                            <input type="radio" class="form-control" name="is-ready" required value="0">
+                                            Si
+                                        </label>
+                                        <label>
+                                            <input type="radio" class="form-control" name="is-ready" required value="1">
+                                            No
+                                        </label>
+                                        @error('sex')
+                                            <span>{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="voucher">Selecciona la foto para tu invitación</label>
                                         <input type="file" class="form-control" id="voucher" name="voucher" required accept="image/jpeg,image/png">
                                         @error('voucher')
                                             <span>{{ $message }}</span>
                                         @enderror
                                     </div>
 
-                                    <button type="submit" class="btn btn-default btn-lg">Finalizar compra</button>
-                                </div>
-                                <div class="col-md-5 address-container">
-                                    <ul class="list-unstyled">
-                                        <tr>
-                                            <td>
-                                                <h3>Finaliza Tu Compra</h3>
-                                            </td>
-                                        </tr>
-                                        <li>
-                                            <tr>
-                                                <td>
-                                                    <h4>Ingresa tus datos y da click en el botón finalizar compra</h4>
-                                                </td>
-                                            </tr>
-                                        </li>
-                                        <li>
-                                            <tr>
-                                                <td>
-                                                    <h4>Realiza tu pago con PayPhone, o transferencia bancaria</h4>
-                                                </td>
-                                            </tr>
-                                        </li>
-
-                                        <li>
-                                            <tr>
-                                                <td>
-                                                    <h4><img src="{{ asset('assets/images/pb_ico.png') }}"> <br>
-                                                        Ahorros - 12002229744 <br>
-                                                        Nombre: Christian Albán C.I - 1722525613<br>
-                                                        Correo: ventas@eternumclub.com
-                                                    </h4>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h4><img src="{{ asset('assets/images/bp_ico.png') }}"> <br>
-                                                        Ahorros - 2204536874 <br>
-                                                        Nombre: Steve Acosta C.I - 1725889685 <br>
-                                                        Correo: ventas@eternumclub.com
-
-                                        <li>
-                                            <tr>
-                                                <td>
-                                                    <h4>Una vez realizado el pago recibirás a tu correo un código QR para el día del evento</h4>
-                                                </td>
-                                            </tr>
-                                        </li>
-
-
-                                        </h4>
-                                        </td>
-                                        </tr>
-                                        </li>
-                                    </ul>
-                                    <h3>Siguenos</h3>
-                                    <a href="http://www.facebook.com" title="" class="fa-icon">
-                                        <img src="{{ asset('assets/images/insta_ico.png') }}">
-                                    </a>
-                                    <a href="http://www.twitter.com" title="" class="fa-icon">
-                                        <img src="{{ asset('assets/images/tik_tok.png') }}">
-                                    </a>
-
-
+                                    <button type="submit" class="btn btn-default btn-lg">Enviar datos</button>
                                 </div>
                             </div>
                         </form>

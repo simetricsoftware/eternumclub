@@ -21,6 +21,10 @@ class Hash extends Model
         'approved_at',
     ];
 
+    protected $casts = [
+        'aditional_fields' => 'array',
+    ];
+
     public function event()
     { 
         return $this->belongsTo(Event::class);

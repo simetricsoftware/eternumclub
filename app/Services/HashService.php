@@ -19,7 +19,7 @@ class HashService
     { 
         $data = collect($data);
 
-        $hash = $this->save($event, $data->only('name', 'email', 'phone')->all());
+        $hash = $this->save($event, $data->only('name', 'email', 'phone', 'sex', 'is-ready', 'instagram')->all());
 
         $voucher_img = Image::make($voucher);
 

@@ -28,6 +28,9 @@ class RegisterVoucher extends FormRequest
             'name' => 'required|string',
             'phone' => 'required|string',
             'voucher' => 'required|file',
+            'sex' => 'required|in:M,F',
+            'is-ready' => 'required|boolean',
+            'instagram' => 'required|string',
         ];
     }
 }
