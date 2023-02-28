@@ -21,9 +21,20 @@
                         <div class="item active">
                             <div class="row">
                                 <div class="col-sm-4">
+                                    <div class="black-image-project-hover">
+                                        <img src="{{ asset('assets/images/lachavizah.png') }}" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="card-container card-container-lg">
+                                        <h4>002/001</h4>
+                                        <h3>La Chaviza</h3>
+                                        <p style="font-size: 1.2rem;"> <b>Estás cordialmente invitado a la fiesta privada más cool de Ambato.</b></p>
+                                        <a href="{{ route('galery', [ 'event' => 2 ]) }}" title="" class="btn btn-default">VER DETALLE</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
 
                                     <div class="black-image-project-hover">
-                                        <img src="./assets/images/halloween.jpg" alt="" class="img-responsive">
+                                        <img src="{{ asset('assets/images/halloween.jpg') }}" alt="" class="img-responsive">
                                     </div>
                                     <div class="card-container card-container-lg">
                                         <h4>001/001</h4>
@@ -34,18 +45,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="black-image-project-hover">
-                                        <img src="./assets/images/prox-2.jpg" alt="" class="img-responsive">
-                                    </div>
-                                    <div class="card-container card-container-lg">
-                                        <h4>002/001</h4>
-                                        <h3>Próximamente</h3>
-                                        <p style="font-size: 1.2rem;"> <b>Wait for it</b></p>
-                                        <a href="{{ route('galery', [ 'event' => 2 ]) }}" title="" class="btn btn-default">COMPRAR</a>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="black-image-project-hover">
-                                        <img src="./assets/images/prox-3.jpg" alt="" class="img-responsive">
+                                        <img src="{{ asset('assets/images/prox-3.jpg') }}" alt="" class="img-responsive">
                                     </div>
                                     <div class="card-container card-container-lg">
                                         <h4>003/001</h4>

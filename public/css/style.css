@@ -1,3 +1,13 @@
+/*
+* Hader
+* */
+
+.navbar-toggle {
+  width: calc(100% - 20px);
+}
+/*
+* Event
+* */
 .banner-mobile {
     display: block;
     width: 100%;
@@ -36,13 +46,53 @@
     right: 0;
 }
 
+.banner-gradient-inverted.banner-gradient-inverted {
+    background: linear-gradient(to bottom, #ffffff 20%, transparent 100%);
+}
+
 .banner-video {
   width: 100%;
 }
 
-.card-container {
+.overlapping-content {
   margin-top: -15rem;
   background-color: transparent;
+}
+
+/*
+* Purchase
+* */
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container > h3 {
+    z-index: 10;
+    margin: 0 5rem;
+}
+
+.form-fields {
+    padding: 0 5rem;
+}
+
+/*
+* Galery
+* */
+
+.galery-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.text-white {
+  color: white;
 }
 
 @media (min-width: 640px) {
@@ -54,7 +104,7 @@
         display: block;
     }
 
-    .card-container {
+    .overlapping-content {
       margin-top: -35rem;
     }
 }

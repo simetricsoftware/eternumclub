@@ -1,20 +1,13 @@
 @extends('layouts.web')
 
 @section('content')
-<div class="section-container">
+<div class="section-container" style="padding-bottom: 0;">
     <div class="container">
-      <div class="row">
+      <div class="row galery-content">
         <div class="col-xs-12 banner-container">
-          <img class="banner-mobile" src="{{ asset('assets/images/lachavizav.png') }}" class="img-responsive" alt="">
-          <img class="banner-desktop" src="{{ asset('assets/images/lachavizah.png') }}" class="img-responsive" alt="">
-          <div class="banner-video-container">
-              <video class="banner-video" autoplay loop muted>
-                <source src="{{ asset('assets/videos/lachavizavideo.webm') }}" type="video/webm">
-                Tu navegador no soporta video HTML5.
-              </video>
-              <div class="banner-gradient"></div>
-          </div>
-          <div class="card-container">
+          <img class="banner-mobile z-10" src="{{ asset('assets/images/lachavizav.png') }}" class="img-responsive" alt="">
+          <img class="banner-desktop z-10" src="{{ asset('assets/images/lachavizah.png') }}" class="img-responsive" alt="">
+          <div class="card-container z-10">
             <div class="text-center">
               <h1 class="h2">LA CHAVISA FEST BY YANZIIZA (NOS MUDAMOS A EGIPTO )</h1>
             </div>
@@ -34,13 +27,23 @@
           </div>
         </div>
 
-        <p style="text-align: center;">
+        <p class="z-10" style="text-align: center;">
             @isset($hash->user)
             <span class="btn btn-danger btn-lg" role="alert">No diponible</span>
             @else
             <a href="{{ route('purchase', [ 'event' => $event ]) }}" class="btn btn-default btn-lg">REGISTRARME</a>
             @endisset
         </p>
+        
+        <div class="backvideo overlapping-content">
+            <div class="banner-video-container">
+                <video class="banner-video" autoplay loop volume="1">
+                  <source src="{{ asset('assets/videos/yansiiza.webm') }}" type="video/webm">
+                  Tu navegador no soporta video HTML5.
+                </video>
+                <div class="banner-gradient banner-gradient-inverted"></div>
+            </div>
+        </div>
         
        </div>
     </div>
