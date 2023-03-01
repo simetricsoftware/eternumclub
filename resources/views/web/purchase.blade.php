@@ -9,7 +9,7 @@
                 <a data-video="#yansiiza" href="#start" class="btn-start btn btn-default btn-lg touch-tostart-lg">Toca para empezar</a>
               </div>
                <div class="banner-video-container">
-                    <video id="yansiiza" class="banner-video" autoplay loop muted>
+                    <video id="yansiiza" class="banner-video" autoplay loop muted playsinline>
                       <source src="{{ asset('assets/videos/lachavizavideo.mp4') }}" type="video/mp4">
                       <source src="{{ asset('assets/videos/lachavizavideo.webm') }}" type="video/webm">
                       Tu navegador no soporta video HTML5.

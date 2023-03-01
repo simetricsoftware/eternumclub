@@ -41,7 +41,7 @@
         
         <div class="backvideo overlapping-content">
             <div class="banner-video-container">
-                <video id="yansiiza" class="banner-video" autoplay loop muted>
+                    <video id="yansiiza" class="banner-video" autoplay loop muted playsinline>
                   <source src="{{ asset('assets/videos/yansiiza.mp4') }}" type="video/mp4">
                   <source src="{{ asset('assets/videos/yansiiza.webm') }}" type="video/webm">
                   Tu navegador no soporta video HTML5.
