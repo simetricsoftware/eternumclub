@@ -5,10 +5,6 @@
     <div class="container">
       <div class="row galery-content">
         <div class="col-xs-12 banner-container">
-          <div class="touch-tostart-container">
-            <a data-sex="0" data-video="#yansiiza" href="#start" class="btn-start btn btn-default btn-lg touch-tostart">Mujer</a>
-            <a data-sex="1" data-video="#yansiiza" href="#start" class="btn-start btn btn-default btn-lg touch-tostart">Hombre</a>
-          </div>
           <img class="banner-mobile z-10" src="{{ asset('assets/images/lachavizav.webp') }}" class="img-responsive" alt="">
           <img class="banner-desktop z-10" src="{{ asset('assets/images/lachavizah.webp') }}" class="img-responsive" alt="">
           <div class="card-container z-10" id="start">
@@ -20,7 +16,7 @@
               <li>Verificaremos tus datos.</li>
               <li>Es obligatorio tu correo electrónico y número de teléfono (para enviarte el código QR de ingreso).</li>
               <li>La fiesta será en Ranch Yanziiza (la ubicación exacta será enviada en tu invitación).</li>
-              <li>Te agradezco por seguir apoyándome en mi carrera y espero que puedas disfrutar conmigo el día viernes 17 de marzo.</li>
+              <li>Te agradezco por seguir apoyándome en mi carrera y espero que puedas disfrutar conmigo el día viernes 10 de marzo.</li>
               <li>Tendremos estricto derecho de admisión.</li>
               <li>Buena vestimenta.</li>
               <li>La fiesta contará con una temática egipcia en la cual esperamos que puedas vestirte de acuerdo a la temática.</li>
@@ -41,9 +37,9 @@
         
         <div class="backvideo overlapping-content">
             <div class="banner-video-container">
-                    <video id="yansiiza" class="banner-video" autoplay loop muted playsinline>
-                  <source src="{{ asset('assets/videos/yansiiza.mp4') }}" type="video/mp4">
-                  <source src="{{ asset('assets/videos/yansiiza.webm') }}" type="video/webm">
+                <video id="yansiiza" class="banner-video" autoplay loop muted playsinline>
+                  <source src="{{ asset('assets/videos/lachavizavideo.mp4') }}" type="video/mp4">
+                  <source src="{{ asset('assets/videos/lachavizavideo.webm') }}" type="video/webm">
                   Tu navegador no soporta video HTML5.
                 </video>
                 <div class="banner-gradient banner-gradient-inverted"></div>

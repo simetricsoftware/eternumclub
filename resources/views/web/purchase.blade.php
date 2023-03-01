@@ -17,7 +17,7 @@
                     <div class="banner-gradient"></div>
                 </div> 
                 <div class="section-container-spacer text-center overlapping-content form-container">
-                    <h1 class="h2">La Chaviza fest by Yansiiza</h1>
+                    <h1 class="h2">La Chaviza fest by Yanziiza</h1>
                     <h3>Por favor ingresa tus datos para continuar</h3>
                 </div>
 
