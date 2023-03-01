@@ -5,9 +5,12 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 banner-container">
+              <div class="touch-tostart-container">
+                <a data-video="#yansiiza" href="#start" class="btn btn-default btn-lg touch-tostart-lg">Toca para empezar</a>
+              </div>
                <div class="banner-video-container">
-                    <video class="banner-video" autoplay loop muted>
-                        <source src="{{ asset('assets/videos/lachavizavideo.mp4') }}" type="video/mp4">
+                    <video id="yansiiza" class="banner-video" autoplay loop muted>
+                      <source src="{{ asset('assets/videos/lachavizavideo.mp4') }}" type="video/mp4">
                       <source src="{{ asset('assets/videos/lachavizavideo.webm') }}" type="video/webm">
                       Tu navegador no soporta video HTML5.
                     </video>
@@ -20,7 +23,7 @@
 
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
-                        <form action="{{ route('register-voucher', [ 'event' => $event ]) }}" class="reveal-content" method="POST" enctype="multipart/form-data">
+                        <form id="start" action="{{ route('register-voucher', [ 'event' => $event ]) }}" class="reveal-content" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" id="hash" name="hash" value="{{ request()->hash }}">
                             <div class="row">

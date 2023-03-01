@@ -5,11 +5,15 @@
     <div class="container">
       <div class="row galery-content">
         <div class="col-xs-12 banner-container">
-          <img class="banner-mobile z-10" src="{{ asset('assets/images/lachavizav.png') }}" class="img-responsive" alt="">
-          <img class="banner-desktop z-10" src="{{ asset('assets/images/lachavizah.png') }}" class="img-responsive" alt="">
-          <div class="card-container z-10">
+          <div class="touch-tostart-container">
+            <a data-sex="0" data-video="#yansiiza" href="#start" class="btn-start btn btn-default btn-lg touch-tostart">Mujer</a>
+            <a data-sex="1" data-video="#yansiiza" href="#start" class="btn-start btn btn-default btn-lg touch-tostart">Hombre</a>
+          </div>
+          <img class="banner-mobile z-10" src="{{ asset('assets/images/lachavizav.webp') }}" class="img-responsive" alt="">
+          <img class="banner-desktop z-10" src="{{ asset('assets/images/lachavizah.webp') }}" class="img-responsive" alt="">
+          <div class="card-container z-10" id="start">
             <div class="text-center">
-              <h1 class="h2">LA CHAVISA FEST BY YANZIIZA (NOS MUDAMOS A EGIPTO )</h1>
+              <h1 class="h2">LA CHAVISA FEST BY YANZIIZA (NOS MUDAMOS A EGIPTO)</h1>
             </div>
             <ul class="content-list">
               <li>Estás cordialmente invitado a la fiesta privada más cool de Ambato.</li>
@@ -37,7 +41,7 @@
         
         <div class="backvideo overlapping-content">
             <div class="banner-video-container">
-                <video class="banner-video" autoplay loop volume="1">
+                <video id="yansiiza" class="banner-video" autoplay loop muted>
                   <source src="{{ asset('assets/videos/yansiiza.mp4') }}" type="video/mp4">
                   <source src="{{ asset('assets/videos/yansiiza.webm') }}" type="video/webm">
                   Tu navegador no soporta video HTML5.
@@ -45,7 +49,26 @@
                 <div class="banner-gradient banner-gradient-inverted"></div>
             </div>
         </div>
-        
+        <div><
+          <div id="for-women" class="grid-container" style="display: none;">
+            @for($i = 1; $i <= 14; $i++)
+              <div>
+                <div class="column">
+                  <img class="image" src="{{ asset('assets/images/galery/' . $i . '.webp') }}">
+                </div>
+              </div>
+            @endfor
+          </div>
+          <div id="for-men" class="grid-container">
+            @for($i = 15; $i <= 28; $i++)
+              <div>
+                <div class="column">
+                  <img class="image" src="{{ asset('assets/images/galery/' . $i . '.webp') }}">
+                </div>
+              </div>
+            @endfor
+          </div>
+        </div>
        </div>
     </div>
   </div>
