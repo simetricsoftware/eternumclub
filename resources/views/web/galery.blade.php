@@ -13,7 +13,7 @@
           <img class="banner-desktop z-10" src="{{ asset('assets/images/lachavizah.webp') }}" class="img-responsive" alt="">
           <div class="card-container z-10" id="start">
             <div class="text-center">
-              <h1 class="h2">LA CHAVISA FEST BY YANZIIZA (NOS MUDAMOS A EGIPTO)</h1>
+              <h1 class="h2">LA CHAVIZA FEST BY YANZIIZA (NOS MUDAMOS A EGIPTO)</h1>
             </div>
             <ul class="content-list">
               <li>Estás cordialmente invitado a la fiesta privada más cool de Ambato.</li>
