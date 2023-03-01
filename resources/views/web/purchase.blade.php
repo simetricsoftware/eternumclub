@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-xs-12 banner-container">
               <div class="touch-tostart-container">
-                <a data-video="#yansiiza" href="#start" class="btn btn-default btn-lg touch-tostart-lg">Toca para empezar</a>
+                <a data-video="#yansiiza" href="#start" class="btn-start btn btn-default btn-lg touch-tostart-lg">Toca para empezar</a>
               </div>
                <div class="banner-video-container">
                     <video id="yansiiza" class="banner-video" autoplay loop muted>
@@ -110,38 +110,4 @@
         </div>
     </div>
 </footer>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function(event) {
-        navActivePage();
-    });
-
-    function prepare(e) {
-        e.preventDefault()
-
-        const hash = document.getElementById('hash').value
-        const name = document.getElementById('name').value
-        const email = document.getElementById('email').value
-        const phone = document.getElementById('phone').value
-
-        const body = JSON.stringify({
-            amount: 100,
-            amountWithoutTax: 100,
-            clientTransactionID: new Date().getTime(),
-            responseUrl: `https://localhost/request-qr?hash=${hash}&name=${name}&email=${email}&phone=${phone}`,
-            cancellationUrl: "https://localhost/request-qr",
-        })
-
-        /* fetch('https://pay.payphonetodoesposible.com/api/Links', { */
-        fetch('https://pay.payphonetodoesposible.com/api/button/Prepare', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                /* 'Content-Type': 'application/x-www-form-urlencoded', */
-                'Authorization': "Bearer qHFtKLJQ53DNmdpp8LygueJJsu8cdGVA3bnpcgfkDy1cBvLzbe7S89aOmRJrzIy4isLJhdoxSJfhqHIKD3AeQyaFH2i-Y1lOFPbZBiORV-1vAhtCrIWMqKmGDEiKcoErB4l6N-DSTwhnjt_gKDOdUWYVeHv9fO3JG5BAUBwQCsKgP6wmKYeV0i8ExHs_R-8-04ViNDSjdRcAWSk-xD9vRACX0WFCZitFvss-fxxADNgTkpOt87qcjw2s6fTC7lG23hq2XD3dqWXepn_kvk-z6PlVk8du3VHVdlFm9euTyJRL3r_lGDlNPAZj72Ozzlx8ChgLKA"
-            },
-            body
-        })
-    }
-</script>
 @endsection
