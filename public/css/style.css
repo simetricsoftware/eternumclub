@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 /*
 * Hader
 * */
@@ -95,8 +98,67 @@
   color: white;
 }
 
+.card-container {
+  margin: 20px auto;
+}
+
+.touch-tostart-container {
+  margin-top: 17rem;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  gap: 4rem;
+}
+
+.touch-tostart-container .touch-tostart,
+.touch-tostart-container .touch-tostart-lg {
+  background-color: white;
+  width: 12rem;
+  animation-name: bounce;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+.touch-tostart-container .touch-tostart-lg {
+  width: 20rem;
+}
+
 input[type="radio"].form-control {
   width: 2rem;
+}
+
+.grid-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+}
+
+.column {
+  width: 100%;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 @media (min-width: 640px) {
@@ -110,5 +172,13 @@ input[type="radio"].form-control {
 
     .overlapping-content {
       margin-top: -35rem;
+    }
+
+    .touch-tostart-container .touch-tostart {
+      margin-top: 30rem;
+    }
+
+    .grid-container {
+      grid-template-columns: 1fr 1fr;
     }
 }

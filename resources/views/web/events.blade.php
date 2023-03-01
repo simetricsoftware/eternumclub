@@ -22,7 +22,7 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="black-image-project-hover">
-                                        <img src="{{ asset('assets/images/lachavizah.png') }}" alt="" class="img-responsive">
+                                        <img src="{{ asset('assets/images/lachavizah.webp') }}" alt="" class="img-responsive">
                                     </div>
                                     <div class="card-container card-container-lg">
                                         <h4>002/001</h4>
