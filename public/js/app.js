@@ -25,5 +25,8 @@ for (let i = 0; i < botonesEspeciales.length; i++) {
 
     const sexo = this.dataset.sex;
     if(sexo) showForSex(sexo);
+
+    const tsc = document.querySelector('.touch-tostart-container');
+    tsc.style.display = 'none'
   });
 }
