@@ -17,8 +17,6 @@ class Hash extends Model
         'email',
         'phone',
         'voucher',
-        'was_used',
-        'approved_at',
     ];
 
     protected $casts = [
@@ -62,5 +60,21 @@ class Hash extends Model
     { 
         if($hash !== null)
             return $query->where('hash', $hash);
+    }
+
+    public function scopeSearch(Builder $query, $search) {
+        if (!$search || $search === '') return; $query;
+
+        return $query->where(function($q_where) use ($search) {
+            $q_where->where('name', 'like', "%$search%")
+                ->orWhere('phone', 'like', "%$search%")
+                ->orWhere('email', 'like', "%$search%");
+        });
+    }
+
+    public function scopeSex(Builder $query, $sex) {
+        if (!$sex || $sex === '') return; $query;
+
+        return $query->where('sex', $sex);
     }
 }

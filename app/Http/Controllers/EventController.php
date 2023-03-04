@@ -46,9 +46,15 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Event $event, Request $request)
     {
-        return view('dashboard.events.show', [ 'event' => $event ]);
+        $hashes = $event->hashes()
+            ->search($request->search)
+            // ->sex($request->sex)
+            ->orderBy('approved_at')
+            ->get();
+
+        return view('dashboard.events.show', [ 'event' => $event, 'hashes' => $hashes ]);
     }
 
     /**

@@ -8,7 +8,6 @@ use App\Models\Hash;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -76,18 +75,14 @@ class HashService
 
     public function save(Event $event, array $data): Hash
     {
-        $hash = Hash::make([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-        ]);
+        $hash = Hash::make($data);
 
         $event->hashes()->save($hash);
 
         $hash->refresh();
 
         $hash->update([
-            'hash' => FacadesHash::make($hash->id),
+            'hash' => FacadesHash::make($hash->id . now()->timestamp),
         ]);
 
         return $hash;
@@ -101,7 +96,6 @@ class HashService
             $path = Storage::disk('public')->putFile('hashes', $file);;
             $hash->file = $path;
         }
-
 
         $hash->hash = $hash_str;
         $hash->save();

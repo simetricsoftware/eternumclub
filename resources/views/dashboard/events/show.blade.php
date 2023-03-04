@@ -3,19 +3,30 @@
         <h2 class="font-semibold text-xl text-white leading-tight">
             {{ $event->title }}
         </h2>
+        <div class="flex items-center gap-4 mt-4">
+            <form class="flex w-full gap-2" action="{{ route('events.show', [ 'event' => $event ]) }}">
+                <input type="hidden" name="sex" value="{{ request()->sex }}"/>
+                <input  class="rounded-lg w-3/4" type="search" name="search" placeholder="Buscar" value="{{ request()->search }}"/>
+                <button class="rounded-lg text-violet-200 w-1/4 bg-violet-600" type="submit">Buscar</button>
+            </form>
+            {{--
+            <a class="px-4 py-2 rounded-lg {{ request()->sex === 'M' ? 'bg-violet-600 text-violet-200' : 'bg-violet-200 text-violet-900'}}"" href="{{ route('events.show', [ 'event' => $event, 'sex' => 'M' ]) }}">M</a>
+            <a class="px-4 py-2 rounded-lg {{ request()->sex === 'H' ? 'bg-violet-600 text-violet-200' : 'bg-violet-200 text-violet-900'}}" href="{{ route('events.show', [ 'event' => $event, 'sex' => 'H' ]) }}">H</a>
+            --}}
+        </div>
     </x-slot>
 
     <div>
         <div class="w-full">
             <div class="bg-container overflow-hidden shadow sm:rounded-lg">
                 <div class="p-6 text-white flex">
-                    <ul class="flex flex-col w-full gap-4 md:px-14">
-                        @foreach($event->hashes as $hash)
-                        <li class="bg-container w-full flex flex-col md:flex-row border rounded">
-                            <div class="grid grid-cols-2 md:flex md:w-1/6">
+                    <ul class="grid w-full gap-4 md:px-14 md:grid-cols-4">
+                        @foreach($hashes as $hash)
+                        <li class="bg-container w-full flex flex-col border rounded p-4 gap-4">
+                            <div class="flex justify-center items-center">
                                 @isset($hash->voucher) 
-                                <a class="ml-2" target="_blank" href="{{ asset("storage/$hash->voucher") }}">
-                                    <img class="w-full md:w-auto md:h-40" src="{{ asset("storage/$hash->voucher") }}" alt="{{ $hash->hash }}">
+                                <a class="rounded-full w-32 h-32 flex justify-center items-center overflow-hidden" target="_blank" href="{{ asset("storage/$hash->voucher") }}">
+                                    <img class="h-full" src="{{ asset("storage/$hash->voucher") }}" alt="{{ $hash->hash }}">
                                 </a>
                                 @else
                                 <div class="flex w-full items-center justify-center"> 
@@ -23,42 +34,58 @@
                                 </div>
                                 @endisset
                             </div>
-                            <div class="flex items-center justify-center p-4 gap-4 md:h-40 md:w-4/6">
-                                <ul class="flex flex-col md:gap-12 md:flex-row w-full justify-between items-center">
-                                    <li class="text-2xl md:w-32 text-purple-900">
-                                        <span class="text-sm">Nombre</span>
-                                        <br>
-                                        {{ $hash->name }}
-                                    </li>
-                                    <li class="text-xl md:text-2xl md:min-w-max text-purple-900 flex-1">
-                                        <span class="text-sm">Correo</span>
-                                        <br>
-                                        {{ $hash->email }}
-                                    </li>
-                                    <li class="flex flex-col text-2xl md:min-w-max text-purple-900">
-                                        <a class="pb-2" aria-label="Chat on WhatsApp" href="https://wa.me/593{{ $hash->phone }}?text=Hola%20{{ $hash->name }}, bienvenido">
-                                            <img class="mx-auto w-2/3 md:w-24" alt="Chat on WhatsApp" src="{{ Vite::asset('resources/images/WhatsAppButtonGreenSmall.png') }}" />
-                                        </a> 
-                                        <br>
-                                        {{ $hash->phone }}
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="flex p-4 items-center justify-center gap-6 md:h-40 md:w-1/6">
-                                <div class="flex flex-col w-full justify-center items-center md:justify-end">
-                                    @if($hash->voucher && $hash->not_used) 
-                                    <form method="POST" action="{{ route('dashboard.hashes.approvate', [ 'hash' => $hash ]) }}">
-                                        @method('PUT')
-                                        @csrf()
-                                        <x-primary-button>{{ $hash->approved_at }} Aprobar</x-primary-button>
-                                    </form>
-                                    <hr>
-                                    @endif
-                                    <form method="POST" action="{{ route('dashboard.hashes.delete', [ 'hash' => $hash ]) }}">
-                                        @method('DELETE')
-                                        @csrf()
-                                        <x-secondary-button>Eliminar</x-secondary-button>
-                                    </form>
+                            <div class="grid grid-cols-3">
+                                <div class="col-span-2 border-r border-r-violet-900">
+                                    <ul class="flex flex-col w-full justify-center">
+                                        @isset($hash->approved_at)
+                                        <li class="flex flex-col text-xl md:min-w-max text-orange-600">
+                                            <p><span class="text-sm">Se envió el correo en</span> {{ $hash->approved_at }}</p>
+                                        </li>
+                                        @endisset
+                                        <li class="text-2xl md:w-32 text-purple-900">
+                                            <span class="text-sm">Nombre</span>
+                                            <br>
+                                            {{ $hash->name }}
+                                        </li>
+                                        <li class="text-lg md:text-2xl md:min-w-max text-purple-900 flex-1">
+                                            <span class="text-sm">Correo</span>
+                                            <br>
+                                            {{ $hash->email }}
+                                        </li>
+                                        <li class="flex flex-col text-2xl md:min-w-max text-purple-900">
+                                            <span class="text-sm">Teléfono</span>
+                                            <br>
+                                            {{ $hash->phone }}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="flex items-center justify-center gap-6 md:h-40 md:w-1/6">
+                                    <div class="flex flex-col w-full justify-center items-center gap-2 px-2">
+                                        @if($hash->voucher && $hash->not_used) 
+                                        <div x-data="{ open: false }" class="w-full">
+                                            <x-secondary-button type="button" x-on:click="open = true" class="w-full flex justify-center">Correo</x-secondary-button>
+                                            <x-modal.confirm method="PUT" action="{{ route('dashboard.hashes.approvate', [ 'hash' => $hash ]) }}">
+                                                <div class="flex items-center justify-center py-14">
+                                                    <p class="text-3xl text-center">¿Estás seguro en enviar el correo de la entrada con el código QR?</p>
+                                                </div>
+                                            </x-modal.confirm>
+                                        </div>
+                                        @endif
+                                        <div x-data="{ open: false }">
+                                            <x-secondary-button type="button" x-on:click="open = true" class="bg-red-600">Eliminar</x-secondary-button>
+                                            <x-modal.confirm method="DELETE" action="{{ route('dashboard.hashes.delete', [ 'hash' => $hash ]) }}">
+                                                <div class="flex items-center justify-center py-14">
+                                                    <p class="text-3xl text-center">¿Estás seguro en eliminar este registro?</p>
+                                                </div>
+                                            </x-modal.confirm>
+                                        </div>
+                                        <a class="px-4 py-2 bg-green-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="https://wa.me/593{{ $hash->phone }}?text=Hola%20{{ $hash->name }}, bienvenido">
+                                            WhatsApp
+                                        </a>
+                                        <a class="px-4 py-2 bg-blue-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="https://wa.me/593{{ $hash->phone }}?text=Hola%20{{ $hash->name }}, bienvenido">
+                                            Invitación
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </li>
