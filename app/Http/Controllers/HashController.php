@@ -10,6 +10,7 @@ use App\Models\Event;
 use App\Models\Hash;
 use App\Services\HashService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class HashController extends Controller
 {
@@ -86,6 +87,6 @@ class HashController extends Controller
     public function downloadInvitation(Hash $hash) {
         $path = $this->hash_service->generateInvitation($hash);
       
-        return response()->download(storage_path($path), 'invitation.png')->deleteFileAfterSend();
+        return response()->download(storage_path($path), Str::slug($hash->name) . '.png')->deleteFileAfterSend();
    }
 }
