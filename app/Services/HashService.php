@@ -64,11 +64,13 @@ class HashService
         Mail::to($hash->email)->send(new QrRequested($hash->name, $qr_url));
     }
 
-    public function registerHash(string $hash, string $email)
+    public function registerHash(string $hash, string $email): void
     {
-        Hash::where('hash', $hash)->where('email', $email)->update([
-            'was_used' => true,
-        ]);
+        $hash = Hash::where('hash', $hash)->where('email', $email)->first();
+
+        $hash->used_at = now();
+
+        $hash->save();
 
         Storage::move("public/unused-qr/$hash.svg", "used-qr/$hash.svg");
     }

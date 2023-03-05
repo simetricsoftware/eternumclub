@@ -48,8 +48,6 @@ require __DIR__.'/auth.php';
 Route::controller(HashController::class)->group(function()
 {
     Route::post('/events/{event}/register-voucher', 'registerVoucher')->name('register-voucher');
-    Route::get('register-hash', 'registerHash')->middleware([ 'auth:sanctum', 'unused-hash', 'role:admin' ])->name('register-hash');
+    Route::get('register-hash', 'registerHash')->middleware([ 'auth:sanctum', 'role:admin' ])->name('register-hash');
     Route::view('confirmation', 'web.confirmation')->name('confirmation');
-    Route::view('denied', 'web.denied')->name('denied');
-    Route::view('approved', 'web.approved')->name('approved');
 });
