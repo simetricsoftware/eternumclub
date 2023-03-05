@@ -54,7 +54,8 @@ class EventController extends Controller
             ->orderBy('approved_at')
             ->paginate(52);
 
-        $pending_to_approve = $event->hashes()->whereNull('approved_at')->count();
+        $pending_to_approve = $event->hashes()->whereNotNull('approved_at')->count();
+        $total_used = $event->hashes()->whereNotNull('used_at')->count();
         $total_hashes = $event->hashes()->count();
 
         return view('dashboard.events.show', [
@@ -62,6 +63,7 @@ class EventController extends Controller
             'hashes' => $hashes,
             'pending_to_approve' => $pending_to_approve,
             'total_hashes' => $total_hashes,
+            'total_used' => $total_used,
             'whatsapp_message' => function(string $name): string {
             return <<<WAME
 "Holi {$name} 💚😊 gracias por ser parte de la Chaviza! Va hacer una fiestita bien privada  lo cual  tú eres uno de nuestros invitados especiales espero que puedas asisitir con tu vestimenta de acuerdo a la temática 🪩🥳
