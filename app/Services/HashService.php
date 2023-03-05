@@ -8,7 +8,6 @@ use App\Models\Hash;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -65,29 +64,27 @@ class HashService
         Mail::to($hash->email)->send(new QrRequested($hash->name, $qr_url));
     }
 
-    public function registerHash(string $hash, string $email)
+    public function registerHash(string $hash, string $email): void
     {
-        Hash::where('hash', $hash)->where('email', $email)->update([
-            'was_used' => true,
-        ]);
+        $hash = Hash::where('hash', $hash)->where('email', $email)->first();
+
+        $hash->used_at = now();
+
+        $hash->save();
 
         Storage::move("public/unused-qr/$hash.svg", "used-qr/$hash.svg");
     }
 
     public function save(Event $event, array $data): Hash
     {
-        $hash = Hash::make([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-        ]);
+        $hash = Hash::make($data);
 
         $event->hashes()->save($hash);
 
         $hash->refresh();
 
         $hash->update([
-            'hash' => FacadesHash::make($hash->id),
+            'hash' => FacadesHash::make($hash->id . now()->timestamp),
         ]);
 
         return $hash;
@@ -102,7 +99,6 @@ class HashService
             $hash->file = $path;
         }
 
-
         $hash->hash = $hash_str;
         $hash->save();
     }
@@ -116,20 +112,30 @@ class HashService
         $hash->delete();
     }
 
-    public function reverseHash(string $hash)
+    public function generateInvitation(Hash $hash)
     {
-        $hash = Hash::firstWhere('hash', $hash); 
+        $invitation_template = Image::make(storage_path("app/events/{$hash->event->id}/invitation_template.png"));
+          
+        $invitation_template->widen(800); 
+      
+        $invitation_template->text(wordwrap($hash->name, 20, "\n"), 400, 800, function($font) {
+            $font->file(storage_path('app/fonts/coolvetica-rg.otf'));
+            $font->size(48);
+            $font->color('#ffffff');
+            $font->align('center');
+            $font->valign('center');
+        });
 
-        $hash->user_id = null; 
+        $temp = now()->timestamp;
 
-        if($hash->voucher)
-            Storage::disk('public')->delete($hash->voucher);
+        if (!Storage::exists('temp')) {
+            Storage::makeDirectory('temp');
+        };
+        
+        $path = "app/temp/{$temp}.png";
 
-        $hash->voucher = null; 
-        $hash->approved_at = null; 
+        $invitation_template->save(storage_path($path));
 
-        $hash->was_used = false; 
-
-        $hash->save();
+        return $path;
     }
 }

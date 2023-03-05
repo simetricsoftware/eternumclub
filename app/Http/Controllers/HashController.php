@@ -10,6 +10,7 @@ use App\Models\Event;
 use App\Models\Hash;
 use App\Services\HashService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class HashController extends Controller
 {
@@ -73,20 +74,25 @@ class HashController extends Controller
 
         $this->hash_service->sendByEmail($hash, $qr_url);
         
-        return redirect()->route('events.show', [ 'event' => $hash->event ]);
+        return redirect()->route('events.show', [ 'event' => $hash->event, 'search' => $hash->email ]);
     }
 
     public function registerHash(RegisterHash $request)
     {
+        $hash = Hash::firstWhere('hash', $request->hash);
+
+        if ($hash->used_at) {
+            return view('web.denied', [ 'hash' => $hash ]);
+        }
+
         $this->hash_service->registerHash($request->hash, $request->email);
 
-        return redirect()->route('approved');
+        return view('web.approved', [ 'hash' => $hash ]);
     }
 
-    public function reverse(Hash $hash)
-    {
-        $this->hash_service->reverseHash($hash);
-
-        return redirect()->route('dashboard.hashes.index');
-    }
+    public function downloadInvitation(Hash $hash) {
+        $path = $this->hash_service->generateInvitation($hash);
+      
+        return response()->download(storage_path($path), Str::slug($hash->name) . '.png')->deleteFileAfterSend();
+   }
 }

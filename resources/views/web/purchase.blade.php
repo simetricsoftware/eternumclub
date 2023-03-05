@@ -31,25 +31,25 @@
                                     <div class="form-group">
                                         <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                                         @error('email')
-                                            <span>{{ $message }}</span>
+                                            <span style="color: red;">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" required>
                                         @error('name')
-                                            <span>{{ $message }}</span>
+                                            <span style="color: red;">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
                                         <input type="tel" class="form-control" id="phone" name="phone" placeholder="Celular" required>
                                         @error('phone')
-                                            <span>{{ $message }}</span>
+                                            <span style="color: red;">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="instagram" name="instagram" placeholder="Tu nombre de usuario de instagram" required>
                                         @error('instagram')
-                                            <span>{{ $message }}</span>
+                                            <span style="color: red;">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
@@ -62,7 +62,7 @@
                                             Hombre
                                         </label>
                                         @error('sex')
-                                            <span>{{ $message }}</span>
+                                            <span style="color: red;">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
@@ -76,14 +76,14 @@
                                             No
                                         </label>
                                         @error('sex')
-                                            <span>{{ $message }}</span>
+                                            <span style="color: red;">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="voucher">Selecciona la foto para tu invitación</label>
                                         <input type="file" class="form-control" id="voucher" name="voucher" required accept="image/jpeg,image/png">
                                         @error('voucher')
-                                            <span>{{ $message }}</span>
+                                            <span style="color: red;">{{ $message }}</span>
                                         @enderror
                                     </div>
 

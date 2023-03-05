@@ -39,7 +39,7 @@ Route::prefix('dashboard')->middleware(['auth', 'role:admin'])->group(function()
         Route::put('/edit/{hash}', 'update')->name('dashboard.hashes.update');
         Route::delete('/edit/{hash}', 'delete')->name('dashboard.hashes.delete');
         Route::put('/request-qr/{hash}', 'requestQr')->name('dashboard.hashes.approvate');
-        Route::get('/reverse/{hash}', 'reverse')->name('dashboard.hashes.reverse');
+        Route::get('/download-invitation/{hash}', 'downloadInvitation')->name('dashboard.hashes.invitation');
     });
 });
 
@@ -48,8 +48,6 @@ require __DIR__.'/auth.php';
 Route::controller(HashController::class)->group(function()
 {
     Route::post('/events/{event}/register-voucher', 'registerVoucher')->name('register-voucher');
-    Route::get('register-hash', 'registerHash')->middleware([ 'auth:sanctum', 'unused-hash', 'role:admin' ])->name('register-hash');
+    Route::get('register-hash', 'registerHash')->middleware([ 'auth:sanctum', 'role:admin' ])->name('register-hash');
     Route::view('confirmation', 'web.confirmation')->name('confirmation');
-    Route::view('denied', 'web.denied')->name('denied');
-    Route::view('approved', 'web.approved')->name('approved');
 });
