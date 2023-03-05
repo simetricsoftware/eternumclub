@@ -66,7 +66,7 @@
                                         <span class="text-violet-800">Ya utilizado</span>
                                     @else
                                     <div class="flex flex-col w-full justify-center items-center gap-2 px-2">
-                                        @if($hash->voucher && $hash->not_used) 
+                                        @if($hash->not_used) 
                                         <div x-data="{ open: false }" class="w-full">
                                             <x-secondary-button type="button" x-on:click="open = true" class="w-full flex justify-center">Correo</x-secondary-button>
                                             <x-modal.confirm method="PUT" action="{{ route('dashboard.hashes.approvate', [ 'hash' => $hash ]) }}">
