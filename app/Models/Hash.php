@@ -81,12 +81,12 @@ class Hash extends Model
     public function scopeShowUsedOnly(Builder $query, $used_first) {
         if (!$used_first || $used_first === '') return; $query;
 
-        return $query->whereNotNull('used_at');
+        return $query->whereNotNull('used_at')->orderBy('used_at', 'DESC');
     }
 
     public function scopeShowEmailOnly(Builder $query, $email_first) {
         if (!$email_first || $email_first === '') return; $query;
 
-        return $query->whereNotNull('approved_at');
+        return $query->whereNotNull('approved_at')->orderBy('approved_at', 'DESC');
     }
 }

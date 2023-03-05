@@ -49,12 +49,15 @@ class EventController extends Controller
     public function show(Event $event, Request $request)
     {
         $hashes = $event->hashes()
-            ->search($request->search)
-            ->showUsedOnly($request->used_first)
-            ->showEmailOnly($request->email_first)
-            // ->sex($request->sex)
-            ->orderBy('approved_at')
-            ->paginate(52);
+            ->search($request->search);
+
+        $hashes = match(true) {
+            $request->filled('used_first') => $hashes->showUsedOnly($request->used_first),
+            $request->filled('email_first') => $hashes->showEmailOnly($request->email_first),
+            default => $hashes->orderBy('approved_at'),
+        };
+        
+        $hashes = $hashes->paginate(52);
 
         $pending_to_approve = $event->hashes()->whereNotNull('approved_at')->count();
         $total_used = $event->hashes()->whereNotNull('used_at')->count();
