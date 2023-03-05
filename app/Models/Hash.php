@@ -77,4 +77,16 @@ class Hash extends Model
 
         return $query->where('sex', $sex);
     }
+
+    public function scopeShowUsedOnly(Builder $query, $used_first) {
+        if (!$used_first || $used_first === '') return; $query;
+
+        return $query->whereNotNull('used_at');
+    }
+
+    public function scopeShowEmailOnly(Builder $query, $email_first) {
+        if (!$email_first || $email_first === '') return; $query;
+
+        return $query->whereNotNull('approved_at');
+    }
 }

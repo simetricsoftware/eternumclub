@@ -50,6 +50,8 @@ class EventController extends Controller
     {
         $hashes = $event->hashes()
             ->search($request->search)
+            ->showUsedOnly($request->used_first)
+            ->showEmailOnly($request->email_first)
             // ->sex($request->sex)
             ->orderBy('approved_at')
             ->paginate(52);
