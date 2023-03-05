@@ -10,7 +10,7 @@
                 <button class="rounded-lg text-violet-200 w-1/4 bg-violet-600" type="submit">Buscar</button>
             </form>
             <div>
-                <span class="text-violet-800">Pendientes de correo {{ $pending_to_approve }} de {{ $total_hashes }}</span>
+                <span class="text-violet-800">Correo: {{ $pending_to_approve }} Escaneados: {{ $total_used }} Total: {{ $total_hashes }}</span>
             </div>
         </div>
     </x-slot>
@@ -84,10 +84,10 @@
                                                 </div>
                                             </x-modal.confirm>
                                         </div>
-                                        <a class="w-full text-center px-4 py-2 bg-green-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="https://api.whatsapp.com/send/?phone=593{{ $hash->phone }}&text={{ urlencode($whatsapp_message($hash->name)) }}&type=phone_number&app_absent=0">
+                                        <a class="w-full text-center px-4 py-2 bg-green-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="https://api.whatsapp.com/send/?phone=593{{ $hash->phone }}&text={{ urlencode($whatsapp_message($hash->name)) }}&type=phone_number&app_absent=0" target="_blank">
                                             WhatsApp
                                         </a>
-                                        <a class="w-full text-center px-4 py-2 bg-blue-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="{{ route('dashboard.hashes.invitation', [ 'hash' => $hash ]) }}" download="invitacion.jpg">
+                                        <a class="w-full text-center px-4 py-2 bg-blue-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="{{ route('dashboard.hashes.invitation', [ 'hash' => $hash ]) }}" download="invitacion.jpg" target="_blank">
                                             Invitación
                                         </a>
                                         <a class="w-full text-center px-4 py-2 bg-emerald-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="{{ route('events.show', [ 'event' => $event ]) }}">
