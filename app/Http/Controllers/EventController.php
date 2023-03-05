@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Event::class, 'event');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -56,7 +61,7 @@ class EventController extends Controller
             $request->filled('email_first') => $hashes->showEmailOnly($request->email_first),
             default => $hashes->orderBy('approved_at'),
         };
-        
+
         $hashes = $hashes->paginate(52);
 
         $pending_to_approve = $event->hashes()->whereNotNull('approved_at')->count();
