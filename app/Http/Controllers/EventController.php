@@ -52,7 +52,7 @@ class EventController extends Controller
             ->search($request->search)
             // ->sex($request->sex)
             ->orderBy('approved_at')
-            ->paginate(50);
+            ->paginate(52);
 
         $pending_to_approve = $event->hashes()->whereNull('approved_at')->count();
         $total_hashes = $event->hashes()->count();
