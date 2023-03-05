@@ -9,8 +9,12 @@
                 <input  class="rounded-lg w-3/4" type="search" name="search" placeholder="Buscar" value="{{ request()->search }}"/>
                 <button class="rounded-lg text-violet-200 w-1/4 bg-violet-600" type="submit">Buscar</button>
             </form>
-            <div>
-                <span class="text-violet-800">Correo: {{ $pending_to_approve }} - Escaneados: {{ $total_used }} - Total: {{ $total_hashes }}</span>
+            <div class="flex">
+                <a class="text-violet-800 underline" href="{{ route('events.show', [ 'event' => $event, 'email_first' => 1 ]) }}">Correo: {{ $pending_to_approve }}</a>
+                <span class="text-violet-800">&nbsp;-&nbsp;</span>
+                <a class="text-violet-800 underline" href="{{ route('events.show', [ 'event' => $event, 'used_first' => 1 ]) }}">Escaneados: {{ $total_used }}</a>
+                <span class="text-violet-800">&nbsp;-&nbsp;</span>
+                <a class="text-violet-800 underline" href="{{ route('events.show', [ 'event' => $event ]) }}">Total: {{ $total_hashes }}</a>
             </div>
         </div>
     </x-slot>
