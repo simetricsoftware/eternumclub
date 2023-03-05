@@ -35,29 +35,37 @@
                             <div class="grid grid-cols-3">
                                 <div class="col-span-2 border-r border-r-violet-900">
                                     <ul class="flex flex-col w-full justify-center">
-                                        @isset($hash->approved_at)
-                                        <li class="flex flex-col text-xl md:min-w-max text-orange-600">
-                                            <p><span class="text-sm">Se envió el correo en</span> {{ $hash->approved_at }}</p>
+                                        @isset($hash->used_at)
+                                        <li class="flex flex-col text-xl text-red-600">
+                                            <p><span class="text-sm font-bold text-red-700">Se escaneó el Qr en</span> {{ $hash->used_at }}</p>
                                         </li>
                                         @endisset
-                                        <li class="text-2xl md:w-32 text-purple-900">
-                                            <span class="text-sm">Nombre</span>
+                                        @isset($hash->approved_at)
+                                        <li class="flex flex-col text-xl text-orange-600">
+                                            <p><span class="text-sm font-bold text-orange-700">Se envió el correo en</span> {{ $hash->approved_at }}</p>
+                                        </li>
+                                        @endisset
+                                        <li class="text-2xl text-purple-900">
+                                            <span class="text-sm font-bold text-purple-700">Nombre</span>
                                             <br>
                                             {{ $hash->name }}
                                         </li>
-                                        <li class="text-lg md:text-2xl md:min-w-max text-purple-900 flex-1">
-                                            <span class="text-sm">Correo</span>
+                                        <li class="text-sm text-purple-900 flex-1">
+                                            <span class="text-sm font-bold text-purple-700">Correo</span>
                                             <br>
                                             {{ $hash->email }}
                                         </li>
-                                        <li class="flex flex-col text-2xl md:min-w-max text-purple-900">
-                                            <span class="text-sm">Teléfono</span>
+                                        <li class="flex flex-col text-2xl text-purple-900">
+                                            <span class="text-sm font-bold text-purple-700">Teléfono</span>
                                             <br>
                                             {{ $hash->phone }}
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="flex items-center justify-center gap-6 md:h-40 md:w-1/6">
+                                <div class="flex items-center justify-center gap-6">
+                                    @isset($hash->used_at)
+                                        <span class="text-violet-800">Ya utilizado</span>
+                                    @else
                                     <div class="flex flex-col w-full justify-center items-center gap-2 px-2">
                                         @if($hash->voucher && $hash->not_used) 
                                         <div x-data="{ open: false }" class="w-full">
@@ -77,13 +85,14 @@
                                                 </div>
                                             </x-modal.confirm>
                                         </div>
-                                        <a class="px-4 py-2 bg-green-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="https://wa.me/593{{ $hash->phone }}?text={{ urlencode($whatsapp_message($hash->name)) }}">
+                                        <a class="px-4 py-2 bg-green-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="https://api.whatsapp.com/send/?phone=593{{ $hash->phone }}&text={{ urlencode($whatsapp_message($hash->name)) }}&type=phone_number&app_absent=0">
                                             WhatsApp
                                         </a>
                                         <a class="px-4 py-2 bg-blue-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="{{ route('dashboard.hashes.invitation', [ 'hash' => $hash ]) }}" download="invitacion.jpg">
                                             Invitación
                                         </a>
                                     </div>
+                                    @endisset
                                 </div>
                             </div>
                         </li>
