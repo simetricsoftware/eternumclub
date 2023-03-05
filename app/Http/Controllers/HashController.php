@@ -83,10 +83,9 @@ class HashController extends Controller
         return redirect()->route('approved');
     }
 
-    public function reverse(Hash $hash)
-    {
-        $this->hash_service->reverseHash($hash);
-
-        return redirect()->route('dashboard.hashes.index');
-    }
+    public function downloadInvitation(Hash $hash) {
+        $path = $this->hash_service->generateInvitation($hash);
+      
+        return response()->download(storage_path($path), 'invitation.png')->deleteFileAfterSend();
+   }
 }

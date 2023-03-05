@@ -39,7 +39,7 @@ Route::prefix('dashboard')->middleware(['auth', 'role:admin'])->group(function()
         Route::put('/edit/{hash}', 'update')->name('dashboard.hashes.update');
         Route::delete('/edit/{hash}', 'delete')->name('dashboard.hashes.delete');
         Route::put('/request-qr/{hash}', 'requestQr')->name('dashboard.hashes.approvate');
-        Route::get('/reverse/{hash}', 'reverse')->name('dashboard.hashes.reverse');
+        Route::get('/download-invitation/{hash}', 'downloadInvitation')->name('dashboard.hashes.invitation');
     });
 });
 

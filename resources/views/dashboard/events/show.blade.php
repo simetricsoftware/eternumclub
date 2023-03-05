@@ -23,11 +23,9 @@
                     <ul class="grid w-full gap-4 md:px-14 md:grid-cols-4">
                         @foreach($hashes as $hash)
                         <li class="bg-container w-full flex flex-col border rounded p-4 gap-4">
-                            <div class="flex justify-center items-center">
+                            <div class="flex items-center">
                                 @isset($hash->voucher) 
-                                <a class="rounded-full w-32 h-32 flex justify-center items-center overflow-hidden" target="_blank" href="{{ asset("storage/$hash->voucher") }}">
-                                    <img class="h-full" src="{{ asset("storage/$hash->voucher") }}" alt="{{ $hash->hash }}">
-                                </a>
+                                <a class="rounded-lg px-4 py-2 bg-sky-600 flex justify-center items-center overflow-hidden" target="_blank" href="{{ asset("storage/$hash->voucher") }}">Ver comprobante</a>
                                 @else
                                 <div class="flex w-full items-center justify-center"> 
                                     <span class="text-center">Sin comprobante</span>
@@ -79,10 +77,10 @@
                                                 </div>
                                             </x-modal.confirm>
                                         </div>
-                                        <a class="px-4 py-2 bg-green-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="https://wa.me/593{{ $hash->phone }}?text=Hola%20{{ $hash->name }}, bienvenido">
+                                        <a class="px-4 py-2 bg-green-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="https://wa.me/593{{ $hash->phone }}?text={{ urlencode($whatsapp_message($hash->name)) }}">
                                             WhatsApp
                                         </a>
-                                        <a class="px-4 py-2 bg-blue-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="https://wa.me/593{{ $hash->phone }}?text=Hola%20{{ $hash->name }}, bienvenido">
+                                        <a class="px-4 py-2 bg-blue-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="{{ route('dashboard.hashes.invitation', [ 'hash' => $hash ]) }}" download="invitacion.jpg">
                                             Invitación
                                         </a>
                                     </div>

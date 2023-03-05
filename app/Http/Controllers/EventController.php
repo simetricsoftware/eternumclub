@@ -54,7 +54,27 @@ class EventController extends Controller
             ->orderBy('approved_at')
             ->get();
 
-        return view('dashboard.events.show', [ 'event' => $event, 'hashes' => $hashes ]);
+        
+
+        return view('dashboard.events.show', [ 'event' => $event, 'hashes' => $hashes, 'whatsapp_message' => function(string $name): string {
+            return <<<WAME
+"Holi {$name} 💚😊 gracias por ser parte de la Chaviza! Va hacer una fiestita bien privada  lo cual  tú eres uno de nuestros invitados especiales espero que puedas asisitir con tu vestimenta de acuerdo a la temática 🪩🥳
+
+1- Etiquetame @yanziizadj para validar tu invitación con la imagen que te mande por aqui (Instagram)
+2- El código QR para ingresar a la fiesta te llegará a tu correo electrónico
+3- Ven a disfrutar el perreo hasta abajo
+4- La ubicación de la fiesta es personal ñia porfa no 👎 des a nadie
+
+Gracias por el acolite la barra libre será solo para ti 😊
+
+OJO👀 El código QR solo se abrirá una vez con tu invitación así que guarda bien tu código del correo 📦
+
+Gracias por ser parte de la Chaviza
+
+No te olvides de validar tu invitación reposteando en el Instagram"
+WAME;
+            }
+        ]);
     }
 
     /**

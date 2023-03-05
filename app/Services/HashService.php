@@ -110,20 +110,30 @@ class HashService
         $hash->delete();
     }
 
-    public function reverseHash(string $hash)
+    public function generateInvitation(Hash $hash)
     {
-        $hash = Hash::firstWhere('hash', $hash); 
+        $invitation_template = Image::make(storage_path("app/events/{$hash->event->id}/invitation_template.png"));
+          
+        $invitation_template->widen(800); 
+      
+        $invitation_template->text(wordwrap($hash->name, 20, "\n"), 400, 800, function($font) {
+            $font->file(storage_path('app/fonts/coolvetica-rg.otf'));
+            $font->size(48);
+            $font->color('#ffffff');
+            $font->align('center');
+            $font->valign('center');
+        });
 
-        $hash->user_id = null; 
+        $temp = now()->timestamp;
 
-        if($hash->voucher)
-            Storage::disk('public')->delete($hash->voucher);
+        if (!Storage::exists('temp')) {
+            Storage::makeDirectory('temp');
+        };
+        
+        $path = "app/temp/{$temp}.png";
 
-        $hash->voucher = null; 
-        $hash->approved_at = null; 
+        $invitation_template->save(storage_path($path));
 
-        $hash->was_used = false; 
-
-        $hash->save();
+        return $path;
     }
 }
