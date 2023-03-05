@@ -25,7 +25,7 @@
 					<tr>
 						<td align="center" style="padding: 0 0 20px 0;">
 							<p style="max-width: 50%; margin: 0 auto;">
-								Gracias por ser parte de la Chaviza no pierdas este código QR con este código y tu invitación podrás ingresar a la fiesta egipcia, pronto a tu WhatsApp se te enviará la ubicación. Gracias por preferirnos 🪩
+								Gracias por ser parte de la Chaviza no pierdas este código QR con este código y tu invitación podrás ingresar a la fiesta egipcia, pronto a tu WhatsApp se te enviará la ubicación. <br> Gracias por preferirnos 🪩
 							</p>
 						</td>
 					</tr>
