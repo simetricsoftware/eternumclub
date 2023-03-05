@@ -74,7 +74,7 @@ class HashController extends Controller
 
         $this->hash_service->sendByEmail($hash, $qr_url);
         
-        return redirect()->route('events.show', [ 'event' => $hash->event ]);
+        return redirect()->route('events.show', [ 'event' => $hash->event, 'search' => $hash->email ]);
     }
 
     public function registerHash(RegisterHash $request)

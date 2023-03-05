@@ -3,23 +3,22 @@
         <h2 class="font-semibold text-xl text-white leading-tight">
             {{ $event->title }}
         </h2>
-        <div class="flex items-center gap-4 mt-4">
+        <div class="flex flex-col items-center gap-4 mt-4">
             <form class="flex w-full gap-2" action="{{ route('events.show', [ 'event' => $event ]) }}">
                 <input type="hidden" name="sex" value="{{ request()->sex }}"/>
                 <input  class="rounded-lg w-3/4" type="search" name="search" placeholder="Buscar" value="{{ request()->search }}"/>
                 <button class="rounded-lg text-violet-200 w-1/4 bg-violet-600" type="submit">Buscar</button>
             </form>
-            {{--
-            <a class="px-4 py-2 rounded-lg {{ request()->sex === 'M' ? 'bg-violet-600 text-violet-200' : 'bg-violet-200 text-violet-900'}}"" href="{{ route('events.show', [ 'event' => $event, 'sex' => 'M' ]) }}">M</a>
-            <a class="px-4 py-2 rounded-lg {{ request()->sex === 'H' ? 'bg-violet-600 text-violet-200' : 'bg-violet-200 text-violet-900'}}" href="{{ route('events.show', [ 'event' => $event, 'sex' => 'H' ]) }}">H</a>
-            --}}
+            <div>
+                <span class="text-violet-800">Pendientes de correo {{ $pending_to_approve }} de {{ $total_hashes }}</span>
+            </div>
         </div>
     </x-slot>
 
     <div>
         <div class="w-full">
             <div class="bg-container overflow-hidden shadow sm:rounded-lg">
-                <div class="p-6 text-white flex">
+                <div class="p-6 text-white flex flex-col gap-6">
                     <ul class="grid w-full gap-4 md:px-14 md:grid-cols-4">
                         @foreach($hashes as $hash)
                         <li class="bg-container w-full flex flex-col border rounded p-4 gap-4">
@@ -77,19 +76,22 @@
                                             </x-modal.confirm>
                                         </div>
                                         @endif
-                                        <div x-data="{ open: false }">
-                                            <x-secondary-button type="button" x-on:click="open = true" class="bg-red-600">Eliminar</x-secondary-button>
+                                        <div x-data="{ open: false }" class="w-full">
+                                            <x-secondary-button type="button" x-on:click="open = true" class="bg-red-600 w-full text-center flex justify-center">Eliminar</x-secondary-button>
                                             <x-modal.confirm method="DELETE" action="{{ route('dashboard.hashes.delete', [ 'hash' => $hash ]) }}">
                                                 <div class="flex items-center justify-center py-14">
                                                     <p class="text-3xl text-center">¿Estás seguro en eliminar este registro?</p>
                                                 </div>
                                             </x-modal.confirm>
                                         </div>
-                                        <a class="px-4 py-2 bg-green-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="https://api.whatsapp.com/send/?phone=593{{ $hash->phone }}&text={{ urlencode($whatsapp_message($hash->name)) }}&type=phone_number&app_absent=0">
+                                        <a class="w-full text-center px-4 py-2 bg-green-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="https://api.whatsapp.com/send/?phone=593{{ $hash->phone }}&text={{ urlencode($whatsapp_message($hash->name)) }}&type=phone_number&app_absent=0">
                                             WhatsApp
                                         </a>
-                                        <a class="px-4 py-2 bg-blue-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="{{ route('dashboard.hashes.invitation', [ 'hash' => $hash ]) }}" download="invitacion.jpg">
+                                        <a class="w-full text-center px-4 py-2 bg-blue-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="{{ route('dashboard.hashes.invitation', [ 'hash' => $hash ]) }}" download="invitacion.jpg">
                                             Invitación
+                                        </a>
+                                        <a class="w-full text-center px-4 py-2 bg-emerald-500 rounded-md uppercase text-xs" aria-label="Chat on WhatsApp" href="{{ route('events.show', [ 'event' => $event ]) }}">
+                                            Listo
                                         </a>
                                     </div>
                                     @endisset
@@ -98,6 +100,10 @@
                         </li>
                         @endforeach
                     </ul>
+                    <div class="flex justify-between">
+                        <a class="px-4 py-2 rounded-lg bg-violet-900" href="{{ $hashes->previousPageUrl() }}">Anterior</a>
+                        <a class="px-4 py-2 rounded-lg bg-violet-900" href="{{ $hashes->nextPageUrl() }}">Siguiente</a>
+                    </div>
                 </div>
             </div>
         </div>

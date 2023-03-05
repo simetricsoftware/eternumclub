@@ -52,11 +52,17 @@ class EventController extends Controller
             ->search($request->search)
             // ->sex($request->sex)
             ->orderBy('approved_at')
-            ->get();
+            ->paginate(50);
 
-        
+        $pending_to_approve = $event->hashes()->whereNull('approved_at')->count();
+        $total_hashes = $event->hashes()->count();
 
-        return view('dashboard.events.show', [ 'event' => $event, 'hashes' => $hashes, 'whatsapp_message' => function(string $name): string {
+        return view('dashboard.events.show', [
+            'event' => $event,
+            'hashes' => $hashes,
+            'pending_to_approve' => $pending_to_approve,
+            'total_hashes' => $total_hashes,
+            'whatsapp_message' => function(string $name): string {
             return <<<WAME
 "Holi {$name} 💚😊 gracias por ser parte de la Chaviza! Va hacer una fiestita bien privada  lo cual  tú eres uno de nuestros invitados especiales espero que puedas asisitir con tu vestimenta de acuerdo a la temática 🪩🥳
 

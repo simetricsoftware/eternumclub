@@ -15,6 +15,10 @@ class RemoveDuplicateHashesSeeder extends Seeder
      */
     public function run()
     {
+        Hash::whereNotNull('approved_at')->update([
+            'approved_at' => null,
+        ]);
+
         Hash::where(function ($q_where) {
             $q_where->whereNull('email')->orWhere('email', "");
         })->delete();
