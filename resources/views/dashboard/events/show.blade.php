@@ -10,7 +10,7 @@
                 <button class="rounded-lg text-violet-200 w-1/4 bg-violet-600" type="submit">Buscar</button>
             </form>
             <div>
-                <span class="text-violet-800">Correo: {{ $pending_to_approve }} Escaneados: {{ $total_used }} Total: {{ $total_hashes }}</span>
+                <span class="text-violet-800">Correo: {{ $pending_to_approve }} - Escaneados: {{ $total_used }} - Total: {{ $total_hashes }}</span>
             </div>
         </div>
     </x-slot>

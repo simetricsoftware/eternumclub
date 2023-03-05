@@ -54,7 +54,7 @@ class EventController extends Controller
             ->orderBy('approved_at')
             ->paginate(52);
 
-        $pending_to_approve = $event->hashes()->whereNull('approved_at')->count();
+        $pending_to_approve = $event->hashes()->whereNotNull('approved_at')->count();
         $total_used = $event->hashes()->whereNotNull('used_at')->count();
         $total_hashes = $event->hashes()->count();
 
