@@ -16,7 +16,9 @@ class HashController extends Controller
 {
     public function __construct(
         protected HashService $hash_service,
-    ) {}
+    ) {
+        $this->authorizeResource(Hash::class, 'hash');
+    }
 
     public function index(Request $request)
     {
@@ -26,33 +28,33 @@ class HashController extends Controller
     }
 
     public function create()
-    { 
+    {
         return view('dashboard.hash.create')->with([ 'hash' => new Hash() ]);
     }
 
     public function save(StoreHashRequest $request)
-    { 
+    {
         $this->hash_service->save($request->hash, $request->file('file'));
-        
+
         return redirect()->route('dashboard.hashes.index');
     }
 
     public function edit(Hash $hash)
-    { 
+    {
         return view('dashboard.hash.edit')->with([ 'hash' => $hash ]);
     }
 
     public function update(Hash $hash, UpdateHashRequest $request)
-    { 
+    {
         $this->hash_service->update($hash, $request->hash, $request->file('file'));
-        
+
         return redirect()->route('dashboard.hashes.index');
     }
 
     public function delete(Hash $hash)
-    { 
+    {
         $this->hash_service->delete($hash);
-        
+
         return redirect()->route('events.show', [ 'event' => $hash->event]);
     }
 
@@ -73,13 +75,15 @@ class HashController extends Controller
         $qr_url = $this->hash_service->requestQr($hash);
 
         $this->hash_service->sendByEmail($hash, $qr_url);
-        
+
         return redirect()->route('events.show', [ 'event' => $hash->event, 'search' => $hash->email ]);
     }
 
     public function registerHash(RegisterHash $request)
     {
         $hash = Hash::firstWhere('hash', $request->hash);
+
+        $this->authorize('hashBelongsCurrentUser', $hash);
 
         if ($hash->used_at) {
             return view('web.denied', [ 'hash' => $hash ]);
@@ -92,7 +96,7 @@ class HashController extends Controller
 
     public function downloadInvitation(Hash $hash) {
         $path = $this->hash_service->generateInvitation($hash);
-      
+
         return response()->download(storage_path($path), Str::slug($hash->name) . '.png')->deleteFileAfterSend();
    }
 }
