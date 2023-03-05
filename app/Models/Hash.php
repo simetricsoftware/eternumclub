@@ -31,7 +31,7 @@ class Hash extends Model
     public function notUsed(): Attribute 
     { 
         return Attribute::make( 
-            get: fn() => $this->was_used != 1 
+            get: fn() => $this->used_at === null 
         );
     }
 
