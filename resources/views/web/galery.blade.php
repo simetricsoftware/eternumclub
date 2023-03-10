@@ -28,11 +28,10 @@
         </div>
 
         <p class="z-10" style="text-align: center;">
-            @isset($hash->user)
             <span class="btn btn-danger btn-lg" role="alert">No diponible</span>
-            @else
+            {{--
             <a href="{{ route('purchase', [ 'event' => $event ]) }}" class="btn btn-default btn-lg">REGISTRARME</a>
-            @endisset
+            --}}
         </p>
         
         <div class="backvideo overlapping-content">
