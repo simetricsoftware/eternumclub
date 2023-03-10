@@ -49,5 +49,6 @@ Route::controller(HashController::class)->group(function()
 {
     Route::post('/events/{event}/register-voucher', 'registerVoucher')->name('register-voucher');
     Route::get('register-hash', 'registerHash')->middleware([ 'auth:sanctum', 'role:admin' ])->name('register-hash');
+    Route::put('register-hash-manually', 'registerHashManually')->middleware([ 'auth:sanctum', 'role:admin' ])->name('register-hash-manually');
     Route::view('confirmation', 'web.confirmation')->name('confirmation');
 });
