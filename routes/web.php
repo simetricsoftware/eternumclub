@@ -19,7 +19,7 @@ Route::view('/', 'welcome')->name('home');
 Route::view('/events', 'web.events')->name('events');
 Route::view('/club', 'web.club')->name('club');
 Route::get('/events/{event}/galery', [ HashController::class, 'galery' ])->name('galery');
-Route::view('/events/{event}/purchase', 'web.purchase')->name('purchase');
+// Route::view('/events/{event}/purchase', 'web.purchase')->name('purchase');
 
 Route::prefix('dashboard')->middleware(['auth', 'role:admin'])->group(function()
 {
@@ -47,7 +47,7 @@ require __DIR__.'/auth.php';
 
 Route::controller(HashController::class)->group(function()
 {
-    Route::post('/events/{event}/register-voucher', 'registerVoucher')->name('register-voucher');
+    // Route::post('/events/{event}/register-voucher', 'registerVoucher')->name('register-voucher');
     Route::get('register-hash', 'registerHash')->middleware([ 'auth:sanctum', 'role:admin' ])->name('register-hash');
     Route::put('register-hash-manually', 'registerHashManually')->middleware([ 'auth:sanctum', 'role:admin' ])->name('register-hash-manually');
     Route::view('confirmation', 'web.confirmation')->name('confirmation');
