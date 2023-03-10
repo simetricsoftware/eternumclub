@@ -27,10 +27,10 @@
                         @foreach($hashes as $hash)
                         <li class="bg-container w-full flex flex-col border rounded p-4 gap-4">
                             <div class="flex items-center">
-                                @isset($hash->voucher) 
+                                @isset($hash->voucher)
                                 <a class="rounded-lg px-4 py-2 bg-sky-600 flex justify-center items-center overflow-hidden" target="_blank" href="{{ asset("storage/$hash->voucher") }}">Ver comprobante</a>
                                 @else
-                                <div class="flex w-full items-center justify-center"> 
+                                <div class="flex w-full items-center justify-center">
                                     <span class="text-center">Sin comprobante</span>
                                 </div>
                                 @endisset
@@ -70,7 +70,7 @@
                                         <span class="text-violet-800">Ya utilizado</span>
                                     @else
                                     <div class="flex flex-col w-full justify-center items-center gap-2 px-2">
-                                        @if($hash->not_used) 
+                                        @if($hash->not_used)
                                         <div x-data="{ open: false }" class="w-full">
                                             <x-secondary-button type="button" x-on:click="open = true" class="w-full flex justify-center">Correo</x-secondary-button>
                                             <x-modal.confirm method="PUT" action="{{ route('dashboard.hashes.approvate', [ 'hash' => $hash ]) }}">
@@ -85,6 +85,16 @@
                                             <x-modal.confirm method="DELETE" action="{{ route('dashboard.hashes.delete', [ 'hash' => $hash ]) }}">
                                                 <div class="flex items-center justify-center py-14">
                                                     <p class="text-3xl text-center">¿Estás seguro en eliminar este registro?</p>
+                                                </div>
+                                            </x-modal.confirm>
+                                        </div>
+                                        <div x-data="{ open: false }" class="w-full">
+                                            <x-secondary-button type="button" x-on:click="open = true" class="bg-yellow-600 w-full text-center flex justify-center">Usada</x-secondary-button>
+                                            <x-modal.confirm method="PUT" action="{{ route('register-hash-manually') }}">
+                                                <div class="flex items-center justify-center py-14">
+                                                    <input type="hidden" name="hash" value="{{ $hash->hash }}"/>
+                                                    <input type="hidden" name="email" value="{{ $hash->email }}"/>
+                                                    <p class="text-3xl text-center">¿Estás seguro en marcar esta entrada como usada?</p>
                                                 </div>
                                             </x-modal.confirm>
                                         </div>

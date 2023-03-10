@@ -94,6 +94,21 @@ class HashController extends Controller
         return view('web.approved', [ 'hash' => $hash ]);
     }
 
+    public function registerHashManually(RegisterHash $request)
+    {
+        $hash = Hash::firstWhere('hash', $request->hash);
+
+        $this->authorize('hashBelongsCurrentUser', $hash);
+
+        if ($hash->used_at) {
+            return view('web.denied', [ 'hash' => $hash ]);
+        }
+
+        $this->hash_service->registerHash($request->hash, $request->email);
+
+        return back();
+    }
+
     public function downloadInvitation(Hash $hash) {
         $path = $this->hash_service->generateInvitation($hash);
 
