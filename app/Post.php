@@ -38,6 +38,10 @@ class Post extends Model
         return $this->belongsToMany('App\Tag');
     }
 
+    public function ticketTypes() {
+        return $this->hasMany(TicketType::class);
+    }
+
     public function scopeUserRole($query) {
         $user = auth()->user();
         if(!$user->hasRole('admin') && !$user->hasRole('moderator'))

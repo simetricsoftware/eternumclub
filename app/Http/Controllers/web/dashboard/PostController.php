@@ -4,7 +4,6 @@ namespace App\Http\Controllers\web\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Post;
-use App\Image;
 use App\Category;
 use App\Tag;
 use App\Http\Requests\StorePost;
@@ -132,7 +131,7 @@ class PostController extends Controller
         }
         $post->image_url = $url;
         $post->save();
-        
+
         return redirect()->route('posts.show', $post)->with('status', 'Imagen guardada correctamente');
     }
 }

@@ -42,12 +42,6 @@
             @php
             $route = Route::getCurrentRoute()->getName()
             @endphp
-            @if(strpos($route, 'index'))
-            <form class="form-inline my-2 my-lg-0" action="{{ route($route, isset($params) ? $params : []) }}">
-                <input class="form-control mr-sm-2" type="text" name="search" placeholder="Buscar" aria-label="search">
-                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Buscar</button>
-            </form>
-            @endif
             <!-- Authentication Links -->
             @guest
                 <li class="nav-item">
