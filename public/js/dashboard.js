@@ -13722,6 +13722,9 @@ window.onload = function () {
     var action = "".concat(url, "/").concat(status ? 'restore' : 'delete', "/").concat(id);
     $('#user-delete').attr('action', action);
   });
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
 };
 
 /***/ }),

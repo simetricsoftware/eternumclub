@@ -29,4 +29,8 @@ window.onload = () => {
         $('#user-delete').attr('action', action)
     })
 
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
 }
