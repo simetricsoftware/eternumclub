@@ -13722,6 +13722,9 @@ window.onload = function () {
     var action = "".concat(url, "/").concat(status ? 'restore' : 'delete', "/").concat(id);
     $('#user-delete').attr('action', action);
   });
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
 };
 
 /***/ }),
@@ -13966,7 +13969,7 @@ if (editor) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/christianalban/http/larablog/resources/js/modules/dashboard.js */"./resources/js/modules/dashboard.js");
+module.exports = __webpack_require__(/*! /var/www/eternumclub/resources/js/modules/dashboard.js */"./resources/js/modules/dashboard.js");
 
 
 /***/ })

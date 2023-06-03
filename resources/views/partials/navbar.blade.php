@@ -11,7 +11,7 @@
             </li>
             @can('show.posts')
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('posts.index') }}">Posts</a>
+                <a class="nav-link" href="{{ route('posts.index') }}">Eventos</a>
             </li>
             @endcan
             @auth

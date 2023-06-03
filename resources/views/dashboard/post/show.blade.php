@@ -62,15 +62,24 @@
                 </div>
             </div>
         </form>
-        <a class="btn btn-primary" href="{{ route('posts.edit', $post) }}">Editar</a>
+        <a class="btn btn-primary" href="{{ route('posts.edit', $post) }}">
+            <i class="fas fa-edit"></i>
+            Editar
+        </a>
         @endcan
         @can('show.comments')
         <td>
-            <a class="btn btn-secondary" href="{{ route('comments.index', $post) }}">Comentarios</a>
+            <a class="btn btn-secondary" href="{{ route('comments.index', $post) }}">
+                <i class="fas fa-comments"></i>
+                Comentarios
+            </a>
         </td>
         @endcan
         @can('delete.posts')
-        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="{{ $post->id }}">Eliminar</button>
+        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="{{ $post->id }}">
+            <i class="fas fa-trash-alt"></i>
+            Eliminar
+        </button>
         @endcan
     </div>
 </div>
