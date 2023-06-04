@@ -27,9 +27,15 @@ Route::namespace('api')->group(function() {
         Route::get('{post:slug}', 'PostController@show');
         Route::put('{post:slug}/vote', 'PostController@vote');
 
-        Route::resource('{post:slug}/comments', 'CommentController')->except('create', 'edit', 'show');
-        Route::put('{post:slug}/comments/{comment}/vote', 'CommentController@vote');
+        Route::prefix('{post:slug}')->group(function() {
+            Route::resource('comments', 'CommentController')->except('create', 'edit', 'show');
+            Route::put('comments/{comment}/vote', 'CommentController@vote');
+            Route::get('ticket-types', 'TicketTypeController@index');
+            Route::get('questions', 'QuestionController@index');
+            Route::get('bank-accounts', 'BankAccountController@index');
+        });
     });
 
     Route::get('categories', 'CategoryController@index');
+    Route::get('ticket-types', 'TicketTypeController@index');
 });
