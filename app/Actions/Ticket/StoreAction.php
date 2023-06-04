@@ -1,33 +1,33 @@
 <?php
 namespace App\Actions\Ticket;
 
-use App\Guest;
+use App\Assistant;
 use App\Http\Requests\Ticket\StoreRequest;
 use App\Post;
 use App\Voucher;
 
 class StoreAction {
     public function execute(StoreRequest $request, Post $post) {
-        $guest = $request->guest;
+        $assistant = $request->assistant;
         $tickets = collect($request->tickets);
         $answers = $request->answers;
 
-        $guest = Guest::create($guest);
+        $assistant = Assistant::create($assistant);
 
-        $voucherPath = $request->file('guest.voucher')->store("vouchers/{$guest->id}");
+        $voucherPath = $request->file('assistant.voucher')->store("vouchers/{$assistant->id}");
         $voucher = Voucher::make([
             'file' => $voucherPath,
         ]);
-        $voucher->guest()->associate($guest);
+        $voucher->assistant()->associate($assistant);
         $voucher->save();
 
-        $toCreateTickets = $tickets->reduce(function ($carrier, $ticket) use ($post, $guest, $voucher) {
+        $toCreateTickets = $tickets->reduce(function ($carrier, $ticket) use ($post, $assistant, $voucher) {
             $this->validateEnoughTickets($post, $ticket['ticket_type_id'], $ticket['quantity']);
 
             for ($i = 0; $i < $ticket['quantity']; $i++) {
                 $carrier[] = [
-                    'hash' => hash('sha256', "{$guest->id}-{$ticket['ticket_type_id']}-{$post->id}-{$voucher->id}-{$i}" . now()->timestamp),
-                    'guest_id' => $guest->id,
+                    'hash' => hash('sha256', "{$assistant->id}-{$ticket['ticket_type_id']}-{$post->id}-{$voucher->id}-{$i}" . now()->timestamp),
+                    'assistant_id' => $assistant->id,
                     'voucher_id' => $voucher->id,
                     'ticket_type_id' => $ticket['ticket_type_id'],
                 ];
@@ -39,7 +39,7 @@ class StoreAction {
         $post->tickets()->createMany($toCreateTickets);
 
         if ($answers) {
-            $guest->answers()->createMany($answers);
+            $assistant->answers()->createMany($answers);
         }
     }
 

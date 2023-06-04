@@ -19,7 +19,7 @@ class CreateTicketsTable extends Migration
             $table->timestamp('used_at')->nullable();
             $table->timestamp('sent_at')->nullable();
             $table->foreignId('post_id')->constrained()->onUpdate('cascade');
-            $table->foreignId('guest_id')->constrained()->onUpdate('cascade');
+            $table->foreignId('assistant_id')->constrained()->onUpdate('cascade');
             $table->foreignId('ticket_type_id')->constrained()->onUpdate('cascade');
             $table->foreignId('voucher_id')->constrained()->onUpdate('cascade');
             $table->timestamps();

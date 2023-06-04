@@ -8,14 +8,14 @@ class Ticket extends Model
 {
     protected $fillable = [
         'hash',
-        'guest_id',
+        'assistant_id',
         'voucher_id',
         'ticket_type_id',
     ];
 
-    public function guest()
+    public function assistant()
     {
-        return $this->belongsTo(Guest::class);
+        return $this->belongsTo(Assistant::class);
     }
 
     public function voucher()

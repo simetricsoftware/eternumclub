@@ -27,6 +27,13 @@
                     <td>{{ $post->dislikes }}</td>
                     @can('edit.posts')
                     <td>
+                        <a class="btn btn-primary" href="{{ route('posts.edit', ['post' => $post->id]) }}" data-toggle="tooltip" data-placement="top" title="Lista de asistentes">
+                            <i class="fa-sharp fa-solid fa-list-check"></i>
+                        </a>
+                    </td>
+                    @endcan
+                    @can('edit.posts')
+                    <td>
                         <a class="btn btn-success" href="{{ route('posts.edit', ['post' => $post->id]) }}" data-toggle="tooltip" data-placement="top" title="Editar evento">
                             <i class="fas fa-edit"></i>
                         </a>

@@ -10,8 +10,8 @@ class Voucher extends Model
         'file',
     ];
 
-    public function guest()
+    public function assistant()
     {
-        return $this->belongsTo(Guest::class);
+        return $this->belongsTo(Assistant::class);
     }
 }

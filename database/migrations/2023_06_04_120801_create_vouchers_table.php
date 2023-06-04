@@ -16,7 +16,7 @@ class CreateVouchersTable extends Migration
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
             $table->string('file');
-            $table->foreignId('guest_id')->constrained()->onUpdate('cascade');
+            $table->foreignId('assistant_id')->constrained()->onUpdate('cascade');
             $table->timestamps();
         });
     }

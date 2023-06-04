@@ -24,12 +24,12 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'guest' => 'required|array',
-            'guest.name' => 'required|string',
-            'guest.email' => 'required|email',
-            'guest.phone' => 'required|string',
-            'guest.identification_number' => 'required|string',
-            'guest.voucher' => 'required|image',
+            'assistant' => 'required|array',
+            'assistant.name' => 'required|string',
+            'assistant.email' => 'required|email',
+            'assistant.phone' => 'required|string',
+            'assistant.identification_number' => 'required|string',
+            'assistant.voucher' => 'required|image',
             'answers' => 'nullable|array',
             'answers.*.question_id' => 'required|integer|exists:questions,id',
             'answers.*.response' => 'required|string',

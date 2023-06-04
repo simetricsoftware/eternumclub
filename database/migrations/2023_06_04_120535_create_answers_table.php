@@ -17,7 +17,7 @@ class CreateAnswersTable extends Migration
             $table->id();
             $table->string('response');
             $table->foreignId('question_id')->constrained()->onUpdate('cascade');
-            $table->foreignId('guest_id')->constrained()->onUpdate('cascade');
+            $table->foreignId('assistant_id')->constrained()->onUpdate('cascade');
             $table->timestamps();
         });
     }
