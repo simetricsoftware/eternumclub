@@ -3,15 +3,15 @@
 <div class="row justify-content-center">
     <div class="col-sm-10">
         @include('dashboard.partials.header', [
-            'title' => 'Preguntas',
+            'title' => 'Cuentas bancarias',
             'route' => 'posts',
             'view'  => 'show',
             'params' => [$post->id],
         ])
         <div id="app">
-            <form action="{{ route('questions.store', [ 'post' => $post ]) }}" method="POST">
+            <form action="{{ route('bank-accounts.store', [ 'post' => $post ]) }}" method="POST">
                 @csrf
-                <questions-component :questions="{{ json_encode($questions) }}"></questions-component>
+                <bank-accounts-component :bank-accounts="{{ json_encode($bankAccounts) }}"></bank-accounts-component>
             </form>
         </div>
     </div>

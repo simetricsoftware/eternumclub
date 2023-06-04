@@ -39,11 +39,6 @@ export default {
             type: 'open'
         }
     },
-    methods: {
-        updateStatement(statement) {
-            this.$emit('updateStatement', statement);
-        }
-    },
     created() {
         this.type = this.question.type;
     }

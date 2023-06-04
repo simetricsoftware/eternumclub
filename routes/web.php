@@ -44,6 +44,7 @@ Route::prefix('dashboard')->namespace('web\dashboard')->group(function() {
         //Rutas para los tipos de entrada
         Route::resource('ticket-type', 'TicketTypeController')->except(['show']);
         Route::resource('questions', 'QuestionController')->only(['index', 'store']);
+        Route::resource('bank-accounts', 'BankAccountController')->only(['index', 'store']);
     });
 });
 

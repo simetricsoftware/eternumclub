@@ -1,13 +1,13 @@
 <template>
 <div>
     <h4>Pregunta</h4>
-    <input type="text" class="form-control" :name="`questions[${index}][statement]`" placeholder="Enunciado de la pregunta" v-model="statement">
+    <input type="text" class="form-control" :name="`questions[${index}][statement]`" placeholder="Enunciado de la pregunta" v-model="statement" required>
     <div class="mt-3">
         <h4>Opciones (Mínimo una opción)</h4>
         <div v-if="opts.length" v-for="(opt, idx) of opts" class="input-group mb-3" :key="`${index}-option-${idx}-${opt.statement}`">
-            <input type="text" class="form-control" :name="`questions[${index}][options][]`" placeholder="Opción" v-model="optValues[idx]">
+            <input type="text" class="form-control" :name="`questions[${index}][options][]`" placeholder="Opción" v-model="optValues[idx]" required>
             <div class="input-group-append">
-                <button class="btn btn-danger" type="button" @click="removeOption(opt)">
+                <button class="btn btn-danger" type="button" @click="removeOption(idx)">
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
@@ -36,8 +36,9 @@ export default {
             let newOption = '';
             this.opts.push(newOption);
         },
-        removeOption(opt) {
-            this.opts = this.opts.filter(o => o !== opt);
+        removeOption(index) {
+            this.opts.splice(index, 1);
+            this.optValues.splice(index, 1);
         }
     },
     created() {

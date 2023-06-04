@@ -86,6 +86,150 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _partials_BankAccountForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./partials/BankAccountForm.vue */ "./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    BankAccount: _partials_BankAccountForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: ['bankAccounts'],
+  data: function data() {
+    return {
+      formBankAccounts: []
+    };
+  },
+  created: function created() {
+    this.formBankAccounts = _toConsumableArray(this.bankAccounts);
+  },
+  methods: {
+    addQuestion: function addQuestion() {
+      this.formBankAccounts.push({
+        type: 'open',
+        statement: '',
+        options: []
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['bankAccount', 'index'],
+  data: function data() {
+    return {
+      identification_number: '',
+      name: '',
+      bank: '',
+      account_number: '',
+      account_type: 'savings',
+      email: ''
+    };
+  },
+  created: function created() {
+    this.identification_number = this.bankAccount.identification_number;
+    this.name = this.bankAccount.name;
+    this.bank = this.bankAccount.bank;
+    this.account_number = this.bankAccount.account_number;
+    this.account_type = this.bankAccount.account_type;
+    this.email = this.bankAccount.email;
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/question/QuestionsComponent.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/question/QuestionsComponent.vue?vue&type=script&lang=js& ***!
@@ -162,9 +306,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         statement: '',
         options: []
       });
-    },
-    updateStatement: function updateStatement(question, statement) {
-      question.statement = statement;
     }
   }
 });
@@ -229,10 +370,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var newOption = '';
       this.opts.push(newOption);
     },
-    removeOption: function removeOption(opt) {
-      this.opts = this.opts.filter(function (o) {
-        return o !== opt;
-      });
+    removeOption: function removeOption(index) {
+      this.opts.splice(index, 1);
+      this.optValues.splice(index, 1);
     }
   },
   created: function created() {
@@ -326,11 +466,6 @@ __webpack_require__.r(__webpack_exports__);
     return {
       type: 'open'
     };
-  },
-  methods: {
-    updateStatement: function updateStatement(statement) {
-      this.$emit('updateStatement', statement);
-    }
   },
   created: function created() {
     this.type = this.question.type;
@@ -14379,6 +14514,232 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue?vue&type=template&id=67ff73a4&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue?vue&type=template&id=67ff73a4& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _vm.formBankAccounts.length
+        ? _c(
+            "div",
+            { staticClass: "col-12 col-sm-8" },
+            _vm._l(_vm.formBankAccounts, function(formBankAccount, index) {
+              return _c(
+                "div",
+                {
+                  key: index + "-bank-account-" + formBankAccount.account_number
+                },
+                [
+                  _c("h3", [
+                    _vm._v(
+                      "\n                    Número de cuenta " +
+                        _vm._s(index + 1) +
+                        "\n                    "
+                    ),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.formBankAccounts.splice(index, 1)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-trash" })]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("bank-account", {
+                    attrs: { "bank-account": formBankAccount, index: index }
+                  }),
+                  _vm._v(" "),
+                  _c("hr")
+                ],
+                1
+              )
+            }),
+            0
+          )
+        : _c("div", [_vm._m(0)])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row mt-3" }, [
+      _c("div", { staticClass: "col-12 col-sm-8" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "button" },
+            on: { click: _vm.addQuestion }
+          },
+          [_vm._v("Añadir cuenta bancaria")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-success", attrs: { type: "submit" } },
+          [_vm._v("Guardar")]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-sm-8" }, [
+      _c("p", [_vm._v("No hay cuentas bancarias")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue?vue&type=template&id=a21aa016&":
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue?vue&type=template&id=a21aa016& ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "identification_number" } }, [
+        _vm._v("Número de cédula")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "tel",
+          id: "identification_number",
+          name: "bankAccounts[" + _vm.index + "][identification_number]",
+          required: ""
+        },
+        domProps: { value: _vm.identification_number }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "name" } }, [_vm._v("Nómbre")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "name",
+          name: "bankAccounts[" + _vm.index + "][name]",
+          required: ""
+        },
+        domProps: { value: _vm.name }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "bank" } }, [_vm._v("Banco")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "bank",
+          name: "bankAccounts[" + _vm.index + "][bank]",
+          required: ""
+        },
+        domProps: { value: _vm.bank }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "account_number" } }, [
+        _vm._v("Número de cuenta")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "tel",
+          id: "account_number",
+          name: "bankAccounts[" + _vm.index + "][account_number]",
+          required: ""
+        },
+        domProps: { value: _vm.account_number }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "account_type" } }, [
+        _vm._v("Tipo de cuenta")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass: "form-control",
+          attrs: {
+            id: "account_type",
+            name: "bankAccounts[" + _vm.index + "][account_type]",
+            required: ""
+          },
+          domProps: { value: _vm.account_type }
+        },
+        [
+          _c("option", { attrs: { value: "savings" } }, [_vm._v("Ahorros")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "current" } }, [_vm._v("Corriente")])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "email" } }, [_vm._v("Correo electrónico")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "email",
+          id: "email",
+          name: "bankAccounts[" + _vm.index + "][email]"
+        },
+        domProps: { value: _vm.email }
+      })
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/question/QuestionsComponent.vue?vue&type=template&id=053cd3e3&":
 /*!****************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/question/QuestionsComponent.vue?vue&type=template&id=053cd3e3& ***!
@@ -14508,7 +14869,8 @@ var render = function() {
       attrs: {
         type: "text",
         name: "questions[" + _vm.index + "][statement]",
-        placeholder: "Enunciado de la pregunta"
+        placeholder: "Enunciado de la pregunta",
+        required: ""
       },
       domProps: { value: _vm.statement },
       on: {
@@ -14549,7 +14911,8 @@ var render = function() {
                     attrs: {
                       type: "text",
                       name: "questions[" + _vm.index + "][options][]",
-                      placeholder: "Opción"
+                      placeholder: "Opción",
+                      required: ""
                     },
                     domProps: { value: _vm.optValues[idx] },
                     on: {
@@ -14570,7 +14933,7 @@ var render = function() {
                         attrs: { type: "button" },
                         on: {
                           click: function($event) {
-                            return _vm.removeOption(opt)
+                            return _vm.removeOption(idx)
                           }
                         }
                       },
@@ -14636,7 +14999,8 @@ var render = function() {
       attrs: {
         type: "text",
         name: "questions[" + _vm.index + "][statement]",
-        placeholder: "Enunciado de la pregunta"
+        placeholder: "Enunciado de la pregunta",
+        required: ""
       },
       domProps: { value: _vm.statement },
       on: {
@@ -26894,6 +27258,144 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BankAccountsComponent_vue_vue_type_template_id_67ff73a4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BankAccountsComponent.vue?vue&type=template&id=67ff73a4& */ "./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue?vue&type=template&id=67ff73a4&");
+/* harmony import */ var _BankAccountsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BankAccountsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BankAccountsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BankAccountsComponent_vue_vue_type_template_id_67ff73a4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BankAccountsComponent_vue_vue_type_template_id_67ff73a4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/dashboard/bank-account/BankAccountsComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BankAccountsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue?vue&type=template&id=67ff73a4&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue?vue&type=template&id=67ff73a4& ***!
+  \*****************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountsComponent_vue_vue_type_template_id_67ff73a4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BankAccountsComponent.vue?vue&type=template&id=67ff73a4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue?vue&type=template&id=67ff73a4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountsComponent_vue_vue_type_template_id_67ff73a4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountsComponent_vue_vue_type_template_id_67ff73a4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BankAccountForm_vue_vue_type_template_id_a21aa016___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BankAccountForm.vue?vue&type=template&id=a21aa016& */ "./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue?vue&type=template&id=a21aa016&");
+/* harmony import */ var _BankAccountForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BankAccountForm.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BankAccountForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BankAccountForm_vue_vue_type_template_id_a21aa016___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BankAccountForm_vue_vue_type_template_id_a21aa016___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BankAccountForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue?vue&type=template&id=a21aa016&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue?vue&type=template&id=a21aa016& ***!
+  \********************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountForm_vue_vue_type_template_id_a21aa016___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BankAccountForm.vue?vue&type=template&id=a21aa016& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/bank-account/partials/BankAccountForm.vue?vue&type=template&id=a21aa016&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountForm_vue_vue_type_template_id_a21aa016___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountForm_vue_vue_type_template_id_a21aa016___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/dashboard/question/QuestionsComponent.vue":
 /*!***************************************************************************!*\
   !*** ./resources/js/components/dashboard/question/QuestionsComponent.vue ***!
@@ -27220,6 +27722,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('questions-component', __webpack_require__(/*! ../components/dashboard/question/QuestionsComponent.vue */ "./resources/js/components/dashboard/question/QuestionsComponent.vue")["default"]);
+Vue.component('bank-accounts-component', __webpack_require__(/*! ../components/dashboard/bank-account/BankAccountsComponent.vue */ "./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -27227,7 +27730,7 @@ Vue.component('questions-component', __webpack_require__(/*! ../components/dashb
  */
 
 if (document.getElementById('app')) {
-  var app = new Vue({
+  new Vue({
     el: '#app'
   });
 }

@@ -5,7 +5,8 @@
         @include('dashboard.partials.header', [
             'title' => 'Entradas',
             'route' => 'posts',
-            'view'  => 'index',
+            'view'  => 'show',
+            'params' => ['post' => $post->id],
         ])
         @include('dashboard.partials.state')
         @can('create.posts')
@@ -15,7 +16,7 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Nombre</th>
+                    <th>Tipo de entrada</th>
                     <th>Valor</th>
                     <th>Cantidad</th>
                 </tr>

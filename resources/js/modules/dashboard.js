@@ -49,6 +49,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('questions-component', require('../components/dashboard/question/QuestionsComponent.vue').default);
+Vue.component('bank-accounts-component', require('../components/dashboard/bank-account/BankAccountsComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -57,7 +58,7 @@ Vue.component('questions-component', require('../components/dashboard/question/Q
  */
 
 if (document.getElementById('app')) {
-    const app = new Vue({
+    new Vue({
         el: '#app',
     });
 }

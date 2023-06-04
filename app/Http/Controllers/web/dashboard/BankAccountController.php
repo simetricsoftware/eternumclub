@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\web\dashboard;
 
-use App\Actions\Question\StoreAction;
+use App\Actions\BankAccount\StoreAction;
 use App\Http\Controllers\Controller;
-use App\Http\Query\Question\Index;
-use App\Http\Requests\Question\StoreRequest;
+use App\Http\Query\BankAccount\Index;
+use App\Http\Requests\BankAccount\StoreRequest;
 use App\Post;
 
-class QuestionController extends Controller
+class BankAccountController extends Controller
 {
     public function __construct()
     {
@@ -20,11 +20,11 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Post $post, Index $question)
+    public function index(Post $post, Index $bankAccount)
     {
-        $questions = $question->query($post)->get();
+        $bankAccounts = $bankAccount->query($post)->get();
 
-        return view('dashboard.question.index', compact('post', 'questions'));
+        return view('dashboard.bank-account.index', compact('post', 'bankAccounts'));
     }
 
     /**
@@ -37,6 +37,6 @@ class QuestionController extends Controller
     {
         $storeAction->execute($request, $post);
 
-        return redirect()->route('questions.index', ['post' => $post])->with('status', 'Cuestionario actualizado con exito');
+        return redirect()->route('bank-accounts.index', ['post' => $post])->with('status', 'Cuentas bancarias actualizadas con exito');
     }
 }

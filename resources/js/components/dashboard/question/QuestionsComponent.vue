@@ -52,9 +52,6 @@ export default {
                 statement: '',
                 options: []
             });
-        },
-        updateStatement(question, statement) {
-            question.statement = statement;
         }
     }
 }

@@ -1,6 +1,6 @@
 <div class="form-group">
-    <label for="name">Tipo de entrada *</label>
-    <input class="form-control" type="text" id="name" name="name" placeholder="ej. General, VIP, etc" value="{{ old('name', $ticketType->name) }}">
+    <label for="name">Nombre *</label>
+    <input class="form-control" type="text" id="name" name="name" value="{{ old('name', $ticketType->name) }}">
     @error('name')
     <span class="text-danger">{{ $message }}</span>
     @enderror
@@ -13,8 +13,8 @@
     @enderror
 </div>
 <div class="form-group">
-    <label for="quantity">Cantidad (Max 500) *</label>
-    <input class="form-control" type="number" id="quantity" name="quantity" max="500" value="{{ old('quantity', $ticketType->quantity) }}">
+    <label for="quantity">Cantidad (0 para ilimitado) *</label>
+    <input class="form-control" type="number" id="quantity" name="quantity" value="{{ old('quantity', $ticketType->quantity) }}">
     @error('quantity')
     <span class="text-danger">{{ $message }}</span>
     @enderror

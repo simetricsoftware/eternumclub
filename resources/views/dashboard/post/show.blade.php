@@ -62,24 +62,38 @@
                 </div>
             </div>
         </form>
-        <a class="btn btn-primary" href="{{ route('posts.edit', $post) }}">
-            <i class="fas fa-edit"></i>
-            Editar
+        @endcan
+        @can('edit.posts')
+        <a class="btn btn-secondary" href="{{ route('ticket-type.index', ['post' => $post->id]) }}" data-toggle="tooltip" data-placement="top" title="Generar entradas">
+            <i class="fa-solid fa-ticket"></i>
+        </a>
+        @endcan
+        @can('edit.posts')
+        <a class="btn btn-secondary" href="{{ route('questions.index', ['post' => $post->id]) }}" data-toggle="tooltip" data-placement="top" title="Crear formulario">
+            <i class="fa-sharp fa-solid fa-file-invoice"></i>
+        </a>
+        @endcan
+        @can('edit.posts')
+        <a class="btn btn-secondary" href="{{ route('bank-accounts.index', ['post' => $post->id]) }}" data-toggle="tooltip" data-placement="top" title="Cuentas bancarias">
+            <i class="fa-solid fa-money-bill-transfer"></i>
         </a>
         @endcan
         @can('show.comments')
-        <td>
-            <a class="btn btn-secondary" href="{{ route('comments.index', $post) }}">
-                <i class="fas fa-comments"></i>
-                Comentarios
-            </a>
-        </td>
+        <a class="btn btn-secondary" href="{{ route('comments.index', $post) }}" data-toggle="tooltip" data-placement="top" title="Ver comentarios">
+            <i class="fas fa-comments"></i>
+        </a>
+        @endcan
+        @can('edit.posts')
+        <a class="btn btn-primary" href="{{ route('posts.edit', $post) }}" data-toggle="tooltip" data-placement="top" title="Editar evento">
+            <i class="fas fa-edit"></i>
+        </a>
         @endcan
         @can('delete.posts')
-        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="{{ $post->id }}">
-            <i class="fas fa-trash-alt"></i>
-            Eliminar
-        </button>
+        <div class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Eliminar evento">
+            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="{{ $post->id }}">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </div>
         @endcan
     </div>
 </div>

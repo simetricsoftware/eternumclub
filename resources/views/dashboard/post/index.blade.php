@@ -27,20 +27,6 @@
                     <td>{{ $post->dislikes }}</td>
                     @can('edit.posts')
                     <td>
-                        <a class="btn btn-primary" href="{{ route('ticket-type.index', ['post' => $post->id]) }}" data-toggle="tooltip" data-placement="top" title="Generar entradas">
-                            <i class="fa-solid fa-ticket"></i>
-                        </a>
-                    </td>
-                    @endcan
-                    @can('edit.posts')
-                    <td>
-                        <a class="btn btn-primary" href="{{ route('questions.index', ['post' => $post->id]) }}" data-toggle="tooltip" data-placement="top" title="Crear formulario">
-                            <i class="fa-sharp fa-solid fa-file-invoice"></i>
-                        </a>
-                    </td>
-                    @endcan
-                    @can('edit.posts')
-                    <td>
                         <a class="btn btn-success" href="{{ route('posts.edit', ['post' => $post->id]) }}" data-toggle="tooltip" data-placement="top" title="Editar evento">
                             <i class="fas fa-edit"></i>
                         </a>
