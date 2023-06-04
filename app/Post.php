@@ -42,6 +42,10 @@ class Post extends Model
         return $this->hasMany(TicketType::class);
     }
 
+    public function questions() {
+        return $this->hasMany(Question::class);
+    }
+
     public function scopeUserRole($query) {
         $user = auth()->user();
         if(!$user->hasRole('admin') && !$user->hasRole('moderator'))

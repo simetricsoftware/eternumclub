@@ -6,7 +6,7 @@ use App\Actions\TicketType\DeleteAction;
 use App\Actions\TicketType\StoreAction;
 use App\Actions\TicketType\UpdateAction;
 use App\Http\Controllers\Controller;
-use App\Http\Query\TicketTypeIndex;
+use App\Http\Query\TicketType\Index;
 use App\Http\Requests\TicketType\StoreRequest;
 use App\Post;
 use App\TicketType;
@@ -24,7 +24,7 @@ class TicketTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Post $post, TicketTypeIndex $query)
+    public function index(Post $post, Index $query)
     {
         $tickets = $query->query($post)->paginate(10);
 
@@ -52,17 +52,6 @@ class TicketTypeController extends Controller
         $storeAction->execute($request, $post);
 
         return redirect()->route('ticket-type.index', ['post' => $post]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\TicketType  $ticketType
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TicketType $ticketType)
-    {
-        //
     }
 
     /**

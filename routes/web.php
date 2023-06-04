@@ -42,7 +42,8 @@ Route::prefix('dashboard')->namespace('web\dashboard')->group(function() {
         //Rutas para los comentarios
         Route::resource('comments', 'CommentController')->only(['index', 'show', 'destroy']);
         //Rutas para los tipos de entrada
-        Route::resource('ticket-type', 'TicketTypeController');
+        Route::resource('ticket-type', 'TicketTypeController')->except(['show']);
+        Route::resource('questions', 'QuestionController')->only(['index', 'store']);
     });
 });
 

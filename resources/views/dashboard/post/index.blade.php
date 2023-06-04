@@ -34,7 +34,7 @@
                     @endcan
                     @can('edit.posts')
                     <td>
-                        <a class="btn btn-primary" href="{{ route('posts.show', ['post' => $post->id]) }}" data-toggle="tooltip" data-placement="top" title="Crear formulario">
+                        <a class="btn btn-primary" href="{{ route('questions.index', ['post' => $post->id]) }}" data-toggle="tooltip" data-placement="top" title="Crear formulario">
                             <i class="fa-sharp fa-solid fa-file-invoice"></i>
                         </a>
                     </td>
