@@ -15,6 +15,7 @@ class IndexResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'statement' => $this->statement,
             'type' => $this->type,
             'options' => $this->options,

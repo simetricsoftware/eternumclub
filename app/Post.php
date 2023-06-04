@@ -50,6 +50,10 @@ class Post extends Model
         return $this->hasMany(BankAccount::class);
     }
 
+    public function tickets() {
+        return $this->hasMany(Ticket::class);
+    }
+
     public function scopeUserRole($query) {
         $user = auth()->user();
         if(!$user->hasRole('admin') && !$user->hasRole('moderator'))

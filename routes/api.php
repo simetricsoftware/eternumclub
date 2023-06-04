@@ -33,6 +33,7 @@ Route::namespace('api')->group(function() {
             Route::get('ticket-types', 'TicketTypeController@index');
             Route::get('questions', 'QuestionController@index');
             Route::get('bank-accounts', 'BankAccountController@index');
+            Route::post('tickets', 'TicketController@store');
         });
     });
 
