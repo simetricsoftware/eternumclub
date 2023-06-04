@@ -13,8 +13,8 @@
     @enderror
 </div>
 <div class="form-group">
-    <label for="quantity">Cantidad (Max 500) *</label>
-    <input class="form-control" type="number" id="quantity" name="quantity" max="500" value="{{ old('quantity', $ticketType->quantity) }}">
+    <label for="quantity">Cantidad (Min: 20, Max 500) *</label>
+    <input class="form-control" type="number" id="quantity" name="quantity" min="20" max="500" value="{{ old('quantity', $ticketType->quantity) }}">
     @error('quantity')
     <span class="text-danger">{{ $message }}</span>
     @enderror

@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
         return [
             'name' => 'required|string',
             'amount' => 'required|numeric',
-            'quantity' => 'required|numeric|max:500',
+            'quantity' => 'required|numeric|min:20|max:500',
         ];
     }
 }
