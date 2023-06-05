@@ -28,19 +28,24 @@ export default new VueRouter ({
             component: require('./components/web/PurchaseComponent').default
         },
         {
-            path: '/form',
-            name: 'form',
+            path: '/posts/:post/form',
+            name: 'posts.form',
             component: require('./components/web/FormComponent').default
         },
         {
-            path: '/ticket',
-            name: 'ticket',
+            path: '/posts/:post/tickets',
+            name: 'posts.tickets',
             component: require('./components/web/PurchaseTicketComponent').default
         },
-          {
+        {
             path: '/thanks',
             name: 'thanks',
             component: require('./components/web/ThanksComponent').default
+        },
+        {
+            path:'/posts/:post/banks',
+            name: 'posts.banks',
+            component: require('./components/web/BankInfoComponent').default
         },
         {
             path: '*',
