@@ -11,12 +11,13 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.browserSync({
-    proxy: 'larablog.test',
-    notify: false
-})
-
+// mix.js('resources/js/app.js', 'public/js')
+//    .js('resources/js/modules/dashboard.js', 'public/js')
+//    .js('resources/js/modules/web.js', 'public/js')
+//    .sass('resources/sass/app.scss', 'public/css');
+//
 mix.js('resources/js/app.js', 'public/js')
    .js('resources/js/modules/dashboard.js', 'public/js')
    .js('resources/js/modules/web.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+   .sass('resources/sass/app.scss', 'public/css')
+    .vue({ version: 2 });

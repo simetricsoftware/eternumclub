@@ -45,7 +45,7 @@
         <div class="card-footer">
             <p>
                 <router-link class="btn btn-secondary" v-if="compact" :to="{ name: 'posts.show', params: {post: post.slug} }">Ver detalles &raquo;</router-link>
-                <router-link class="btn btn-secondary" v-else :to="{ name: 'posts.tickets',params: {post:post.slug} }">Ir a los pots</router-link>
+                <router-link class="btn btn-secondary" v-else :to="{ name: 'purchase' }">Comprar entradas</router-link>
             </p>
         </div>
     </div>
