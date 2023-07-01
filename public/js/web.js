@@ -10078,12 +10078,11 @@ __webpack_require__.r(__webpack_exports__);
       var slug = this.$route.params.post;
       axios.get("/api/posts/".concat(slug, "/bank-accounts")).then(function (response) {
         _this.bankInfo = response.data.data;
-        console.log(_this.bankInfo); // Imprimir los datos en la consola
       });
     }
   },
   created: function created() {
-    // Recibir el dato numérico del otro sistema y asignarlo a 
+    // Recibir el dato numérico del otro sistema y asignarlo a
     this.getBanks();
   }
 });
@@ -10124,34 +10123,77 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     total: function total() {
-      return this.$store.state.amount;
+      return this.ticketTypes.reduce(function (previous, current) {
+        return previous + current.amount;
+      }, 0);
+    },
+    ticketTypes: function ticketTypes() {
+      return this.$store.state.tickets;
+    },
+    slug: function slug() {
+      return this.$route.params.post;
     }
   },
   data: function data() {
     return {
-      optionsRadio: ["opción1", "opcion2", "opcines4"],
-      optionsMulti: ["opciones1", "opciones2", "opción3"],
-      optionsDrop: ["Cerveza", "Tequila", "Ron", "Wisky"],
-      answer1: "",
-      answer2: [],
-      answer3: "",
-      answer4: "",
-      ticketTypes: []
+      basicData: {},
+      questions: []
     };
   },
   methods: {
     getBanks: function getBanks() {
       var _this = this;
-      var slug = this.$route.params.post;
-      axios.get("/api/posts/".concat(slug, "/bank-accounts")).then(function (response) {
+      axios.get("/api/posts/".concat(this.slug, "/bank-accounts")).then(function (response) {
         _this.bankInfo = response.data.data;
-        console.log(_this.bankInfo); // Imprimir los datos en la consola
+      });
+    },
+    getQuestions: function getQuestions() {
+      var _this2 = this;
+      axios.get("/api/posts/".concat(this.slug, "/questions")).then(function (response) {
+        _this2.questions = response.data.data;
+      });
+    },
+    checkInvalidTotal: function checkInvalidTotal() {
+      if (this.total === 0) {
+        this.$router.push({
+          name: 'posts.tickets',
+          params: {
+            post: this.$route.params.post
+          }
+        });
+      }
+    },
+    onChangeBasicData: function onChangeBasicData(event) {
+      this.basicData = event;
+    },
+    handleSubmit: function handleSubmit() {
+      var _this3 = this;
+      var formData = new FormData();
+      formData.append('assistant[name]', this.basicData.name);
+      formData.append('assistant[email]', this.basicData.email);
+      formData.append('assistant[phone]', this.basicData.phone);
+      formData.append('assistant[identification_number]', this.basicData.identification_number);
+      formData.append('assistant[voucher]', this.basicData.voucher);
+      this.questions.forEach(function (question, index) {
+        formData.append("answers[".concat(index, "][question_id]"), +question.id);
+        formData.append("answers[".concat(index, "][response]"), question.answer);
+      });
+      this.ticketTypes.forEach(function (ticketType, index) {
+        formData.append("tickets[".concat(index, "][ticket_type_id]"), ticketType.id);
+        formData.append("tickets[".concat(index, "][quantity]"), ticketType.count);
+      });
+      axios.post("/api/posts/".concat(this.slug, "/tickets"), formData).then(function () {
+        _this3.$router.push({
+          name: 'thanks'
+        });
       });
     }
   },
   created: function created() {
-    // Recibir el dato numérico del otro sistema y asignarlo a 
+    // Recibir el dato numérico del otro sistema y asignarlo a
     this.getBanks();
+    this.getQuestions();
+    this.checkInvalidTotal();
   }
 });
 
@@ -10268,15 +10310,25 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       email: "",
-      nombre: "",
-      cedula: "",
-      celular: "",
-      imagen: null
+      name: "",
+      identification_number: "",
+      phone: "",
+      voucher: null
     };
   },
   methods: {
     onFileChange: function onFileChange(event) {
-      this.imagen = event.target.files[0];
+      this.voucher = event.target.files[0];
+      this.onChange();
+    },
+    onChange: function onChange() {
+      this.$emit('change', {
+        email: this.email,
+        name: this.name,
+        identification_number: this.identification_number,
+        phone: this.phone,
+        voucher: this.voucher
+      });
     }
   }
 });
@@ -10295,6 +10347,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -10306,17 +10364,10 @@ __webpack_require__.r(__webpack_exports__);
         return ticket.count > 0;
       });
     },
-    calcularTotal: function calcularTotal() {
-      var total = 0;
-      this.ticketTypes.forEach(function (ticket) {
-        var cantidad = ticket.count || 0;
-        var precio = ticket.amount || 0;
-        total += cantidad * precio;
-      });
-      return total.toFixed(2);
-    },
     total: function total() {
-      return this.$store.state.amount;
+      return this.ticketTypes.reduce(function (previous, current) {
+        return previous + current.amount * +current.count;
+      }, 0);
     }
   },
   data: function data() {
@@ -10328,6 +10379,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     continuar: function continuar() {
       // Lógica para continuar después de validar la cantidad de entradas
+      this.$store.state.tickets = this.ticketTypes;
       this.$router.push({
         name: "posts.form"
       });
@@ -10336,11 +10388,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       var slug = this.$route.params.post;
       axios.get("/api/posts/".concat(slug, "/ticket-types")).then(function (response) {
-        _this.ticketTypes = response.data.data;
+        _this.ticketTypes = response.data.data.map(function (ticket) {
+          return _objectSpread(_objectSpread({}, ticket), {}, {
+            count: 0,
+            error: ""
+          });
+        });
       });
     },
     validateCount: function validateCount(ticket) {
-      this.$store.state.amount = this.calcularTotal;
       if (ticket.count <= 0) {
         ticket.error = "La cantidad debe ser mayor a cero";
       } else {
@@ -11200,9 +11256,22 @@ var render = function render() {
     staticClass: "container"
   }, [_c("div", {
     staticClass: "row"
+  }, [_c("form", {
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.handleSubmit.apply(null, arguments);
+      }
+    }
   }, [_c("div", {
     staticClass: "col-6 m-auto"
-  }, [_c("purchase-component"), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
+  }, [_c("purchase-component", {
+    on: {
+      change: function change($event) {
+        return _vm.onChangeBasicData($event);
+      }
+    }
+  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "total_price"
   }, [_vm._v(" Total " + _vm._s(_vm.total))]), _vm._v(" "), _c("div", {
     staticClass: "modal fade",
@@ -11224,54 +11293,61 @@ var render = function render() {
     staticClass: "modal-body"
   }, [_c("bank-info-component")], 1), _vm._v(" "), _vm._m(2)])])]), _vm._v(" "), _c("div", {
     staticClass: "margins"
-  }, [_c("open-question-component", {
-    attrs: {
-      question: "Pregunta 1"
-    },
-    model: {
-      value: _vm.answer1,
-      callback: function callback($$v) {
-        _vm.answer1 = $$v;
+  }, _vm._l(_vm.questions, function (question) {
+    return _c("div", [question.type === "open" ? _c("open-question-component", {
+      attrs: {
+        question: question.statement
       },
-      expression: "answer1"
-    }
-  }), _vm._v(" "), _c("multiple-question-component", {
-    attrs: {
-      question: "Pregunta 2",
-      options: _vm.optionsMulti
-    },
-    model: {
-      value: _vm.answer2,
-      callback: function callback($$v) {
-        _vm.answer2 = $$v;
+      model: {
+        value: question.answer,
+        callback: function callback($$v) {
+          _vm.$set(question, "answer", $$v);
+        },
+        expression: "question.answer"
+      }
+    }) : _vm._e(), _vm._v(" "), question.type === "multiple" ? _c("multiple-question-component", {
+      attrs: {
+        question: question.statement,
+        options: question.options
       },
-      expression: "answer2"
-    }
-  }), _vm._v(" "), _c("radio-question-component", {
-    attrs: {
-      question: "Pregunta 3",
-      options: _vm.optionsRadio
-    },
-    model: {
-      value: _vm.answer3,
-      callback: function callback($$v) {
-        _vm.answer3 = $$v;
+      model: {
+        value: question.answer,
+        callback: function callback($$v) {
+          _vm.$set(question, "answer", $$v);
+        },
+        expression: "question.answer"
+      }
+    }) : _vm._e(), _vm._v(" "), question.type === "radio" ? _c("radio-question-component", {
+      attrs: {
+        question: question.statement,
+        options: question.options
       },
-      expression: "answer3"
-    }
-  }), _vm._v(" "), _c("select-question-component", {
-    attrs: {
-      question: "Pregunta 4",
-      options: _vm.optionsDrop
-    },
-    model: {
-      value: _vm.answer4,
-      callback: function callback($$v) {
-        _vm.answer4 = $$v;
+      model: {
+        value: question.answer,
+        callback: function callback($$v) {
+          _vm.$set(question, "answer", $$v);
+        },
+        expression: "question.answer"
+      }
+    }) : _vm._e(), _vm._v(" "), question.type === "dropdown" ? _c("select-question-component", {
+      attrs: {
+        question: question.statement,
+        options: question.options
       },
-      expression: "answer4"
+      model: {
+        value: question.answer,
+        callback: function callback($$v) {
+          _vm.$set(question, "answer", $$v);
+        },
+        expression: "question.answer"
+      }
+    }) : _vm._e()], 1);
+  }), 0)], 1), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-primary custom-button",
+    attrs: {
+      type: "submit"
     }
-  })], 1)], 1)])])]);
+  }, [_vm._v("Enviar")])])])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -11287,7 +11363,7 @@ var staticRenderFns = [function () {
     }
   }, [_c("i", {
     staticClass: "fas fa-university mr-2"
-  }), _vm._v("\n            Ver información bancaria\n          ")])]);
+  }), _vm._v("\n                            Ver información bancaria\n                        ")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -11520,7 +11596,7 @@ var render = function render() {
       "max-width": "100%",
       height: "auto"
     }
-  }, [_c("form", [_c("div", {
+  }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
@@ -11537,12 +11613,14 @@ var render = function render() {
     attrs: {
       type: "email",
       id: "email",
-      placeholder: "Ingresa tu email"
+      placeholder: "Ingresa tu email",
+      required: ""
     },
     domProps: {
       value: _vm.email
     },
     on: {
+      change: _vm.onChange,
       input: function input($event) {
         if ($event.target.composing) return;
         _vm.email = $event.target.value;
@@ -11552,107 +11630,109 @@ var render = function render() {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
-      "for": "nombre"
+      "for": "name"
     }
   }, [_vm._v("Nombre:")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.nombre,
-      expression: "nombre"
+      value: _vm.name,
+      expression: "name"
     }],
     staticClass: "form-control custom-input",
     attrs: {
       type: "text",
-      id: "nombre",
-      placeholder: "Nombre"
+      id: "name",
+      placeholder: "Nombre",
+      required: ""
     },
     domProps: {
-      value: _vm.nombre
+      value: _vm.name
     },
     on: {
+      change: _vm.onChange,
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.nombre = $event.target.value;
+        _vm.name = $event.target.value;
       }
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
-      "for": "cedula"
+      "for": "identification_number"
     }
   }, [_vm._v("Cédula:")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.cedula,
-      expression: "cedula"
+      value: _vm.identification_number,
+      expression: "identification_number"
     }],
     staticClass: "form-control custom-input",
     attrs: {
       type: "text",
-      id: "cedula",
-      placeholder: "Número de ID"
+      id: "identification_number",
+      placeholder: "Número de ID",
+      required: ""
     },
     domProps: {
-      value: _vm.cedula
+      value: _vm.identification_number
     },
     on: {
+      change: _vm.onChange,
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.cedula = $event.target.value;
+        _vm.identification_number = $event.target.value;
       }
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
-      "for": "celular"
+      "for": "phone"
     }
   }, [_vm._v("Celular:")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.celular,
-      expression: "celular"
+      value: _vm.phone,
+      expression: "phone"
     }],
     staticClass: "form-control custom-input",
     attrs: {
       type: "text",
-      id: "celular",
-      placeholder: "Ingresa tu número"
+      id: "phone",
+      placeholder: "Ingresa tu número",
+      required: ""
     },
     domProps: {
-      value: _vm.celular
+      value: _vm.phone
     },
     on: {
+      change: _vm.onChange,
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.celular = $event.target.value;
+        _vm.phone = $event.target.value;
       }
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
-      "for": "imagen"
+      "for": "voucher"
     }
   }, [_vm._v("Subir comprobante de pago/ transferencia:")]), _vm._v(" "), _c("input", {
     staticClass: "form-control-file",
     attrs: {
       type: "file",
-      id: "imagen"
+      id: "voucher",
+      required: ""
     },
     on: {
       change: _vm.onFileChange
     }
-  })]), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-primary custom-button",
-    attrs: {
-      type: "submit"
-    }
-  }, [_vm._v("Enviar")])])]), _vm._v(" "), _c("hr")]);
+  })])]), _vm._v(" "), _c("hr")]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -11794,7 +11874,6 @@ var render = function render() {
       staticClass: "form-check-input custom-radio",
       attrs: {
         type: "radio",
-        name: "radioOptions",
         id: option
       },
       domProps: {
@@ -12894,7 +12973,10 @@ var render = function render() {
     staticClass: "btn btn-secondary",
     attrs: {
       to: {
-        name: "purchase"
+        name: "posts.tickets",
+        params: {
+          post: _vm.post.slug
+        }
       }
     }
   }, [_vm._v("Comprar entradas")])], 1)])]) : _vm._e()]);
@@ -12974,10 +13056,6 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MOD
     name: 'posts.show',
     component: (__webpack_require__(/*! ./components/web/posts/ShowComponent */ "./resources/js/components/web/posts/ShowComponent.vue")["default"])
   }, {
-    path: '/purchase',
-    name: 'purchase',
-    component: (__webpack_require__(/*! ./components/web/PurchaseComponent */ "./resources/js/components/web/PurchaseComponent.vue")["default"])
-  }, {
     path: '/posts/:post/form',
     name: 'posts.form',
     component: (__webpack_require__(/*! ./components/web/FormComponent */ "./resources/js/components/web/FormComponent.vue")["default"])
@@ -13021,7 +13099,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     user: null,
-    amount: 0
+    tickets: []
   },
   mutations: {
     setUser: function setUser(state, user) {
@@ -13100,7 +13178,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.margins > * {\n  margin-bottom: 50px;\n  margin-top: 50px;\n}\n.total_price {\nfont-size: 1.5rem;\ntext-align: center;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.margins > * {\n    margin-bottom: 50px;\n    margin-top: 50px;\n}\n.total_price {\n    font-size: 1.5rem;\n    text-align: center;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13124,7 +13202,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.itemgap{\n  gap:50px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.itemgap {\n    gap: 50px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13172,7 +13250,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.itemgap{\n  gap:50px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.itemgap {\n    gap: 50px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

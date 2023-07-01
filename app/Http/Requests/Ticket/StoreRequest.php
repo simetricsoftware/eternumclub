@@ -32,7 +32,7 @@ class StoreRequest extends FormRequest
             'assistant.voucher' => 'required|image',
             'answers' => 'nullable|array',
             'answers.*.question_id' => 'required|integer|exists:questions,id',
-            'answers.*.response' => 'required|string',
+            'answers.*.response' => 'nullable',
             'tickets' => 'required|array',
             'tickets.*.ticket_type_id' => 'required|integer',
             'tickets.*.quantity' => 'required|integer',

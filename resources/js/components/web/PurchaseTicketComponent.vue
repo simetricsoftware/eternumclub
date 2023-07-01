@@ -41,17 +41,10 @@ export default {
     canContinue() {
       return this.ticketTypes.some(ticket => ticket.count > 0);
     },
-    calcularTotal() {
-      let total = 0;
-      this.ticketTypes.forEach(ticket => {
-        const cantidad = ticket.count || 0;
-        const precio = ticket.amount || 0;
-        total += cantidad * precio;
-      });
-      return total.toFixed(2);
-    },
     total() {
-      return this.$store.state.amount
+      return this.ticketTypes.reduce((previous, current) => {
+        return previous + (current.amount * +current.count);
+      }, 0)
     }
   },
 
@@ -65,6 +58,7 @@ export default {
   methods: {
     continuar() {
       // Lógica para continuar después de validar la cantidad de entradas
+      this.$store.state.tickets = this.ticketTypes;
       this.$router.push({name: "posts.form"})
     },
 
@@ -72,12 +66,17 @@ export default {
       const slug = this.$route.params.post;
       axios.get(`/api/posts/${slug}/ticket-types`)
         .then(response => {
-          this.ticketTypes = response.data.data;
+          this.ticketTypes = response.data.data.map(ticket => {
+            return {
+              ...ticket,
+              count: 0,
+              error: "",
+            };
+          });
         });
     },
 
     validateCount(ticket) {
-      this.$store.state.amount = this.calcularTotal
       if (ticket.count <= 0) {
         ticket.error = "La cantidad debe ser mayor a cero";
       } else {

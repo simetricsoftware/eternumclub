@@ -6,15 +6,15 @@
     </div>
   </div>
 </template>
-  
 
-    
+
+
     <script>
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-    
+
     export default {
       components:{ FontAwesomeIcon },
-      props:{question: String, value:String},   
+      props:{question: String, value:String},
       data() {
         return {
          answer: ''
@@ -27,7 +27,7 @@
       }
     }
     </script>
-    
+
     <style lang="css" scoped>
     </style>
-    
+

@@ -23,11 +23,6 @@ export default new VueRouter ({
             component: require('./components/web/posts/ShowComponent').default
         },
         {
-            path: '/purchase',
-            name: 'purchase',
-            component: require('./components/web/PurchaseComponent').default
-        },
-        {
             path: '/posts/:post/form',
             name: 'posts.form',
             component: require('./components/web/FormComponent').default

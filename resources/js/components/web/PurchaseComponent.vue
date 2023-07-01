@@ -1,34 +1,32 @@
 <template>
-  <div>
-    <h1 class="display-6 text-center" >Ingresa tus datos para continuar</h1>
-      <div class="container-sm" style="max-width: 100%; height: auto;">
-        <form>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control custom-input" id="email" placeholder="Ingresa tu email" v-model="email">
-          </div>
-          <div class="form-group">
-            <label for="nombre">Nombre:</label>
-            <input type="text" class="form-control custom-input" id="nombre" placeholder="Nombre" v-model="nombre">
-          </div>
-          <div class="form-group">
-            <label for="cedula">Cédula:</label>
-            <input type="text" class="form-control custom-input" id="cedula" placeholder="Número de ID" v-model="cedula">
-          </div>
-          <div class="form-group">
-            <label for="celular">Celular:</label>
-            <input type="text" class="form-control custom-input" id="celular" placeholder="Ingresa tu número" v-model="celular">
-          </div>
-          <div class="form-group">
-            <label for="imagen">Subir comprobante de pago/ transferencia:</label>
-            <input type="file" class="form-control-file" id="imagen" @change="onFileChange">
-          </div>
-          <button type="submit" class="btn btn-primary custom-button">Enviar</button>
-        </form>
-      </div>
-    <hr>
-  </div>
+    <div>
+        <h1 class="display-6 text-center">Ingresa tus datos para continuar</h1>
+        <div class="container-sm" style="max-width: 100%; height: auto;">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control custom-input" id="email" placeholder="Ingresa tu email" v-model="email" @change="onChange" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Nombre:</label>
+                <input type="text" class="form-control custom-input" id="name" placeholder="Nombre" v-model="name" @change="onChange" required>
+            </div>
+            <div class="form-group">
+                <label for="identification_number">Cédula:</label>
+                <input type="text" class="form-control custom-input" id="identification_number" placeholder="Número de ID" v-model="identification_number" @change="onChange" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Celular:</label>
+                <input type="text" class="form-control custom-input" id="phone" placeholder="Ingresa tu número" v-model="phone" @change="onChange" required>
+            </div>
+            <div class="form-group">
+                <label for="voucher">Subir comprobante de pago/ transferencia:</label>
+                <input type="file" class="form-control-file" id="voucher" @change="onFileChange" required>
+            </div>
+        </div>
+        <hr>
+    </div>
 </template>
+
 
 
 <script>
@@ -41,15 +39,25 @@ export default {
   data() {
     return {
       email: "",
-      nombre: "",
-      cedula: "",
-      celular: "",
-      imagen: null
+      name: "",
+      identification_number: "",
+      phone: "",
+      voucher: null
     };
   },
   methods: {
     onFileChange(event) {
-      this.imagen = event.target.files[0];
+        this.voucher = event.target.files[0];
+        this.onChange();
+    },
+    onChange() {
+        this.$emit('change', {
+            email: this.email,
+            name: this.name,
+            identification_number: this.identification_number,
+            phone: this.phone,
+            voucher: this.voucher
+        })
     }
   }
 }
