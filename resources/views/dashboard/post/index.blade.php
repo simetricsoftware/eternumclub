@@ -27,7 +27,7 @@
                     <td>{{ $post->dislikes }}</td>
                     @can('edit.posts')
                     <td>
-                        <a class="btn btn-primary" href="{{ route('tickets.index', ['post' => $post->id]) }}" data-toggle="tooltip" data-placement="top" title="Lista de asistentes">
+                        <a class="btn btn-primary" href="{{ route('vouchers.index', ['post' => $post->id]) }}" data-toggle="tooltip" data-placement="top" title="Lista de asistentes">
                             <i class="fa-sharp fa-solid fa-list-check"></i>
                         </a>
                     </td>

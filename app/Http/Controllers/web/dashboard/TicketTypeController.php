@@ -10,7 +10,6 @@ use App\Http\Query\TicketType\Index;
 use App\Http\Requests\TicketType\StoreRequest;
 use App\Post;
 use App\TicketType;
-use Illuminate\Http\Request;
 
 class TicketTypeController extends Controller
 {

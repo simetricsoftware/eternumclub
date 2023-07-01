@@ -45,7 +45,8 @@ Route::prefix('dashboard')->namespace('web\dashboard')->group(function() {
         Route::resource('ticket-type', 'TicketTypeController')->except(['show']);
         Route::resource('questions', 'QuestionController')->only(['index', 'store']);
         Route::resource('bank-accounts', 'BankAccountController')->only(['index', 'store']);
-        Route::resource('tickets', 'TicketController')->only(['index', 'store']);
+        Route::resource('vouchers', 'VoucherController')->only(['index']);
+        Route::put('vouchers/{voucher}/send-mail', 'VoucherController@sendMail')->name('vouchers.send-mail');
     });
 });
 
