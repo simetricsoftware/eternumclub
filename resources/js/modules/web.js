@@ -1,4 +1,4 @@
-window.Vue = require('vue');
+import Vue from 'vue'
 
 /**
  * The following block of code may be used to automatically register your
@@ -22,7 +22,7 @@ Vue.component('web-component', require('../components/web/WebComponent.vue').def
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
+new Vue({
     el: '#app',
     router,
     store

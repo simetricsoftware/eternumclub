@@ -13,15 +13,15 @@
   </div>
 </template>
 
-    
+
     <script>
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-    
+
     export default {
         components:{ FontAwesomeIcon },
         props:{question: String, options: Array},
         data() {
-         return { 
+         return {
          selectedOption : "",
 
         };
@@ -36,7 +36,7 @@
       }
     }
 </script>
-    
+
     <style lang="css" scoped>
     </style>
-    
+

@@ -48,18 +48,17 @@ export default {
 
  methods:{
     getBanks() {
-      const slug = this.$route.params.post;       
+      const slug = this.$route.params.post;
       axios.get(`/api/posts/${slug}/bank-accounts`)
         .then(response => {
           this.bankInfo = response.data.data;
-          console.log(this.bankInfo); // Imprimir los datos en la consola
 
         });
     },
   },
 
   created() {
-    // Recibir el dato numérico del otro sistema y asignarlo a 
+    // Recibir el dato numérico del otro sistema y asignarlo a
     this.getBanks();
   }
 }
