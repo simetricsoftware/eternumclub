@@ -14544,9 +14544,9 @@ var render = function() {
                 [
                   _c("h3", [
                     _vm._v(
-                      "\n                    Número de cuenta " +
+                      "\r\n                    Número de cuenta " +
                         _vm._s(index + 1) +
-                        "\n                    "
+                        "\r\n                    "
                     ),
                     _c(
                       "button",
@@ -14768,9 +14768,9 @@ var render = function() {
                 [
                   _c("h3", [
                     _vm._v(
-                      "\n                    Pregunta " +
+                      "\r\n                    Pregunta " +
                         _vm._s(index + 1) +
-                        "\n                    "
+                        "\r\n                    "
                     ),
                     _c(
                       "button",
@@ -27977,7 +27977,7 @@ if (editor) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/eternumclub/resources/js/modules/dashboard.js */"./resources/js/modules/dashboard.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\eternumclub\resources\js\modules\dashboard.js */"./resources/js/modules/dashboard.js");
 
 
 /***/ })

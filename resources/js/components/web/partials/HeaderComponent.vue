@@ -1,7 +1,7 @@
 <template>
 <div>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <router-link class="navbar-brand" :to="{ name: 'home'}">Larablog</router-link>
+        <router-link class="navbar-brand" :to="{ name: 'home'}">Eternum Club</router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -12,10 +12,10 @@
                     <router-link class="nav-link" :to="{ name: 'home' }">Inicio</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" :to="{ name: 'posts' }">Posts</router-link>
+                    <router-link class="nav-link" :to="{ name: 'posts' }">Eventos</router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/home">Dashboard</a>
+                    <a class="nav-link" href="/home">Panel de eventos</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
