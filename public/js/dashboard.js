@@ -27193,7 +27193,8 @@ window.onload = function () {
   $('#confirmDelete').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var id = button.data('id');
-    var action = $('#row-delete').attr('data-action') + '/' + id;
+    var current = button.data('current');
+    var action = $('#row-delete').attr('data-action') + current ? '' : '/' + id;
     $('#row-delete').attr('action', action);
     var modal = $(_this);
     modal.find('.modal-title').text('Se eliminará el registro con id ' + id);
