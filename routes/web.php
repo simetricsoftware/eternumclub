@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Route::get('ads.txt', function() {
+    return response()->file(public_path('ads.txt'));
+});
+
 
 //Rutas con el prefijo dashboard para el módulo administrativo
 Route::prefix('dashboard')->namespace('web\dashboard')->group(function() {
