@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title', 500)->nullable();
             $table->string('slug', 500)->nullable()->unique();
             $table->text('content')->nullable();
-            $table->string('image_url');
+            $table->string('image_url')->nullable();
             $table->enum('status', ['posted', 'unposted'])->default('unposted');
             $table->foreignId('category_id')->constrained()->onUpdate('cascade');
             $table->foreignId('user_id')->nullable()->constrained()->onUpdate('cascade');

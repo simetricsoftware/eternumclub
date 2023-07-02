@@ -15,7 +15,7 @@ use App\Http\Resources\User as UserResource;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return new UserResource($request->user());
 });
 
@@ -27,9 +27,16 @@ Route::namespace('api')->group(function() {
         Route::get('{post:slug}', 'PostController@show');
         Route::put('{post:slug}/vote', 'PostController@vote');
 
-        Route::resource('{post:slug}/comments', 'CommentController')->except('create', 'edit', 'show');
-        Route::put('{post:slug}/comments/{comment}/vote', 'CommentController@vote');
+        Route::prefix('{post:slug}')->group(function() {
+            Route::resource('comments', 'CommentController')->except('create', 'edit', 'show');
+            Route::put('comments/{comment}/vote', 'CommentController@vote');
+            Route::get('ticket-types', 'TicketTypeController@index');
+            Route::get('questions', 'QuestionController@index');
+            Route::get('bank-accounts', 'BankAccountController@index');
+            Route::post('tickets', 'TicketController@store');
+        });
     });
 
     Route::get('categories', 'CategoryController@index');
+    Route::get('ticket-types', 'TicketTypeController@index');
 });

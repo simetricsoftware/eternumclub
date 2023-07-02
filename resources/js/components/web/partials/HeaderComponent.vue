@@ -1,7 +1,10 @@
 <template>
 <div>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <router-link class="navbar-brand" :to="{ name: 'home'}">Larablog</router-link>
+        <div class="d-flex" style="align-items: center;">
+            <img width="48px;" src="images/eternum_ico.png">
+            <router-link class="ml-2 navbar-brand" :to="{ name: 'home'}">Eternum Club</router-link>
+        </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,13 +12,10 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <router-link class="nav-link" :to="{ name: 'home' }">Inicio</router-link>
+                    <router-link class="nav-link" :to="{ name: 'posts' }">Eventos</router-link>
                 </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" :to="{ name: 'posts' }">Posts</router-link>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/home">Dashboard</a>
+                <li class="nav-item" v-if="user?.role.name === 'organizer'">
+                    <a class="nav-link" href="/dashboard/posts">Panel de eventos</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -40,9 +40,6 @@
                 <div class="d-flex" v-else>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Iniciar sesión</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">Registrarse</a>
                     </li>
                 </div>
             </ul>

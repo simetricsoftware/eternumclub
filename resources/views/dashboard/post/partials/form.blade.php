@@ -45,5 +45,16 @@
         <option value="{{ $id }}" {{ !in_array($id, old('tags', $post_tags)) ? : 'selected'}}>{{ $name }}</option>
         @endforeach
     </select>
+    <span>Presiona ctrl+clic para seleccionar varios</span>
+</div>
+<div class="form-group">
+    <div class="form-group">
+        <label for="image">Imagen</label>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="image" name="image" aria-describedby="inputGroupFileAddon01" accept="image/*">
+            <label class="custom-file-label" data-browse="Examinar" for="image">Selecciona un archio</label>
+        </div>
+        <span>Te recomendamos subir en formato (1080x720)px</span>
+    </div>
 </div>
 <input class="btn btn-primary" type="submit" name="save" value="Guardar">

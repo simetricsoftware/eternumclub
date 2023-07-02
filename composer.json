@@ -13,9 +13,10 @@
         "fruitcake/laravel-cors": "^1.0",
         "laravel/cashier": "^11.1",
         "laravel/framework": "^7.0",
-        "laravel/passport": "^8.4",
+        "laravel/sanctum": "^2.15",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-permission": "^3.11"
     },
     "require-dev": {

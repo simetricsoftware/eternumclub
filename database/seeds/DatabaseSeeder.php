@@ -14,11 +14,16 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolesAndPermissionsSeeder::class,
             UsersSeeder::class,
-            CategoriesSeeder::class,
-            PostsSeeder::class,
-            CommentsSeeder::class,
-            VotesSeeder::class,
-            TagsSeeder::class
         ]);
+
+        if(app()->environment('local')) {
+            $this->call([
+                CategoriesSeeder::class,
+                PostsSeeder::class,
+                CommentsSeeder::class,
+                VotesSeeder::class,
+                TagsSeeder::class
+            ]);
+        }
     }
 }

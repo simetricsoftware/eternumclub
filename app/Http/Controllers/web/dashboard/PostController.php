@@ -4,18 +4,18 @@ namespace App\Http\Controllers\web\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Post;
-use App\Image;
 use App\Category;
 use App\Tag;
 use App\Http\Requests\StorePost;
 use App\Http\Requests\UpdatePost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth');
+        $this->middleware('auth:sanctum');
         $this->authorizeResource(Post::class, 'post');
     }
 
@@ -56,8 +56,9 @@ class PostController extends Controller
         $post = Post::create($request->validated());
         $post->user()->associate(auth()->user()->id)->save();
         $post->setTags($request->validated());
+        $this->uploadImage($request, $post);
 
-        return redirect()->route('posts.show', $post)->with('status', 'Post creado con exito');
+        return redirect()->route('posts.show', $post)->with('status', 'Evento creado con exito');
     }
 
     /**
@@ -66,14 +67,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($post)
+    public function show(Post $post)
     {
-        $post = Post::votesCount()->find($post);
+        $post = Post::votesCount()->find($post->id);
         return view('dashboard.post.show', compact('post'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * S
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -96,7 +97,8 @@ class PostController extends Controller
     {
         $post->update($request->validated());
         $post->setTags($request->validated());
-        return redirect()->route('posts.show', $post)->with('status', 'Post actualizado con exito');
+        $this->uploadImage($request, $post);
+        return redirect()->route('posts.show', $post)->with('status', 'Evento actualizado con exito');
     }
 
     /**
@@ -108,7 +110,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('posts.index')->with('status', 'Post eliminado con exito');
+        return redirect()->route('posts.index')->with('status', 'Evento eliminado con exito');
     }
 
     /**
@@ -119,20 +121,30 @@ class PostController extends Controller
      */
     public function uploadImage(Request $request, Post $post)
     {
-        $file = $request->validate([
-            'image' => 'required|mimes:jpeg,bmp,png|max:10240' //10 Mb
-        ]);
+        $file = $request->file('image');
 
-        $url = Storage::putFile("posts/$post->id", $file['image']);
+        if (!$file) {
+            return;
+        }
+
+        $tempUrl = Storage::putFile("posts/$post->id", $file);
+        $optimizedUrl = preg_replace('/\.(jpe?g|png)$/i', '.webp', $tempUrl);
+
+        Artisan::call('optimize:image', [
+            '--use-webp' => true,
+            '--input' => $tempUrl,
+            '--output' => $optimizedUrl,
+            '--disk' => 'public',
+        ]);
 
         if ($post->image_url) {
             if (Storage::exists($post->image_url)) {
                 Storage::delete($post->image_url);
             }
         }
-        $post->image_url = $url;
+        $post->image_url = $optimizedUrl;
         $post->save();
-        
+
         return redirect()->route('posts.show', $post)->with('status', 'Imagen guardada correctamente');
     }
 }

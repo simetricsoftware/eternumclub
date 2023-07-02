@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,20 +36,21 @@ Route::prefix('dashboard')->namespace('web\dashboard')->group(function() {
 
     //Rutas para los posts
     Route::resource('posts', 'PostController');
-    Route::prefix('posts')->group(function() {
+    Route::prefix('posts/{post}')->group(function() {
         //Rutas subir una imagen
-        Route::post('{post}/image', 'PostController@uploadImage')->name('posts.image');
+        Route::post('image', 'PostController@uploadImage')->name('posts.image');
         //Rutas para los comentarios
-        Route::resource('{post}/comments', 'CommentController')->only(['index', 'show', 'destroy']);
+        Route::resource('comments', 'CommentController')->only(['index', 'show', 'destroy']);
+        //Rutas para los tipos de entrada
+        Route::resource('ticket-type', 'TicketTypeController')->except(['show']);
+        Route::resource('questions', 'QuestionController')->only(['index', 'store']);
+        Route::resource('bank-accounts', 'BankAccountController')->only(['index', 'store']);
+        Route::resource('vouchers', 'VoucherController')->only(['index', 'destroy']);
+        Route::put('vouchers/{voucher}/send-mail', 'VoucherController@sendMail')->name('vouchers.send-mail');
+        Route::get('ticket/{ticket:hash}/use', 'TicketController@markAsUsed')->name('ticket.mark-as-used');
+        Route::view('ticket/valid', 'dashboard.ticket.valid')->name('ticket.is-valid');
+        Route::view('ticket/invalid', 'dashboard.ticket.invalid')->name('ticket.is-invalid');
     });
-
-    Route::get('paymentmethods/subscriptions/create', 'PaymentMethodController@createSubscription');
-    Route::post('paymentmethods/subscriptions', 'PaymentMethodController@storeSubscription');
-    Route::get('paymentmethods/subscriptions/show', 'PaymentMethodController@showSubscriptions');
-    Route::get('paymentmethods/singlecharges/create', 'PaymentMethodController@createSingleCharge');
-    Route::post('paymentmethods/singlecharges', 'PaymentMethodController@storeSingleCharge');
-    Route::get('paymentmethods/singlecharges/show', 'PaymentMethodController@showSingleCharge');
-
 });
 
 Auth::routes(['verify' => true]);

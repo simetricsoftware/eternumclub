@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name') }}</a>
+    <div class="d-flex" style="align-items: center;">
+        <img width="48px;" src="{{ asset('images/eternum_ico.png') }}">
+        <a class="navbar-brand ml-2" href="{{ route('web.index') }}">{{ config('app.name') }}</a>
+    </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -11,7 +14,7 @@
             </li>
             @can('show.posts')
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('posts.index') }}">Posts</a>
+                <a class="nav-link" href="{{ route('posts.index') }}">Eventos</a>
             </li>
             @endcan
             @auth
@@ -42,22 +45,11 @@
             @php
             $route = Route::getCurrentRoute()->getName()
             @endphp
-            @if(strpos($route, 'index'))
-            <form class="form-inline my-2 my-lg-0" action="{{ route($route, isset($params) ? $params : []) }}">
-                <input class="form-control mr-sm-2" type="text" name="search" placeholder="Buscar" aria-label="search">
-                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Buscar</button>
-            </form>
-            @endif
             <!-- Authentication Links -->
             @guest
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
-                @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
-                @endif
             @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -30,7 +30,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        if ($user->hasRole('moderator')) return true;
+        if ($user->hasRole('organizer')) return true;
         return $user->id === $post->user_id && $user->hasPermissionTo('show.posts');
     }
 

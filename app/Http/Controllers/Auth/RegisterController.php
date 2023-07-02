@@ -54,6 +54,7 @@ class RegisterController extends Controller
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required', 'string', 'in:guest,organizer'],
         ]);
     }
 
@@ -72,8 +73,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $user->assignRole('guest');
-        $user->createAsStripeCustomer();
+        $user->assignRole($data['role']);
 
         return $user;
     }

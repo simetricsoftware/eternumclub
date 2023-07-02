@@ -64,6 +64,18 @@
                                 @endif
                             </div>
                         </div>
+
+                        @if (Route::has('register'))
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4 mt-4">
+                                <span>¿No tienes una cuenta?,</span>
+                                <br>
+                                <p>
+                                    Registrate como <a class="btn btn-link" href="{{ route('register', ['role' => 'guest']) }}">{{ __('Guest') }}</a> u <a class="btn btn-link" href="{{ route('register', ['role' => 'organizer']) }}">{{ __('Organizer') }}</a>
+                                </p>
+                            </div>
+                        </div>
+                        @endif
                     </form>
                 </div>
             </div>

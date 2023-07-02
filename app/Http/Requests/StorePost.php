@@ -30,7 +30,8 @@ class StorePost extends FormRequest
           'content'     => 'required',
           'category_id' => 'required',
           'status'      => 'required',
-          'tags'        => 'nullable'
+          'tags'        => 'nullable',
+          'image'       => 'required|mimes:jpeg,jpg,png|max:10240' //10 Mb
         ];
     }
 
