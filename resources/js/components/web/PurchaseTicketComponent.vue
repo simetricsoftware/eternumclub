@@ -15,7 +15,7 @@
   </div>
   <div class="row w-100">
     <label class="col-5" style="font-size: 4vh;">Cantidad:</label>
-    <div class="col-7">
+    <div class="col-3">
       <input type="number" style="width: 100%; font-size: 4vh;" :max="ticket.quantity" v-model="ticket.count" @input="validateCount(ticket)">
     </div>
   </div>
