@@ -29,9 +29,9 @@ class CommentController extends Controller
         return view('dashboard.comment.index', ['comments' => $comments, 'post' => $post, 'params' => $post]);
     }
 
-    public function show(Post $post, $comment)
+    public function show(Post $post, Comment $comment)
     {
-        $comment = Comment::votesCount()->find($comment);
+        $comment = Comment::votesCount()->find($comment->id);
         return view('dashboard.comment.show', compact('comment', 'post'));
     }
 

@@ -25,6 +25,20 @@
         </div>
         <div class="container">
             <div class="row">
+                <div class="col-12">
+                    <a class="btn btn-secondary" href="{{ route('vouchers.index', [ 'post' => $post->id, 'filter[status]' => 'pending' ]) }}">
+                        <i class="fa-solid fa-clock"></i>
+                        Pendientes
+                    </a>
+                    <a class="btn btn-primary" href="{{ route('vouchers.index', [ 'post' => $post->id, 'filter[status]' => 'processed' ]) }}">
+                        <i class="fa-solid fa-envelope-circle-check"></i>
+                        Procesados
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
                 @foreach ($vouchers as $voucher)
                 <div class="p-2 col-12 col-sm-3">
                     <div class="card">

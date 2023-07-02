@@ -23,40 +23,32 @@ class UsersSeeder extends Seeder
         ]);
         $admin->assignRole('admin');
 
-        $moderator = App\User::create([
-            'name'              => 'moderator',
-            'lastname'          => 'moderator',
-            'email'             => 'moderator@moderator.com',
-            'email_verified_at' => now(),
-            'password'          => Hash::make('moderator'),
-            'remember_token'    => Str::random(10),
-        ]);
-        $moderator->assignRole('moderator');
+        if (app()->environment('local')) {
+            $organizer = App\User::create([
+                'name'              => 'organizer',
+                'lastname'          => 'organizer',
+                'email'             => 'organizer@organizer.com',
+                'email_verified_at' => now(),
+                'password'          => Hash::make('organizer'),
+                'remember_token'    => Str::random(10),
+            ]);
+            $organizer->assignRole('organizer');
 
-        $writer = App\User::create([
-            'name'              => 'writer',
-            'lastname'          => 'writer',
-            'email'             => 'writer@writer.com',
-            'email_verified_at' => now(),
-            'password'          => Hash::make('writer'),
-            'remember_token'    => Str::random(10),
-        ]);
-        $writer->assignRole('writer');
+            $guest = App\User::create([
+                'name'              => 'guest',
+                'lastname'          => 'guest',
+                'email'             => 'guest@guest.com',
+                'email_verified_at' => now(),
+                'password'          => Hash::make('guest'),
+                'remember_token'    => Str::random(10),
+            ]);
+            $guest->assignRole('guest');
 
-        $guest = App\User::create([
-            'name'              => 'guest',
-            'lastname'          => 'guest',
-            'email'             => 'guest@guest.com',
-            'email_verified_at' => now(),
-            'password'          => Hash::make('guest'),
-            'remember_token'    => Str::random(10),
-        ]);
-        $guest->assignRole('guest');
-
-        $roles = array('moderator', 'writer', 'guest');
-        factory(App\User::class, 50)->create()->each(function($user) use ($roles) {
-            $user->assignRole($roles[rand(0,2)]);
-        });
+            $roles = array('organizer', 'guest');
+            factory(App\User::class, 50)->create()->each(function($user) use ($roles) {
+                $user->assignRole($roles[rand(0,1)]);
+            });
+        }
 
     }
 }

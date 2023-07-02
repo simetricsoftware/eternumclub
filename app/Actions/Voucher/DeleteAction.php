@@ -11,6 +11,8 @@ class DeleteAction {
 
         $voucher->tickets()->delete();
 
+        $voucher->answers()->delete();
+
         $voucher->delete();
     }
 }

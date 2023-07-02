@@ -60,19 +60,13 @@ class RolesAndPermissionsSeeder extends Seeder
             'create.comments', 'show.comments', 'edit.comments', 'delete.comments'
         ]);
 
-        $writer = Role::create(['name' => 'writer', 'description' => 'Escritor con permisos para crear, mostrar, editar y eliminar los posts']);
-        $writer->givePermissionTo([
-            'show.tags',
-            'create.posts', 'show.posts', 'edit.posts', 'delete.posts'
-        ]);
-
-        $moderator = Role::create(['name' => 'moderator', 'description' => 'Moderador con permisos para administrar a los usuarios y las categorías y visualizar los posts']);
-        $moderator->givePermissionTo([
+        $organizer = Role::create(['name' => 'organizer', 'description' => 'Moderador con permisos para administrar a los usuarios y las categorías y visualizar los posts']);
+        $organizer->givePermissionTo([
+            'create.posts',
             'show.posts',
+            'edit.posts',
+            'delete.posts',
             'show.comments', 'delete.comments',
-            'create.tags', 'show.tags', 'edit.tags', 'delete.tags',
-            'create.categories', 'show.categories', 'edit.categories', 'delete.categories',
-            'create.users', 'show.users', 'edit.users', 'delete.users',
         ]);
 
         $admin = Role::create(['name' => 'admin', 'description' => 'Administrador con todos los permisos']);

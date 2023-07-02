@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\api;
 
-//use App\Http\Controllers\api\ApiResponseController as Controller;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\Post as PostResource;
@@ -17,7 +16,7 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api')->only('vote');
+        $this->middleware('auth:sanctum')->only('vote');
     }
 
     /**
@@ -33,6 +32,7 @@ class PostController extends Controller
             ->sortByCategory($request->category)
             ->search($request->search)
             ->where('status', 'posted')
+            ->userRole()
             ->votesCount()
             ->paginate(10)
         );
