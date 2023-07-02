@@ -10,15 +10,14 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class SendMailAction {
     public function execute(Voucher $voucher, Post $post) {
 
-        $qrs = $voucher->tickets->map(function ($ticket) {
+        $qrs = $voucher->tickets->map(function ($ticket) use ($post) {
             $ticket->sent_at = now();
             $ticket->save();
 
             return QrCode::size(600)
-                ->style('round')
                 ->format('png')
                 ->margin(2)
-                ->generate($ticket->hash);
+                ->generate(route('ticket.mark-as-used', ['post' => $post, 'ticket' => $ticket]));
         });
 
         Mail::to($voucher->assistant->email)

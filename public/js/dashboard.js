@@ -759,70 +759,6 @@ render._withStripped = true;
 
 /***/ }),
 
-/***/ "./resources/js/modules/dashboard.js":
-/*!*******************************************!*\
-  !*** ./resources/js/modules/dashboard.js ***!
-  \*******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
-
-var _this = this;
-__webpack_require__(/*! ./quill.js */ "./resources/js/modules/quill.js");
-
-/*
-* Modal de confirmación para eliminar un registro desde la vista index
-*/
-window.onload = function () {
-  $('#confirmDelete').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var id = button.data('id');
-    var action = $('#row-delete').attr('data-action') + '/' + id;
-    $('#row-delete').attr('action', action);
-    var modal = $(_this);
-    modal.find('.modal-title').text('Se eliminará el registro con id ' + id);
-  });
-  $('#confirm-delete-user').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var id = button.data('id');
-    var status = button.data('status');
-    $('#toogle-user-status').attr('value', status ? 'Restaurar' : 'Eliminar');
-    var url = $('#user-delete').attr('data-url');
-    var action = "".concat(url, "/").concat(status ? 'restore' : 'delete', "/").concat(id);
-    $('#user-delete').attr('action', action);
-  });
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-  });
-};
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('questions-component', (__webpack_require__(/*! ../components/dashboard/question/QuestionsComponent.vue */ "./resources/js/components/dashboard/question/QuestionsComponent.vue")["default"]));
-Vue.component('bank-accounts-component', (__webpack_require__(/*! ../components/dashboard/bank-account/BankAccountsComponent.vue */ "./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue")["default"]));
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-if (document.getElementById('app')) {
-  new Vue({
-    el: '#app'
-  });
-}
-
-/***/ }),
-
 /***/ "./resources/js/modules/quill-images-handler.js":
 /*!******************************************************!*\
   !*** ./resources/js/modules/quill-images-handler.js ***!
@@ -27237,11 +27173,71 @@ Vue.compile = compileToFunctions;
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__("./resources/js/modules/dashboard.js");
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+/*!*******************************************!*\
+  !*** ./resources/js/modules/dashboard.js ***!
+  \*******************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+var _this = undefined;
+
+__webpack_require__(/*! ./quill.js */ "./resources/js/modules/quill.js");
+
+/*
+* Modal de confirmación para eliminar un registro desde la vista index
+*/
+window.onload = function () {
+  $('#confirmDelete').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var id = button.data('id');
+    var action = $('#row-delete').attr('data-action') + '/' + id;
+    $('#row-delete').attr('action', action);
+    var modal = $(_this);
+    modal.find('.modal-title').text('Se eliminará el registro con id ' + id);
+  });
+  $('#confirm-delete-user').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var id = button.data('id');
+    var status = button.data('status');
+    $('#toogle-user-status').attr('value', status ? 'Restaurar' : 'Eliminar');
+    var url = $('#user-delete').attr('data-url');
+    var action = "".concat(url, "/").concat(status ? 'restore' : 'delete', "/").concat(id);
+    $('#user-delete').attr('action', action);
+  });
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+};
+
+/**
+ * The following block of code may be used to automatically register your
+ * Vue components. It will recursively scan this directory for the Vue
+ * components and automatically register them with their "basename".
+ *
+ * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ */
+
+// const files = require.context('./', true, /\.vue$/i)
+// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('questions-component', (__webpack_require__(/*! ../components/dashboard/question/QuestionsComponent.vue */ "./resources/js/components/dashboard/question/QuestionsComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('bank-accounts-component', (__webpack_require__(/*! ../components/dashboard/bank-account/BankAccountsComponent.vue */ "./resources/js/components/dashboard/bank-account/BankAccountsComponent.vue")["default"]));
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+if (document.getElementById('app')) {
+  new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    el: '#app'
+  });
+}
+})();
+
 /******/ })()
 ;

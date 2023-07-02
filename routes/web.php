@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,8 +45,11 @@ Route::prefix('dashboard')->namespace('web\dashboard')->group(function() {
         Route::resource('ticket-type', 'TicketTypeController')->except(['show']);
         Route::resource('questions', 'QuestionController')->only(['index', 'store']);
         Route::resource('bank-accounts', 'BankAccountController')->only(['index', 'store']);
-        Route::resource('vouchers', 'VoucherController')->only(['index']);
+        Route::resource('vouchers', 'VoucherController')->only(['index', 'destroy']);
         Route::put('vouchers/{voucher}/send-mail', 'VoucherController@sendMail')->name('vouchers.send-mail');
+        Route::get('ticket/{ticket:hash}/use', 'TicketController@markAsUsed')->name('ticket.mark-as-used');
+        Route::view('ticket/valid', 'dashboard.ticket.valid')->name('ticket.is-valid');
+        Route::view('ticket/invalid', 'dashboard.ticket.invalid')->name('ticket.is-invalid');
     });
 });
 

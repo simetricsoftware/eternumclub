@@ -32,6 +32,9 @@
                             <h5 class="card-title">{{ $voucher->assistant->name }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{ $voucher->assistant->identification_number }}</h6>
                             <div class="mt-2">
+                                <a class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Ver comprobante de pago" href="{{ asset('storage/' . $voucher->file) }}" target="_blank">
+                                    <i class="fa-solid fa-money-check-dollar"></i>
+                                </a>
                                 <form class="d-inline" action="{{ route('vouchers.send-mail', [ 'post' => $post, 'voucher' => $voucher ]) }}" method="POST">
                                     @csrf
                                     @method('PUT')
@@ -39,15 +42,19 @@
                                         <i class="fa-solid fa-envelope"></i>
                                     </button>
                                 </form>
-                                <a class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Ver comprobante de pago" href="{{ asset('storage/' . $voucher->file) }}" target="_blank">
-                                    <i class="fa-solid fa-money-check-dollar"></i>
-                                </a>
-                                <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Reembolsar comprobante">
+                                <span data-toggle="tooltip" data-placement="top" title="Reembolsar comprobante">
+                                <button class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="{{ $voucher->id }}">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
+                                </span>
                                 <span data-toggle="tooltip" data-placement="top" title="Ver entradas">
                                     <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#hashesModal{{ $voucher->id }}">
                                         <i class="fa-solid fa-ticket"></i>
+                                    </button>
+                                </span>
+                                <span data-toggle="tooltip" data-placement="top" title="Ver resultado de encuesta">
+                                    <button type="button" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#questionsModal{{ $voucher->id }}">
+                                        <i class="fa-solid fa-question"></i>
                                     </button>
                                 </span>
                             </div>
@@ -66,8 +73,35 @@
                                             <div>
                                                 <span class="hash">SHA-256: {{ $ticket->hash }}</span>
                                                 <p class="card-text">
-                                                    <span class="badge badge-primary">Usado: {{ $ticket->used_at ?? 'Nunca' }}</span>
+                                                    <span class="badge {{ $ticket->used_at ? 'badge-success' : 'badge-primary' }}">Usado: {{ $ticket->used_at ?? 'Nunca' }}</span>
                                                     <span class="badge badge-warning">Enviado: {{ $ticket->sent_at ?? 'Nunca' }}</span>
+                                                </p>
+                                            </div>
+                                            @endforeach
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="modal fade" id="questionsModal{{ $voucher->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Resultado de encuesta</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            @foreach ($voucher->answers as $answer)
+                                            <div>
+                                                <span class="hash font-weight-bold">{{ $answer->question->statement }}</span>
+                                                <p class="card-text">
+                                                    {{ $answer->response }}
                                                 </p>
                                             </div>
                                             @endforeach
@@ -95,7 +129,7 @@
 @section('styles')
 <style>
     .hash {
-        font-size: 0.8rem;
+        font-size: 1rem;
         font-family: monospace;
 }
 </style>
