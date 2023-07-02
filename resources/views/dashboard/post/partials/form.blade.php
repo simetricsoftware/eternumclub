@@ -46,4 +46,13 @@
         @endforeach
     </select>
 </div>
+<div class="form-group">
+    <div class="form-group">
+        <label for="image">Imagen</label>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="image" name="image" aria-describedby="inputGroupFileAddon01" accept="image/*">
+            <label class="custom-file-label" data-browse="Examinar" for="image">Selecciona un archio</label>
+        </div>
+    </div>
+</div>
 <input class="btn btn-primary" type="submit" name="save" value="Guardar">

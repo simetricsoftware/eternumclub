@@ -47,23 +47,6 @@
             @endforeach
         </div>
         @can('edit.posts')
-        <form action="{{ route('posts.image', ['post' => $post->id]) }}" enctype="multipart/form-data" method="post">
-            @csrf
-            <div class="form-group">
-                <label for="image">Imagen</label>
-                <div class="input-group">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image" name="image" aria-describedby="inputGroupFileAddon01" accept="image/*">
-                        <label class="custom-file-label" data-browse="Examinar" for="image">Selecciona un archio</label>
-                    </div>
-                    <div class="input-group-append">
-                        <input class="btn btn-outline-secondary" type="submit" value="Subir">
-                    </div>
-                </div>
-            </div>
-        </form>
-        @endcan
-        @can('edit.posts')
         <a class="btn btn-secondary" href="{{ route('ticket-type.index', ['post' => $post->id]) }}" data-toggle="tooltip" data-placement="top" title="Generar entradas">
             <i class="fa-solid fa-ticket"></i>
         </a>
@@ -90,7 +73,7 @@
         @endcan
         @can('delete.posts')
         <div class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Eliminar evento">
-            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="{{ $post->id }}">
+            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="{{ $post->id }}" data-current="true">
                 <i class="fas fa-trash-alt"></i>
             </button>
         </div>
