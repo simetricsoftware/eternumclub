@@ -13,7 +13,7 @@
       </div>
       <div class="row">
         <span class="small text-muted">Tipo de cuenta:</span>
-        <span class="small">{{ bank.account_type }}</span>
+        <span class="small">{{ getAccountTypeTranslation(bank.account_type) }}</span>
       </div>
       <div class="row">
         <span class="small text-muted">Nombre:</span>
@@ -31,7 +31,6 @@
   </div>
 </template>
 
-
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -46,19 +45,28 @@ export default {
     };
   },
 
- methods:{
+  methods: {
     getBanks() {
       const slug = this.$route.params.post;
       axios.get(`/api/posts/${slug}/bank-accounts`)
         .then(response => {
           this.bankInfo = response.data.data;
-
         });
     },
+    
+    getAccountTypeTranslation(accountType) {
+      // Mapear el tipo de cuenta en inglés al español
+      const accountTypeTranslations = {
+        savings: 'Ahorros',
+        current: 'Corriente',
+        // Agrega más traducciones según tus necesidades
+      };
+      
+      return accountTypeTranslations[accountType] || accountType;
+    }
   },
 
   created() {
-    // Recibir el dato numérico del otro sistema y asignarlo a
     this.getBanks();
   }
 }
@@ -85,3 +93,4 @@ export default {
   font-size: 1rem;
 }
 </style>
+
