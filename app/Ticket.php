@@ -8,6 +8,8 @@ class Ticket extends Model
 {
     protected $fillable = [
         'hash',
+        'used_at',
+        'sent_at',
         'assistant_id',
         'voucher_id',
         'ticket_type_id',

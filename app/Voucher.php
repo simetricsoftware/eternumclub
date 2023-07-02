@@ -20,4 +20,9 @@ class Voucher extends Model
     {
         return $this->hasMany(Ticket::class);
     }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
 }

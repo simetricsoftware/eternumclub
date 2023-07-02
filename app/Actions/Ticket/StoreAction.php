@@ -5,6 +5,8 @@ use App\Assistant;
 use App\Http\Requests\Ticket\StoreRequest;
 use App\Post;
 use App\Voucher;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 
 class StoreAction {
     public function execute(StoreRequest $request, Post $post) {
@@ -14,7 +16,16 @@ class StoreAction {
 
         $assistant = Assistant::create($assistant);
 
-        $voucherPath = $request->file('assistant.voucher')->store("vouchers/{$assistant->id}");
+        $tempUrl = Storage::putFile("vouchers/{$assistant->id}", $request->file('assistant.voucher'));
+        $voucherPath = preg_replace('/\.(jpe?g|png)$/i', '.webp', $tempUrl);
+
+        Artisan::call('optimize:image', [
+            '--use-webp' => true,
+            '--input' => $tempUrl,
+            '--output' => $voucherPath,
+            '--disk' => 'public',
+        ]);
+
         $voucher = Voucher::make([
             'file' => $voucherPath,
             'amount' => $tickets->sum('quantity'),
@@ -40,6 +51,13 @@ class StoreAction {
         $post->tickets()->createMany($toCreateTickets);
 
         if ($answers) {
+            $answers = collect($answers)->map(function ($answer) use ($voucher) {
+                return [
+                    'question_id' => $answer['question_id'],
+                    'response' => $answer['response'],
+                    'voucher_id' => $voucher->id,
+                ];
+            })->toArray();
             $assistant->answers()->createMany($answers);
         }
     }

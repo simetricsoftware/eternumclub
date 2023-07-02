@@ -9,6 +9,7 @@ use App\Tag;
 use App\Http\Requests\StorePost;
 use App\Http\Requests\UpdatePost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -119,17 +120,25 @@ class PostController extends Controller
     public function uploadImage(Request $request, Post $post)
     {
         $file = $request->validate([
-            'image' => 'required|mimes:jpeg,bmp,png|max:10240' //10 Mb
+            'image' => 'required|mimes:jpeg,jpg,png|max:10240' //10 Mb
         ]);
 
-        $url = Storage::putFile("posts/$post->id", $file['image']);
+        $tempUrl = Storage::putFile("posts/$post->id", $file['image']);
+        $optimizedUrl = preg_replace('/\.(jpe?g|png)$/i', '.webp', $tempUrl);
+
+        Artisan::call('optimize:image', [
+            '--use-webp' => true,
+            '--input' => $tempUrl,
+            '--output' => $optimizedUrl,
+            '--disk' => 'public',
+        ]);
 
         if ($post->image_url) {
             if (Storage::exists($post->image_url)) {
                 Storage::delete($post->image_url);
             }
         }
-        $post->image_url = $url;
+        $post->image_url = $optimizedUrl;
         $post->save();
 
         return redirect()->route('posts.show', $post)->with('status', 'Imagen guardada correctamente');

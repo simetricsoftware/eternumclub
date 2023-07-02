@@ -9,6 +9,7 @@ class Answer extends Model
     protected $fillable = [
         'response',
         'question_id',
+        'voucher_id',
     ];
 
     public function question()
