@@ -12,11 +12,12 @@
             </div>
             <div class="form-group">
                 <label for="identification_number">Cédula:</label>
-                <input type="text" class="form-control custom-input" id="identification_number" placeholder="Número de ID" v-model="identification_number" @change="onChange" required>
+                <input type="number" class="form-control custom-input" id="identification_number" placeholder="Número de ID" v-model="identification_number" @change="onChange" required>
             </div>
             <div class="form-group">
                 <label for="phone">Celular:</label>
-                <input type="text" class="form-control custom-input" id="phone" placeholder="Ingresa tu número" v-model="phone" @change="onChange" required>
+                <span>Ej. 0987654321</span>
+                <input type="tel" class="form-control custom-input" id="phone" placeholder="Ingresa tu número" v-model="phone" @change="onChange" pattern="^09\d{8}$" required>
             </div>
             <div class="form-group">
                 <label for="voucher">Subir comprobante de pago/ transferencia:</label>
