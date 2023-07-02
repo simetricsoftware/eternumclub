@@ -36,6 +36,10 @@ class LoginController extends Controller
         if($user->hasRole('guest')){
             return redirect(RouteServiceProvider::WEB);
         }
+        if($user->hasRole('organizer')){
+            return redirect(RouteServiceProvider::EVENTS);
+        }
+
         return redirect(RouteServiceProvider::HOME);
     }
 }
