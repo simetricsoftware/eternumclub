@@ -4,27 +4,31 @@
 
     <img src="./eternum_ico.png" alt="Imagen" class="image">
 
-    <div v-for="ticket of ticketTypes" :key="ticket.id" class="form-group">
-      <div class="form-group-row">
-        <label for="inputType" class="label">Tipo:</label>
-        <div class="data">{{ ticket.name }}</div>
-      </div>
-      <div class="form-group-row">
-        <label for="inputPrecio" class="label">Precio:</label>
-        <div class="data">{{ ticket.amount }}</div>
-      </div>
-      <div class="form-group-row">
-        <label for="inputCantidad" class="label">Cantidad:</label>
-        <input type="number" class="form-control input" :id="'inputCantidad-' + ticket.id" :max="ticket.quantity" v-model="ticket.count" @input="validateCount(ticket)">
-      </div>
-      <div class="error-message">{{ ticket.error }}</div>
+    <div  v-for="ticket of ticketTypes" :key="ticket.id" style="margin-bottom: 2vh;">
+  <div class="row w-100">
+    <label class="col-5" style="font-size: 4vh;">Tipo:</label>
+    <div class="col-7" style="font-size: 4vh;">{{ ticket.name }}</div>
+  </div>
+  <div class="row w-100">
+    <label class="col-5" style="font-size: 4vh;">Precio:</label>
+    <div class="col-7" style="font-size: 4vh;"> ${{ ticket.amount }}</div>
+  </div>
+  <div class="row w-100">
+    <label class="col-5" style="font-size: 4vh;">Cantidad:</label>
+    <div class="col-7">
+      <input type="number" style="width: 100%; font-size: 4vh;" :max="ticket.quantity" v-model="ticket.count" @input="validateCount(ticket)">
     </div>
+  </div>
+  <div style="margin-top: 1vh; font-size: 3.6vh;">{{ ticket.error }}</div>
+</div>
 
     <div class="total">
-      Total: <span>{{ total  }}</span>
-    </div>
+  Total: <span>$ {{ total }}</span>
+</div>
 
-    <button class="continue-button" @click="continuar" :disabled="!canContinue">Continuar</button>
+
+<button class="continue-button" @click="continuar" :disabled="!canContinue" style="font-size: 1.5rem; padding: 10px 20px;">Continuar</button>
+
   </div>
 </template>
 

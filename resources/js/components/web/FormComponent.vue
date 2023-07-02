@@ -1,17 +1,18 @@
 <template>
     <div>
         <div class="container">
-            <div class="row">
+           
                 <form @submit.prevent="handleSubmit">
-                    <div class="col-6 m-auto">
-                        <purchase-component @change="onChangeBasicData($event)"></purchase-component>
+                    <div class="col-12 col-sm-6 m-auto">
+                        <purchase-component @change="onChangeBasicData($event)" style="font-size: 1.2rem;"></purchase-component>
+
                         <div class="text-center">
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#bankModal">
                                 <i class="fas fa-university mr-2"></i>
                                 Ver información bancaria
                             </button>
                         </div>
-                        <div class="total_price"> Total {{ total }}</div>
+                        <div  style="margin-top: 30px;"class="total_price"> Total ${{ total }}</div>
                         <!-- Modal -->
                         <div class="modal fade" id="bankModal" tabindex="-1" role="dialog" aria-labelledby="bankModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -22,9 +23,10 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
-                                        <bank-info-component></bank-info-component>
-                                    </div>
+                                        <div class="modal-body">
+                                            <bank-info-component style="font-size: 1.2rem;"></bank-info-component>
+                                        </div>
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                     </div>
@@ -32,18 +34,20 @@
                             </div>
                         </div>
 
-                        <div class="margins">
+                        <div class="margins" style="font-size: 1.2rem;">
                             <div v-for="question of questions">
                                 <open-question-component v-if="question.type === 'open'" :question="question.statement" v-model="question.answer"></open-question-component>
                                 <multiple-question-component v-if="question.type === 'multiple'" :question="question.statement" v-model="question.answer" :options="question.options"></multiple-question-component>
                                 <radio-question-component v-if="question.type === 'radio'" :question="question.statement" v-model="question.answer" :options="question.options"></radio-question-component>
                                 <select-question-component v-if="question.type === 'dropdown'" :question="question.statement" v-model="question.answer" :options="question.options"></select-question-component>
                             </div>
-                        </div>
+                            </div>
                     </div>
-                    <button type="submit" class="btn btn-primary custom-button">Enviar</button>
+                    <div class="text-center">
+                    <button type="submit" class="btn btn-primary custom-button mt-4 mx-auto" style="font-size: 1.5rem;">Enviar</button>
+                    </div>
                 </form>
-            </div>
+           
         </div>
     </div>
 </template>
