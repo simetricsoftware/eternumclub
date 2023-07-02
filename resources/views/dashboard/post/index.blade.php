@@ -5,7 +5,7 @@
             @if($posts->isEmpty())
             <div class="d-flex flex-column align-items-center justify-content-center mt-4">
                 <img src="{{ asset('images/crear.gif') }}" alt="No hay eventos" >
-            
+
                 <a class="btn btn-lg btn-dark mt-3" href="{{ route('posts.create') }}" style="color: white;">Crear Evento</a>
             </div>
             @else
@@ -20,8 +20,12 @@
                             <th>Id</th>
                             <th>Título</th>
                             <th>Estado</th>
-                            <th>N° de me gusta</th>
-                            <th>N° de no me gusta</th>
+                            <th>
+                                <i class="fa-solid fa-thumbs-up"></i>
+                            </th>
+                            <th>
+                                <i class="fa-solid fa-thumbs-down"></i>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,7 +33,13 @@
                             <tr>
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->title }}</td>
-                                <td>{{ $post->status }}</td>
+                                <td>
+                                    @if($post->status === 'posted')
+                                        <i class="fa-solid fa-globe text-success"></i>
+                                    @else
+                                        <i class="fa-solid fa-pen-ruler text-primary"></i>
+                                    @endif
+                                </td>
                                 <td>{{ $post->likes }}</td>
                                 <td>{{ $post->dislikes }}</td>
                                 @can('edit.posts')

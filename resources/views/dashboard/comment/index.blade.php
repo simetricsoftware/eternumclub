@@ -14,8 +14,12 @@
                 <tr>
                     <th>Id</th>
                     <th>Usuario</th>
-                    <th>N° Me gusta</th>
-                    <th>N° No me gusta</th>
+                    <th>
+                        <i class="fa-solid fa-thumbs-up"></i>
+                    </th>
+                    <th>
+                        <i class="fa-solid fa-thumbs-down"></i>
+                    </th>
                     <th>Creado</th>
                     <th>Actualizado</th>
                 </tr>
