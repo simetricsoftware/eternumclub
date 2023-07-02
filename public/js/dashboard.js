@@ -258,7 +258,7 @@ var render = function render() {
   }, _vm._l(_vm.formBankAccounts, function (formBankAccount, index) {
     return _c("div", {
       key: "".concat(index, "-bank-account-").concat(formBankAccount.account_number)
-    }, [_c("h3", [_vm._v("\r\n                    Número de cuenta " + _vm._s(index + 1) + "\r\n                    "), _c("button", {
+    }, [_c("h3", [_vm._v("\n                    Número de cuenta " + _vm._s(index + 1) + "\n                    "), _c("button", {
       staticClass: "btn btn-danger",
       attrs: {
         type: "button"
@@ -462,7 +462,7 @@ var render = function render() {
   }, _vm._l(_vm.formQuestions, function (question, index) {
     return _c("div", {
       key: "".concat(index, "-question-").concat(question.statement)
-    }, [_c("h3", [_vm._v("\r\n                    Pregunta " + _vm._s(index + 1) + "\r\n                    "), _c("button", {
+    }, [_c("h3", [_vm._v("\n                    Pregunta " + _vm._s(index + 1) + "\n                    "), _c("button", {
       staticClass: "btn btn-danger",
       attrs: {
         type: "button"
