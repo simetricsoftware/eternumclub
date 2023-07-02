@@ -45,6 +45,7 @@
         <option value="{{ $id }}" {{ !in_array($id, old('tags', $post_tags)) ? : 'selected'}}>{{ $name }}</option>
         @endforeach
     </select>
+    <span>Presiona ctrl+clic para seleccionar varios</span>
 </div>
 <div class="form-group">
     <div class="form-group">
