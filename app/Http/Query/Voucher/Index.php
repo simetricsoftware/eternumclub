@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class Index {
     public function query(Request $request, Post $post): Builder {
-        return Voucher::whereHas('tickets', function ($query) use ($post, $request) {
+        $q_voucher = Voucher::whereHas('tickets', function ($query) use ($post, $request) {
             $query->where('post_id', $post->id);
 
             if ($request->has('search')) {
@@ -22,5 +22,20 @@ class Index {
                 });
             }
         });
+
+        $status = $request->get('filter')['status'] ?? null;
+        if ($status) {
+            if ($status === 'pending') {
+                $q_voucher->whereDoesntHave('tickets', function ($query) {
+                    $query->whereNotNull('sent_at');
+                });
+            } else if ($status === 'processed') {
+                $q_voucher->whereDoesntHave('tickets', function ($query) {
+                    $query->whereNull('sent_at');
+                });
+            }
+        }
+
+        return $q_voucher;
     }
 }

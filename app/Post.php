@@ -56,7 +56,7 @@ class Post extends Model
 
     public function scopeUserRole($query) {
         $user = auth()->user();
-        if(!$user->hasRole('admin') && !$user->hasRole('moderator'))
+        if(!$user->hasRole('admin'))
             return $query->where('user_id',$user->id);
     }
 

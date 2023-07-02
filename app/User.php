@@ -7,12 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Traits\HasRoles;
-use Laravel\Passport\HasApiTokens;
-use Laravel\Cashier\Billable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, Notifiable, HasRoles, SoftDeletes, Billable;
+    use HasApiTokens, Notifiable, HasRoles, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

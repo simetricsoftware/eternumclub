@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import { BootstrapVue } from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 /**
  * The following block of code may be used to automatically register your

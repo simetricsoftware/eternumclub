@@ -30,7 +30,7 @@ class CommentPolicy
      */
     public function view(User $user, Comment $comment)
     {
-        if($user->hasRole('moderator')) return true;
+        if($user->hasRole('organizer')) return true;
         return $user->hasPermissionTo('show.comments');
     }
 
@@ -66,7 +66,7 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
-        return $user->id === $comment->user_id && $user->hasPermissionTo('delete.comments');
+        return ($user->id === $comment->user_id || $comment->post->user_id === $user->id) && $user->hasPermissionTo('delete.comments');
     }
 
 }

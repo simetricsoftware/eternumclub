@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 class PostController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth');
+        $this->middleware('auth:sanctum');
         $this->authorizeResource(Post::class, 'post');
     }
 
@@ -57,7 +57,7 @@ class PostController extends Controller
         $post->user()->associate(auth()->user()->id)->save();
         $post->setTags($request->validated());
 
-        return redirect()->route('posts.show', $post)->with('status', 'Post creado con exito');
+        return redirect()->route('posts.show', $post)->with('status', 'Evento creado con exito');
     }
 
     /**
@@ -66,14 +66,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($post)
+    public function show(Post $post)
     {
-        $post = Post::votesCount()->find($post);
+        $post = Post::votesCount()->find($post->id);
         return view('dashboard.post.show', compact('post'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * S
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -96,7 +96,7 @@ class PostController extends Controller
     {
         $post->update($request->validated());
         $post->setTags($request->validated());
-        return redirect()->route('posts.show', $post)->with('status', 'Post actualizado con exito');
+        return redirect()->route('posts.show', $post)->with('status', 'Evento actualizado con exito');
     }
 
     /**
@@ -108,7 +108,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('posts.index')->with('status', 'Post eliminado con exito');
+        return redirect()->route('posts.index')->with('status', 'Evento eliminado con exito');
     }
 
     /**
