@@ -31,7 +31,6 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $voucher->assistant->name }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{ $voucher->assistant->identification_number }}</h6>
-                            <span>{{ $voucher }}</span>
                             <div class="mt-2">
                                 <form class="d-inline" action="{{ route('vouchers.send-mail', [ 'post' => $post, 'voucher' => $voucher ]) }}" method="POST">
                                     @csrf
@@ -40,9 +39,9 @@
                                         <i class="fa-solid fa-envelope"></i>
                                     </button>
                                 </form>
-                                <button class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Ver comprobante de pago">
+                                <a class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Ver comprobante de pago" href="{{ asset('storage/' . $voucher->file) }}" target="_blank">
                                     <i class="fa-solid fa-money-check-dollar"></i>
-                                </button>
+                                </a>
                                 <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Reembolsar comprobante">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>

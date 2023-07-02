@@ -73,7 +73,7 @@ export default {
     computed: {
         total() {
             return this.ticketTypes.reduce((previous, current) => {
-                return previous + current.amount;
+                return previous + (current.amount * +current.count);
             }, 0)
         },
         ticketTypes() {

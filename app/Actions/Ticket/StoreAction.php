@@ -4,7 +4,6 @@ namespace App\Actions\Ticket;
 use App\Assistant;
 use App\Http\Requests\Ticket\StoreRequest;
 use App\Post;
-use App\TicketType;
 use App\Voucher;
 
 class StoreAction {
@@ -15,8 +14,6 @@ class StoreAction {
 
         $assistant = Assistant::create($assistant);
 
-        $ticketAmount = TicketType::whereIn('id', $tickets->pluck('ticket_type_id'))->sum('amount');
-        dd($tickets->sum('quantity'));
         $voucherPath = $request->file('assistant.voucher')->store("vouchers/{$assistant->id}");
         $voucher = Voucher::make([
             'file' => $voucherPath,
