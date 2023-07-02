@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('main')
-<div>
+<div class="container">
     @include('partials.navbar')
 
     <main class="py-4">
