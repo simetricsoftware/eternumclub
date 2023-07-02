@@ -3,7 +3,7 @@
 <div class="row justify-content-center">
     <div class="col-sm-8">
         @include('dashboard.partials.header', ['title' => "Editar $post->title"])
-        <form id="post-form" action="{{ route('posts.update', ['post' => $post->id]) }}" method="POST">
+        <form id="post-form" action="{{ route('posts.update', ['post' => $post->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             @include('dashboard.post.partials.form')

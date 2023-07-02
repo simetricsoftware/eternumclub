@@ -7,7 +7,7 @@
             'route' => 'posts',
             'view'  => 'index'
         ])
-        <form id="post-form" action="{{ route('posts.store') }}" method="POST">
+        <form id="post-form" action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @include('dashboard.post.partials.form')
         </form>

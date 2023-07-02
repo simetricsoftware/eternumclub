@@ -56,6 +56,7 @@ class PostController extends Controller
         $post = Post::create($request->validated());
         $post->user()->associate(auth()->user()->id)->save();
         $post->setTags($request->validated());
+        $this->uploadImage($request, $post);
 
         return redirect()->route('posts.show', $post)->with('status', 'Evento creado con exito');
     }
@@ -96,6 +97,7 @@ class PostController extends Controller
     {
         $post->update($request->validated());
         $post->setTags($request->validated());
+        $this->uploadImage($request, $post);
         return redirect()->route('posts.show', $post)->with('status', 'Evento actualizado con exito');
     }
 
@@ -119,11 +121,13 @@ class PostController extends Controller
      */
     public function uploadImage(Request $request, Post $post)
     {
-        $file = $request->validate([
-            'image' => 'required|mimes:jpeg,jpg,png|max:10240' //10 Mb
-        ]);
+        $file = $request->file('image');
 
-        $tempUrl = Storage::putFile("posts/$post->id", $file['image']);
+        if (!$file) {
+            return;
+        }
+
+        $tempUrl = Storage::putFile("posts/$post->id", $file);
         $optimizedUrl = preg_replace('/\.(jpe?g|png)$/i', '.webp', $tempUrl);
 
         Artisan::call('optimize:image', [
