@@ -16,12 +16,14 @@ class DatabaseSeeder extends Seeder
             UsersSeeder::class,
         ]);
 
-        // $this->call([
-        //     CategoriesSeeder::class,
-        //     PostsSeeder::class,
-        //     CommentsSeeder::class,
-        //     VotesSeeder::class,
-        //     TagsSeeder::class
-        // ]);
+        if(app()->environment('local')) {
+            $this->call([
+                CategoriesSeeder::class,
+                PostsSeeder::class,
+                CommentsSeeder::class,
+                VotesSeeder::class,
+                TagsSeeder::class
+            ]);
+        }
     }
 }
