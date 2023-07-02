@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
         <div class="col-sm-10">
             @if($posts->isEmpty())
-            <div class="d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">
+            <div class="d-flex flex-column align-items-center justify-content-center mt-4">
                 <img src="{{ asset('images/crear.gif') }}" alt="No hay eventos" >
             
                 <a class="btn btn-lg btn-dark mt-3" href="{{ route('posts.create') }}" style="color: white;">Crear Evento</a>
