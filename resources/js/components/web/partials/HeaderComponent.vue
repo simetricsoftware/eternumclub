@@ -12,7 +12,7 @@
                     <router-link class="nav-link" :to="{ name: 'posts' }">Eventos</router-link>
                 </li>
                 <li class="nav-item" v-if="user?.role.name === 'organizer'">
-                    <a class="nav-link" href="/home">Panel de eventos</a>
+                    <a class="nav-link" href="/dashboard/posts">Panel de eventos</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
