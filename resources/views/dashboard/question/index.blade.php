@@ -3,7 +3,7 @@
 <div class="row justify-content-center">
     <div class="col-sm-10">
         @include('dashboard.partials.header', [
-            'title' => 'Preguntas',
+            'title' => 'Crea tu formulario',
             'route' => 'posts',
             'view'  => 'show',
             'params' => [$post->id],
