@@ -9,12 +9,9 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <router-link class="nav-link" :to="{ name: 'home' }">Inicio</router-link>
-                </li>
-                <li class="nav-item">
                     <router-link class="nav-link" :to="{ name: 'posts' }">Eventos</router-link>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" v-if="user?.role.name === 'organizer'">
                     <a class="nav-link" href="/home">Panel de eventos</a>
                 </li>
             </ul>

@@ -32,7 +32,6 @@ class PostController extends Controller
             ->sortByCategory($request->category)
             ->search($request->search)
             ->where('status', 'posted')
-            ->userRole()
             ->votesCount()
             ->paginate(10)
         );
