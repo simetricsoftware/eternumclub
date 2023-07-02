@@ -11,14 +11,19 @@ class SendMailAction {
     public function execute(Voucher $voucher, Post $post) {
 
         $qrs = $voucher->tickets->map(function ($ticket) {
-            return QrCode::size(600)
+            $ticket->sent_at = now();
+            $ticket->save();
+
+            $qr = QrCode::size(600)
                 ->style('round')
                 ->format('png')
                 ->margin(2)
                 ->generate($ticket->hash);
 
-            $ticket->sent_at = now();
-            $ticket->save();
+            return [
+                'qr' => $qr,
+                'hash' => $ticket->hash,
+            ];
         });
 
         Mail::to($voucher->assistant->email)

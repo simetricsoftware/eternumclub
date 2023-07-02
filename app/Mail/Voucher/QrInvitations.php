@@ -36,10 +36,8 @@ class QrInvitations extends Mailable
     {
         $view = $this->view('emails.voucher.qr-sent');
 
-        $index = 0;
-        $this->qrs->each(function ($qr) use ($view, &$index) {
-            $view->attachData($qr, 'qr-'. ($index + 1) . '.png');
-            $index++;
+        $this->qrs->each(function ($qr) use ($view) {
+            $view->attachData($qr['qr'], $qr['hash'] . '.png');
         });
 
         return $view->with([

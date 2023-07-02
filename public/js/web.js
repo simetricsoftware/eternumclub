@@ -10124,7 +10124,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     total: function total() {
       return this.ticketTypes.reduce(function (previous, current) {
-        return previous + current.amount;
+        return previous + current.amount * +current.count;
       }, 0);
     },
     ticketTypes: function ticketTypes() {
