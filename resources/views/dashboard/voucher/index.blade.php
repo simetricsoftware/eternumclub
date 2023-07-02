@@ -43,9 +43,9 @@
                 <div class="col-12 col-sm-6 col-md-4 p-2">
                     <div class="card col-12">
                         <div class="card-body">
-                            <h5 class="card-title">
+                            <h5 class="card-title row">
                                 <span class="font-weight-bold">{{ $voucher->assistant->name }}</span>
-                                <a class="btn btn-success" href="{{ 'https://api.whatsapp.com/send?phone=593' . substr($voucher->assistant->phone, 1) . '&text=' . asset('posts/' . $post->slug) }}" target="_blank">
+                                <a class="btn btn-success ml-auto" href="{{ 'https://api.whatsapp.com/send?phone=593' . substr($voucher->assistant->phone, 1) . '&text=' . asset('posts/' . $post->slug) }}" target="_blank">
                                     <i class="fa-brands fa-whatsapp"></i>
                                 </a>
                             </h5>
