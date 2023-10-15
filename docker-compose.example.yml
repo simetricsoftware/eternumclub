@@ -27,7 +27,7 @@ services:
             - eternumclub
         volumes:
             - ./:/var/www/eternumclub
-            - ./nginx.conf:/etc/nginx/conf.d/default.conf
+            - ./nginx.conf:/etc/nginx/conf.d/eternumclub.conf
         ports:
             - "80:80"
             - "443:443"
