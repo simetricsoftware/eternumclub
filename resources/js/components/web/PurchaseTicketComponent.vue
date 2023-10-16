@@ -1,34 +1,32 @@
 <template>
   <div class="container">
-    <h1 class="text-center">Compra tus Entradas</h1>
+    <h1 class="text-center title">Compra tus Entradas</h1>
 
     <img src="./eternum_ico.png" alt="Imagen" class="image">
 
-    <div  v-for="ticket of ticketTypes" :key="ticket.id" style="margin-bottom: 2vh;">
-  <div class="row w-100">
-    <label class="col-5" style="font-size: 4vh;">Tipo:</label>
-    <div class="col-7" style="font-size: 4vh;">{{ ticket.name }}</div>
-  </div>
-  <div class="row w-100">
-    <label class="col-5" style="font-size: 4vh;">Precio:</label>
-    <div class="col-7" style="font-size: 4vh;"> ${{ ticket.amount }}</div>
-  </div>
-  <div class="row w-100">
-    <label class="col-5" style="font-size: 4vh;">Cantidad:</label>
-    <div class="col-3">
-      <input type="number" style="width: 100%; font-size: 4vh;" :max="ticket.quantity" v-model="ticket.count" @input="validateCount(ticket)">
+    <div v-for="ticket of ticketTypes" :key="ticket.id" class="ticket">
+      <div class="ticket-row">
+        <label class="label-text">Tipo:</label>
+        <div class="label-text">{{ ticket.name }}</div>
+      </div>
+      <div class="ticket-row">
+        <label class="label-text">Precio:</label>
+        <div class="price">$ {{ ticket.amount }}</div>
+      </div>
+      <div class="ticket-row">
+        <label class="label-text">Cantidad:</label>
+        <div class="input-container">
+          <input type="number" :max="ticket.quantity" v-model="ticket.count" @input="validateCount(ticket)" value="1">
+        </div>
+      </div>
+      <div class="error-message">{{ ticket.error }}</div>
     </div>
-  </div>
-  <div style="margin-top: 1vh; font-size: 3.6vh;">{{ ticket.error }}</div>
-</div>
 
     <div class="total">
-  Total: <span>$ {{ total }}</span>
-</div>
+      Total: <span>$ {{ total }}</span>
+    </div>
 
-
-<button class="continue-button" @click="continuar" :disabled="!canContinue" style="font-size: 1.5rem; padding: 10px 20px;">Continuar</button>
-
+    <button class="continue-button" @click="continuar" :disabled="!canContinue">Continuar</button>
   </div>
 </template>
 
@@ -100,46 +98,61 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.form-group {
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 20px;
-}
-
-.form-group-row {
-  display: flex;
   align-items: center;
 }
 
-.label {
-  flex-basis: 20%;
-  text-align: right;
-  margin-right: 10px;
-}
-
-.data {
-  flex-basis: 80%;
-}
-
-.input {
-  width: 100%;
+.title {
+  font-size: 2rem; /* Aumenta el tamaño del título */
+  margin-bottom: 20px; /* Añade margen inferior al título */
 }
 
 .image {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
   margin-bottom: 20px;
+}
+
+.ticket {
+  border: none; /* Quita el borde */
+  padding: 10px;
+}
+
+.ticket-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.label-text {
+  font-size: 1.5rem; /* Aumenta el tamaño del texto de etiqueta */
+}
+
+.price {
+  font-size: 1.5rem; /* Aumenta el tamaño del precio */
+}
+
+.input-container {
+  flex-basis: 30%; /* Haz el campo de cantidad más pequeño */
+}
+
+input[type="number"] {
+  width: 5vw; /* Aumenta el ancho del campo numérico */
+  padding: 5px;
+  border: 1px solid #ddd; /* Agrega un borde al campo numérico */
+  -moz-appearance: textfield; /* Elimina los botones de incremento y decremento en Firefox */
+  appearance: textfield; /* Elimina los botones de incremento y decremento en otros navegadores */
 }
 
 .error-message {
   color: red;
   margin-top: 5px;
+}
+
+.total {
+  font-size: 1.5rem;
+  margin-top: 20px; /* Añade margen superior al pie de página */
 }
 
 .continue-button {
@@ -156,12 +169,12 @@ export default {
 }
 
 @media (max-width: 576px) {
-  .form-group {
-    max-width: 100%;
+  .label-text {
+    font-size: 1.3rem; /* Ajusta el tamaño del texto de etiqueta en dispositivos móviles */
   }
-}
 
-.total{
-  font-size: 1.5rem;
+  input[type="number"] {
+    width: 15vw; /* Ajusta el ancho del campo numérico en dispositivos móviles */
+  }
 }
 </style>

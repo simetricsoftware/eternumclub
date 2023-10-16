@@ -1,7 +1,7 @@
 <template>
 <div>
     <footer class="container">
-        <p class="text-center">Eternum Club is powered by &copy; Simetric Software {{ year }}</p>
+        <p class="text-center">Simetric Club is powered by &copy; <a href="https://www.simetricsoftware.com/"  target="blank">Simetric Software</a> {{ year }}</p>
     </footer>
 </div>
 </template>
