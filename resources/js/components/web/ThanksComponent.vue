@@ -6,6 +6,16 @@
   </div>
 </template>
 
+<script>
+export default {
+  beforeRouteEnter(to, from, next) {
+    // Esta función se ejecutará antes de que la ruta se active
+    window.scrollTo(0, 0); // Lleva al usuario al principio de la ventana
+    next();
+  }
+}
+</script>
+
 <style lang="css" scoped>
 .container {
   display: flex;

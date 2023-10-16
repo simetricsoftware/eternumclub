@@ -2,28 +2,19 @@
   <div>
       <div class="row justify-content-center">
           <div class="col-sm-12">
-              <post-component :compact="false" @voted="getPost" :post="post"></post-component>
-              <div class="row">
-                  <div class="col-sm-8">
-                      <comment-box-component @voted="getPost"></comment-box-component>
-                  </div>
-                  <div class="col-sm-4">
-                      <div class="overflow-auto">
-                          <recent-posts-component :size="'lg'"></recent-posts-component>
-                      </div>
-                  </div>
-              </div>
+              <event-component :compact="false" @voted="getPost" :post="post"></event-component>
+              
           </div>
       </div>
   </div>
 </template>
 
 <script>
-import PostComponent from './partials/PostComponent'
+import EventComponent from './partials/EventComponent'
 import RecentPostsComponent from './partials/RecentPostsComponent'
 import CommentBoxComponent from '../comments/CommentBoxComponent'
 export default {
-    components: { RecentPostsComponent, PostComponent, CommentBoxComponent },
+    components: { RecentPostsComponent, EventComponent, CommentBoxComponent },
     data() {
         return {
             post: null
