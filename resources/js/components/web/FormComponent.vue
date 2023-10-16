@@ -6,33 +6,8 @@
                     <div class="col-12 col-sm-6 m-auto">
                         <purchase-component @change="onChangeBasicData($event)" style="font-size: 1.2rem;"></purchase-component>
 
-                        <div class="text-center">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#bankModal">
-                                <i class="fas fa-university mr-2"></i>
-                                Ver información bancaria
-                            </button>
-                        </div>
                         <div  style="margin-top: 30px;"class="total_price"> Total ${{ total }}</div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="bankModal" tabindex="-1" role="dialog" aria-labelledby="bankModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="bankModalLabel">Información Bancaria</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                        <div class="modal-body">
-                                            <bank-info-component style="font-size: 1.2rem;"></bank-info-component>
-                                        </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <div class="margins" style="font-size: 1.2rem;">
                             <div v-for="question of questions">
@@ -70,10 +45,9 @@ import OpenQuestionComponent from './OpenQuestionComponent.vue'
 import MultipleQuestionComponent from './MultipleQuestionComponent.vue'
 import RadioQuestionComponent from './RadioQuestionComponent.vue'
 import SelectQuestionComponent from './SelectQuestionComponent.vue'
-import BankInfoComponent from './BankInfoComponent.vue'
 
 export default {
-    components: { OpenQuestionComponent, MultipleQuestionComponent, RadioQuestionComponent, SelectQuestionComponent, PurchaseComponent, BankInfoComponent },
+    components: { OpenQuestionComponent, MultipleQuestionComponent, RadioQuestionComponent, SelectQuestionComponent, PurchaseComponent },
     computed: {
         total() {
             return this.ticketTypes.reduce((previous, current) => {

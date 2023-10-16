@@ -2,17 +2,12 @@
   <div>
     <div class="carousel-container">
       <b-carousel :controls="true" :indicators="true" :interval="8000" :background="'#000000'" :style="{ maxHeight: '500px' }">
-        <b-carousel-slide img-src="images/banner_1.jpg"></b-carousel-slide>
-        <b-carousel-slide img-src="images/banner_2.jpg"></b-carousel-slide>
-        <b-carousel-slide img-src="images/banner_3.jpg"></b-carousel-slide>
+        <b-carousel-slide img-src="images/banner1.gif"></b-carousel-slide>
+        <b-carousel-slide img-src="images/banner2.gif"></b-carousel-slide>
+        <b-carousel-slide img-src="images/banner3.gif"></b-carousel-slide>
       </b-carousel>
     </div>
-    <div class="text-center" style="margin-top: 50px;">
-      <p style="color: ffffff;">
-        <router-link class="btn btn-primary btn-lg" :to="{name: 'posts'}">Todos los eventos &raquo;</router-link>
-      </p>
-    </div>
-
+  
     <recent-posts-component :size="'sm'"></recent-posts-component>
 
     <hr>

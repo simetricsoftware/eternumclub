@@ -1,56 +1,38 @@
 <template>
-<div>
-    <div v-if="post" class="card my-2">
-        <div class="card-header text-center">
-            <div :class="['overflow-hidden', compact ? 'overflow-image' : '']">
-                <img class="w-100 img-thumbnail" :src="post.image" alt="Imagen no encontrada">
-            </div>
-        </div>
+    <div>
+      <div v-if="post" class="card my-2">
+        <!-- Tarjeta -->
         <div class="card-body">
-            <div class="container">
-                <span class="badge badge-primary">
-                    {{ post.category.title }}
-                </span>
-                <div class="d-inline" v-if="post.tags">
-                    <span class="badge badge-success mr-1" v-for="tag of post.tags">
-                        {{ tag.name }}
-                    </span>
-                </div>
-                <div class="float-right">
-                    <votes-component class="d-inline" v-if="!compact" :votes="this.post.votes" :tag="this.post.id" :url="url" @voted="$emit('voted')"></votes-component>
-                    <div v-else>
-                        <font-awesome-icon icon="thumbs-up" />
-                        <span class="badge badge-light">{{ post.votes.likes }}</span>
-                        <font-awesome-icon icon="thumbs-down" />
-                        <span class="badge badge-light">{{ post.votes.dislikes }}</span>
-                    </div>
-                </div>
+          <div v-if="compact">
+            <h2>{{ truncate(post.title, 20) }}</h2>
+            <div>
+              <p>{{ convertPlainText(post.content) }}</p>
             </div>
-            <hr>
-            <div v-if="compact">
-                <h2>{{ truncate(post.title, 20) }}</h2>
-                <div>
-                    <p>{{ convertPlainText(post.content) }}</p>
-                </div>
+          </div>
+          <div v-else>
+            <h2>{{ post.title }}</h2>
+            <div class="card-body ql-container ql-snow">
+              <div class="ql-editor">
+                <p v-html="post.content"></p>
+              </div>
             </div>
-            <div v-else>
-                <h2>{{ post.title }}</h2>
-                <div class="card-body ql-container ql-snow">
-                    <div class="ql-editor">
-                        <p v-html="post.content"></p>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-        <div class="card-footer">
-            <p>
-                <router-link class="btn btn-secondary" v-if="compact" :to="{ name: 'posts.show', params: {post: post.slug} }">Ver detalles &raquo;</router-link>
-                <router-link class="btn btn-secondary" v-else :to="{ name: 'posts.tickets', params: { post: post.slug  } }">Comprar entradas</router-link>
-            </p>
-        </div>
+        <!-- Fin Tarjeta -->
+  
+        <!-- Imagen de la tarjeta con enlace al router -->
+        <router-link :to="{ name: compact ? 'posts.show' : 'posts.tickets', params: { post: post.slug } }">
+          <div class="card-header text-center">
+            <div :class="['overflow-hidden', compact ? 'overflow-image' : '']">
+              <img class="w-100 img-thumbnail" :src="post.image" alt="Imagen no encontrada">
+            </div>
+          </div>
+        </router-link>
+  
+      </div>
     </div>
-</div>
-</template>
+  </template>
+  
 
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

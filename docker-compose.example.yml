@@ -51,6 +51,14 @@ services:
             MYSQL_DATABASE: eternumclub
             MYSQL_USER: eternumclub_dev
             MYSQL_PASSWORD: eternumclub_dev
+    mailhog:
+        image: mailhog/mailhog
+        container_name: eternumclub-mailhog
+        ports:
+            - 1025:1025
+            - 8025:8025
+        networks:
+            - eternumclub
 networks:
     eternumclub:
         driver: bridge

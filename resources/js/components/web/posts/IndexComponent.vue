@@ -1,9 +1,7 @@
 <template>
 <div>
     <div class="row justify-content-center">
-        <div class="col-md-2">
-            <category-component :active="postsResult.meta.category" @active-category="setCategory"></category-component>
-        </div>
+      
         <div class="col-md-10">
             <div v-for="post in postsResult.data"  :key="post.id" class="col-md-12">
                 <post-component compact="true" :post="post"></post-component>
