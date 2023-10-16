@@ -110,5 +110,9 @@ export default {
 .dropdown-item {
   font-size: 16px; /* Tamaño de fuente deseado para elementos desplegables */
 }
+
+.bg-custom{
+background-color:#000000;
+}
 </style>
 
