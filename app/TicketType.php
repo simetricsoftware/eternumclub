@@ -9,4 +9,9 @@ class TicketType extends Model
     protected $fillable = [
         'name', 'amount', 'quantity'
     ];
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
 }

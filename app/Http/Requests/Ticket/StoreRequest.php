@@ -29,7 +29,7 @@ class StoreRequest extends FormRequest
             'assistant.email' => 'required|email',
             'assistant.phone' => 'required|string',
             'assistant.identification_number' => 'required|string',
-            'assistant.voucher' => 'required|image',
+            'assistant.voucher' => 'required|file',
             'answers' => 'nullable|array',
             'answers.*.question_id' => 'required|integer|exists:questions,id',
             'answers.*.response' => 'nullable',

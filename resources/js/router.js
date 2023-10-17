@@ -13,22 +13,22 @@ export default new VueRouter ({
             component: require('./components/web/HomeComponent').default
         },
         {
-            path: '/posts',
+            path: '/events',
             name: 'posts',
             component: require('./components/web/posts/IndexComponent').default
         },
         {
-            path: '/posts/:post',
+            path: '/:post',
             name: 'posts.show',
             component: require('./components/web/posts/ShowComponent').default
         },
         {
-            path: '/posts/:post/form',
+            path: '/:post/form',
             name: 'posts.form',
             component: require('./components/web/FormComponent').default
         },
         {
-            path: '/posts/:post/tickets',
+            path: '/:post/tickets',
             name: 'posts.tickets',
             component: require('./components/web/PurchaseTicketComponent').default
         },
@@ -38,7 +38,7 @@ export default new VueRouter ({
             component: require('./components/web/ThanksComponent').default
         },
         {
-            path:'/posts/:post/banks',
+            path:'/:post/banks',
             name: 'posts.banks',
             component: require('./components/web/BankInfoComponent').default
         },

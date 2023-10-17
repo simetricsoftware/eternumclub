@@ -11,7 +11,7 @@ window.onload = () => {
         const id = button.data('id')
         const current = button.data('current')
 
-        let action = $('#row-delete').attr('data-action') + current ? '' : ('/'+ id)
+        let action = $('#row-delete').attr('data-action') + (current ? '' : ('/'+ id))
         $('#row-delete').attr('action', action)
 
         let modal = $(this)

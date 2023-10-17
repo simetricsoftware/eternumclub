@@ -8,6 +8,7 @@ use App\Category;
 use App\Tag;
 use App\Http\Requests\StorePost;
 use App\Http\Requests\UpdatePost;
+use App\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
@@ -109,6 +110,12 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        Ticket::whereHas('ticketType.post', function ($query) use ($post) {
+            $query->where('id', $post->id);
+        })->delete();
+
+        $post->ticketTypes()->delete();
+
         $post->delete();
         return redirect()->route('posts.index')->with('status', 'Evento eliminado con exito');
     }
