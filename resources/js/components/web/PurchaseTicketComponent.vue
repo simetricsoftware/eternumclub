@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+   <div class="container" style="padding-top: 30px;">
     <h1 class="text-center title">Compra tus Entradas</h1>
 
     <img src="./eternum_ico.png" alt="Imagen" class="image">
