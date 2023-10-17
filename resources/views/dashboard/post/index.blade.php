@@ -66,7 +66,7 @@
                                 @can('delete.posts')
                                     <td>
                                         <div data-toggle="tooltip" data-placement="top" title="Eliminar evento">
-                                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="{{ $post->id }}">
+                                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="{{ $post->id }}" >
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </div>
