@@ -1,5 +1,5 @@
   <template>
-      <div>
+      <div style="padding-top: 30px;">
           <h1 class="display-6 text-center">Ingresa la info de contacto</h1>
           <div class="container-sm" style="max-width: 100%; height: auto;">
             <div class="form-group">
