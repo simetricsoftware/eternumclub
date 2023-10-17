@@ -14,10 +14,12 @@ class SendMailAction {
             $ticket->sent_at = now();
             $ticket->save();
 
+            $route = route('ticket.mark-as-used', ['post' => $post, 'ticket' => $ticket]);
+
             return QrCode::size(600)
                 ->format('png')
                 ->margin(2)
-                ->generate(route('ticket.mark-as-used', ['post' => $post, 'ticket' => $ticket]));
+                ->generate(str_replace('http://', 'https://', $route));
         });
 
         Mail::to($voucher->assistant->email)
