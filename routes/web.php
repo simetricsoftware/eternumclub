@@ -52,8 +52,8 @@ Route::prefix('dashboard')->namespace('web\dashboard')->group(function() {
         Route::resource('vouchers', 'VoucherController')->only(['index', 'destroy']);
         Route::put('vouchers/{voucher}/send-mail', 'VoucherController@sendMail')->name('vouchers.send-mail');
         Route::get('ticket/{ticket:hash}/use', 'TicketController@markAsUsed')->name('ticket.mark-as-used');
-        Route::view('ticket/valid', 'dashboard.ticket.valid')->name('ticket.is-valid');
-        Route::view('ticket/invalid', 'dashboard.ticket.invalid')->name('ticket.is-invalid');
+        Route::view('ticket/valid', 'dashboard.ticket.valid')->middleware('auth')->name('ticket.is-valid');
+        Route::view('ticket/invalid', 'dashboard.ticket.invalid')->middleware('auth')->name('ticket.is-invalid');
     });
 });
 
